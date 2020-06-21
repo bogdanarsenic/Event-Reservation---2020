@@ -21,7 +21,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(Manifestation manifestation)
         {
-            string Query = "INSERT INTO Manifestations(Id, Name, Type, Capacity, EventTime, Price, Status, PlaceId, Pictures, IsActive) VALUES(@Id, @Name, @Type, @Capacity, @EventTime, @Price, @Status, @PlaceId, @Pictures, @IsActive)";
+            string Query = "INSERT INTO Manifestations(Id, Name, Type, Capacity, EventTime, Price, Status, PlaceId, Pictures,UserId, IsActive) VALUES(@Id, @Name, @Type, @Capacity, @EventTime, @Price, @Status, @PlaceId, @Pictures,@UserId, @IsActive)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -36,6 +36,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@EventTime", SqlDbType.DateTime2).Value = manifestation.EventTime;
                     cmd.Parameters.Add("@Price", SqlDbType.Int).Value = manifestation.Price;
                     cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = manifestation.Status;
+                    cmd.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = manifestation.UserId;
                     cmd.Parameters.Add("@PlaceId", SqlDbType.NVarChar).Value = manifestation.PlaceId;
                     cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = manifestation.IsActive;
@@ -48,7 +49,7 @@ namespace TicketReservation.ModelsDB
 
         public void Update(Manifestation manifestation)
         {
-            string Query = "UPDATE Manifestations set Id = @Id, Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, Status=@Status, PlaceId=@PlaceId, Pictures=@Pictures, IsActive=@IsActive" +
+            string Query = "UPDATE Manifestations set Id = @Id, Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, Status=@Status, PlaceId=@PlaceId, UserId=@UserId, Pictures=@Pictures, IsActive=@IsActive" +
                "WHERE Id = @id";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -64,6 +65,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Price", SqlDbType.Int).Value = manifestation.Price;
                     cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = manifestation.Status;
                     cmd.Parameters.Add("@PlaceId", SqlDbType.NVarChar).Value = manifestation.PlaceId;
+                    cmd.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = manifestation.UserId;
                     cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = manifestation.IsActive;
 
@@ -98,6 +100,7 @@ namespace TicketReservation.ModelsDB
                         manifestation.Status = reader["Status"].ToString();
                         manifestation.PlaceId = reader["PlaceId"].ToString();
                         manifestation.Pictures = reader["Pictures"].ToString();
+                        manifestation.UserId = reader["UserId"].ToString();
                         manifestation.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
 
                         manifestations.Add(manifestation);
@@ -130,6 +133,7 @@ namespace TicketReservation.ModelsDB
                             EventTime = Convert.ToDateTime(reader["EventTime"].ToString()),
                             Price = Convert.ToInt32(reader["Price"].ToString()),
                             Status = reader["Status"].ToString(),
+                            UserId = reader["UserId"].ToString(),
                             PlaceId = reader["PlaceId"].ToString(),
                             Pictures = reader["Pictures"].ToString(),
                             IsActive = Convert.ToBoolean(reader["IsActive"].ToString()),
@@ -167,6 +171,7 @@ namespace TicketReservation.ModelsDB
                         manifestation.Price = Convert.ToInt32(reader["Price"].ToString());
                         manifestation.Status = reader["Status"].ToString();
                         manifestation.PlaceId = reader["PlaceId"].ToString();
+                        manifestation.UserId = reader["UserId"].ToString();
                         manifestation.Pictures = reader["Pictures"].ToString();
                         manifestation.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
 
@@ -227,6 +232,7 @@ namespace TicketReservation.ModelsDB
                         manifestation.Price = Convert.ToInt32(reader["Price"].ToString());
                         manifestation.Status = reader["Status"].ToString();
                         manifestation.PlaceId = reader["PlaceId"].ToString();
+                        manifestation.UserId = reader["UserId"].ToString();
                         manifestation.Pictures = reader["Pictures"].ToString();
                         manifestation.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
 

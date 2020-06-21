@@ -18,14 +18,16 @@ namespace TicketReservation.Models
         public Location Place { get; set; }
         public bool IsActive { get; set; }
         public string Pictures { get; set; }
-       
+        public string UserId { get; set; }
+
+
 
         public Manifestation()
         {
 
         }
 
-        public Manifestation(string name, int capacity, string type, DateTime eventTime, int price, string status, string placeId, bool isActive, string pictures)
+        public Manifestation(string name, int capacity, string type, DateTime eventTime, int price, string status, string placeId, bool isActive, string pictures,string userId)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -37,6 +39,7 @@ namespace TicketReservation.Models
             PlaceId = placeId;
             IsActive = isActive;
             Pictures = pictures;
+            UserId = userId;
         }
     }
 }
