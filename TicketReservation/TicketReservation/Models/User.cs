@@ -14,6 +14,7 @@ namespace TicketReservation.Models
         public string Gender { get; set; }
         public string Role { get; set; }
         public string Type { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public List<Ticket> Tickets { get; set; }
         public List<Manifestation>Manifestations { get; set; }
         public int Points { get; set; }
@@ -24,7 +25,7 @@ namespace TicketReservation.Models
 
         }
 
-        public User(string username, string password, string name, string surname, string gender, string role, string type,int points)
+        public User(string username, string password, string name, string surname, DateTime dateOfBirth,string gender, string role, string type,int points)
         {
             Username = username;
             Password = password;
@@ -33,6 +34,7 @@ namespace TicketReservation.Models
             Gender = gender;
             Role = role;
             Type = type;
+            DateOfBirth = dateOfBirth;
 
             if (role == "Buyer")
             {

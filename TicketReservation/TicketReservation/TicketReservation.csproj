@@ -124,6 +124,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDB\CommentDB.cs" />
+    <Compile Include="ModelsDB\LocationDB.cs" />
+    <Compile Include="ModelsDB\ManifestationDB.cs" />
+    <Compile Include="ModelsDB\TicketDB.cs" />
+    <Compile Include="ModelsDB\UserDB.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Manifestation.cs" />
