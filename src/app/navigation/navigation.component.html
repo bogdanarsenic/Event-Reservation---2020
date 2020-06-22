@@ -1,0 +1,36 @@
+<body>
+    <div class="topnav">
+  
+
+        <div *ngIf="ShowLogin()">
+            <button routerLink="/login"> Login </button> 
+            <button routerLink="/registration">Registration</button>  
+            
+            <div *ngIf="(CurrentComponent()=='LoginComponent' || CurrentComponent()=='RegisterComponent')" (click)="BackToCheck()">
+              <button class="back" routerLink="">Back </button>
+            </div>
+     
+        </div>
+        
+
+        <div *ngIf="ShowLogout()">
+            <button  (click)="CallLogout()"> Logout </button>
+
+            <div *ngIf="IsAdmin()">
+
+            </div>
+
+            <div *ngIf="IsSeller()">
+                    
+                    
+            </div>
+            
+            <div *ngIf="IsBuyer()">
+            </div>
+        </div>
+
+
+        
+      
+    </div>
+</body>
