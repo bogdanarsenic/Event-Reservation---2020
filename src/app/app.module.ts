@@ -7,6 +7,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServerService } from './services/server.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes=[
   { path: 'registration',component:RegisterComponent},
@@ -26,9 +29,13 @@ const appRoutes:Routes=[
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
+
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

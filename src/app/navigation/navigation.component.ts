@@ -30,7 +30,7 @@ export class NavigationComponent implements OnInit {
 
   ShowLogin()
   {
-    if(localStorage.jwt)
+    if(localStorage.getItem('Logged')=="Yes")
     {
       return false;
     }
@@ -42,13 +42,13 @@ export class NavigationComponent implements OnInit {
 
   ShowLogout()
   {
-    if(!localStorage.jwt)
+    if(localStorage.getItem('Logged')=="Yes")
     {
-      return false;
+      return true;
     }
     else
     {
-      return true;
+      return false;
     }
   }
 
@@ -60,7 +60,7 @@ export class NavigationComponent implements OnInit {
     
   IsAdmin()
   {
-    if(localStorage.getItem('role')=="Admin")
+    if(localStorage.getItem('Role')=="Admin")
         return true;
     else
         return false;
@@ -69,7 +69,7 @@ export class NavigationComponent implements OnInit {
 
   IsBuyer()
   {
-    if(localStorage.getItem('role')=="Buyer")
+    if(localStorage.getItem('Role')=="Buyer")
       return true;
     else
       return false;
@@ -77,7 +77,7 @@ export class NavigationComponent implements OnInit {
   
   IsSeller()
   {
-    if(localStorage.getItem('role')=="Seller")
+    if(localStorage.getItem('Role')=="Seller")
       return true;
     else
       return false;
