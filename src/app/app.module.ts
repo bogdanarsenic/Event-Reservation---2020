@@ -10,12 +10,14 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServerService } from './services/server.service';
 import { HttpClientModule } from '@angular/common/http';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 const appRoutes:Routes=[
   { path: 'registration',component:RegisterComponent},
   { path: '', component:HomeComponent},
   { path: 'home', component:HomeComponent},
   { path: 'login',component:LoginComponent},
+  { path: 'editprofile',component:EditprofileComponent},
 
 ];
 
@@ -25,7 +27,8 @@ const appRoutes:Routes=[
     NavigationComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditprofileComponent
   ],
   imports: [
     BrowserModule,
