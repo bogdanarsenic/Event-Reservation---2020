@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServerService } from './services/server.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { AddsellerComponent } from './addseller/addseller.component';
 
 const appRoutes:Routes=[
   { path: 'registration',component:RegisterComponent},
@@ -18,6 +19,9 @@ const appRoutes:Routes=[
   { path: 'home', component:HomeComponent},
   { path: 'login',component:LoginComponent},
   { path: 'editprofile',component:EditprofileComponent},
+  { path: 'addseller',component:AddsellerComponent},
+
+
 
 ];
 
@@ -28,7 +32,8 @@ const appRoutes:Routes=[
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    AddsellerComponent
   ],
   imports: [
     BrowserModule,

@@ -15,10 +15,10 @@
 
         <div *ngIf="ShowLogout()">
             <button  (click)="CallLogout()"> Logout </button>
-            <button routerLink="/editprofile"> EditProfile </button>
+            <button routerLink="/editprofile"> Edit Profile </button>
 
             <div *ngIf="IsAdmin()">
-
+                <button routerLink="/addseller"> AddNewSeller </button>
             </div>
 
             <div *ngIf="IsSeller()">

@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         }
         else
         {
-          
+
         this.registerService.GetUser(this.korisnik.Username,this.korisnik.Password)
           .subscribe(
             res=>
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
 
                 localStorage.setItem('Logged', "Yes")
                 localStorage.setItem('Role', "Buyer")
-                localStorage.setItem('currentId',this.korisnik.Username);
+                localStorage.setItem('Username',this.korisnik.Username);
                 
                 this.router.navigate(['']).then(()=>window.location.reload());
                 this.router.navigateByUrl("/home");

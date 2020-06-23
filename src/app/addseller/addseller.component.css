@@ -1,3 +1,5 @@
+
+
 .section {
 	position: relative;
 	height: 100vh;
@@ -21,7 +23,7 @@
 	font-family: 'Montserrat', sans-serif;
 	
 	background-size: cover;
-	background-image: url('..//../assets/festival.jpg');
+	background-image: url('..//../assets/festival2.jpg');
 	background-position: center;
 }
 

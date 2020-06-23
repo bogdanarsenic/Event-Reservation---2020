@@ -22,6 +22,11 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/User/Register",buyer);
   }
 
+  RegistrationSeller(seller:User):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/User/RegisterSeller",seller);
+  }
+
   GetUser(Username:string,Password:string):Observable<User>
   {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
