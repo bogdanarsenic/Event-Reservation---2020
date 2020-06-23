@@ -34,7 +34,7 @@ export class EditprofileComponent implements OnInit {
 
     this.user=new User("","","","","","","");
 
-    this.id=localStorage.getItem('Username');
+    this.id=sessionStorage.getItem('Username');
     this.getUser();
    
     

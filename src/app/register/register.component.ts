@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     
     this.korisnik=new User("","","","","","","");
     this.currentUser=new Login("","");
-    localStorage.setItem('CurrentComponent','RegisterComponent');
+    sessionStorage.setItem('CurrentComponent','RegisterComponent');
   }
 
   onSubmit()
@@ -64,9 +64,9 @@ export class RegisterComponent implements OnInit {
             {
             
 
-                localStorage.setItem('Logged', "Yes")
-                localStorage.setItem('Role', "Buyer")
-                localStorage.setItem('Username',this.korisnik.Username);
+              sessionStorage.setItem('Logged', "Yes")
+              sessionStorage.setItem('Role', "Buyer")
+              sessionStorage.setItem('Username',this.korisnik.Username);
                 
                 this.router.navigate(['']).then(()=>window.location.reload());
                 this.router.navigateByUrl("/home");

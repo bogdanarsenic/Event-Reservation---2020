@@ -32,6 +32,11 @@ export class ServerService {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
   }
 
+  GetAllUsers():Observable<any>
+  {
+    return this.http.get('http://localhost:52294/api/User/GetAllUsers');
+  }
+
   GetUserByUsername(Username:string):Observable<User>
   {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrentByUsername`,{params:{Username}});

@@ -35,7 +35,7 @@ export class AddsellerComponent implements OnInit {
 
   }
   ngOnInit() {
-    localStorage.setItem('CurrentComponent','AddSellerComponent');
+    sessionStorage.setItem('CurrentComponent','AddSellerComponent');
     this.korisnik=new User("","","","","","","");
     this.currentUser=new Login("","");
   }

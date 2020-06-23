@@ -19,18 +19,18 @@ export class NavigationComponent implements OnInit {
 
   BackToCheck()
   {
-      localStorage.setItem('CurrentComponent','HomeComponent');
+    sessionStorage.setItem('CurrentComponent','HomeComponent');
       this.router.navigateByUrl('/home');
   }
 
   CurrentComponent()
   {
-    return localStorage.getItem('CurrentComponent');
+    return sessionStorage.getItem('CurrentComponent');
   }
 
   ShowLogin()
   {
-    if(localStorage.getItem('Logged')=="Yes")
+    if(sessionStorage.getItem('Logged')=="Yes")
     {
       return false;
     }
@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
 
   ShowLogout()
   {
-    if(localStorage.getItem('Logged')=="Yes")
+    if(sessionStorage.getItem('Logged')=="Yes")
     {
       return true;
     }
@@ -54,13 +54,13 @@ export class NavigationComponent implements OnInit {
 
   CallLogout()
   {
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigateByUrl('');
   }
     
   IsAdmin()
   {
-    if(localStorage.getItem('Role')=="Admin")
+    if(sessionStorage.getItem('Role')=="Admin")
         return true;
     else
         return false;
@@ -69,7 +69,7 @@ export class NavigationComponent implements OnInit {
 
   IsBuyer()
   {
-    if(localStorage.getItem('Role')=="Buyer")
+    if(sessionStorage.getItem('Role')=="Buyer")
       return true;
     else
       return false;
@@ -77,7 +77,7 @@ export class NavigationComponent implements OnInit {
   
   IsSeller()
   {
-    if(localStorage.getItem('Role')=="Seller")
+    if(sessionStorage.getItem('Role')=="Seller")
       return true;
     else
       return false;
