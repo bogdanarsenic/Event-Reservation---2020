@@ -44,15 +44,28 @@
             </div>
 
             <div class="form-group">
-                <span class="form-label">Event Time: </span>
-                <input class="form-control" type="datetime-local" name="EventTime" id="EventTime" formControlName="EventTime" placeholder="Event Time">
-                <span *ngIf="eventUserForm.controls.EventTime.touched">
-                    <small *ngIf="eventUserForm.controls.EventTime.errors?.required">
-                            <div class="attent">
-                                    Time of Event is required!
-                            </div>
-                    </small>
-                </span>
+               <span class="form-label">Event Date: </span>
+
+                <mat-form-field style="width:150px;margin-right: 20px;">
+                    <input  matInput [matDatepicker]="picker" [min]="tomorrow" formControlName="EventDay"> 
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true"  #picker></mat-datepicker>
+              </mat-form-field>
+
+              
+
+              <span class="form-label" style="margin-left: 10px;">Event Time: </span>          
+              <ngx-timepicker-field [format]="24" [defaultTime]="'23:11'" formControlName="EventTime2" style="float:right"></ngx-timepicker-field>
+
+
+              <span *ngIf="eventUserForm.controls.EventDay.touched">
+                <small *ngIf="eventUserForm.controls.EventDay.errors?.required">
+                        <div class="attent" style="color: red;">
+                               You need to put event day and event time!
+                        </div>
+                </small>
+            </span>
+             
             </div>
 
 

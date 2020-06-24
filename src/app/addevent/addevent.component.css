@@ -21,6 +21,11 @@ text-area{
 	height: 100vh;
 }
 
+mat-datepicker{
+    position:fixed;
+    top: 100px;
+}
+
 
 
 .booking-form {

@@ -6,6 +6,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import {Location} from '../classes/Location';
 import {Event} from '../classes/Event';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldControl} from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -27,7 +34,12 @@ export class AddeventComponent implements OnInit {
   address2:string;
   eventId:string;
   locId:string;
+
+  todayDate:Date = new Date();
+  tomorrow:Date =  new Date(this.todayDate.setDate(this.todayDate.getDate() + 1));
+
   
+  dateCheck:string;
   
   event:Event;
   
@@ -71,8 +83,8 @@ export class AddeventComponent implements OnInit {
       Type: ['',Validators.required],
       Price:['',Validators.required],
       Capacity:['',Validators.required],
-      EventTime:['',Validators.required],
-
+      EventDay:['',Validators.required],
+      EventTime2:['00:00']
      })
    }
   ngOnInit() {
@@ -84,6 +96,7 @@ export class AddeventComponent implements OnInit {
       this.loc=new Location("",this.center.lat,this.center.lng,"");
       this.templat=""
       this.templong=""
+      this.dateCheck=""
   }
 
   ItemsChanged(event)
@@ -185,7 +198,16 @@ export class AddeventComponent implements OnInit {
     this.event.Price=this.event.Price;
     this.event.SellerId=sessionStorage.getItem('Username');
     this.event.Status="NotActive";
+
+    var nesto=moment(this.event.EventDay).format();
+
+    this.event.EventTime2=nesto.split('T')[0]+"T"+this.event.EventTime2+":00";
     
+    var date=new Date(this.event.EventTime2);
+
+    var userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    
+    this.event.EventTime=new Date(date.getTime() - userTimezoneOffset);
 
     this.service.postEvent(this.event).subscribe(
       data=>

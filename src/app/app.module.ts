@@ -17,6 +17,20 @@ import { AddeventComponent } from './addevent/addevent.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import {GoogleMapsModule} from '@angular/google-maps';
 import { AgmCoreModule } from '@agm/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+
+
 
 
 
@@ -58,10 +72,17 @@ const appRoutes:Routes=[
       apiKey:'AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4'
     }),
     GoogleMapsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    NgxMaterialTimepickerModule,
+    MatMomentDateModule, 
 
   ],
-  providers: [ServerService],
+  providers: [ServerService,{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: 'sr-SR'},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
