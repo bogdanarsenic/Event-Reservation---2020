@@ -24,8 +24,9 @@ namespace TicketReservation.Controllers
         [Route("RegisterLocation")]
         public string RegisterLocation(Location location)
         {
+            location.Id = Guid.NewGuid();
             locationDB.Insert(location);
-            return "Success";
+            return location.Id.ToString();
         }
     }
 }

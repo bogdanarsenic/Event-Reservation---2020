@@ -57,7 +57,7 @@ namespace TicketReservation.Controllers
             {
                 t.Manifestation = manifestationDB.GetOneById(t.ManifestationId);
 
-                if (t.Manifestation.UserId == u.Username)
+                if (t.Manifestation.SellerId == u.Username)
                 {
                     ret2.Add(t);
                 }

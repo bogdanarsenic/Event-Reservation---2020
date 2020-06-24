@@ -56,17 +56,21 @@ namespace TicketReservation.Controllers
             register.Pictures = "";
             register.IsActive = false;
 
+
             List<Manifestation> manifestations = new List<Manifestation>();
             manifestations = GetAllManifestations();
 
-            foreach(Manifestation m in manifestations)
+            if(manifestations.Count!=0)
             {
-                if(m.EventTime==register.EventTime && m.Place==register.Place)
+                foreach (Manifestation m in manifestations)
                 {
-                    return "Already has event in that time and place";
+                    if (m.EventTime == register.EventTime && m.Place == register.Place)
+                    {
+                        return "Already has event in that time and place";
+                    }
                 }
             }
-           
+            
             manifestationDB.Insert(register);
 
             return register.Id.ToString();
@@ -78,7 +82,7 @@ namespace TicketReservation.Controllers
         public List<Manifestation> GetAllManifestationsByUserId(string IdAp)
         {
             List<Manifestation> ret = null;
-            ret = manifestationDB.GetAllByUserId(IdAp);
+            ret = manifestationDB.GetAllBySellerId(IdAp);
             return ret;
 
         }

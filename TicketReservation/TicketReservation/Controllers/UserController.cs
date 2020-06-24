@@ -116,7 +116,7 @@ namespace TicketReservation.Controllers
             foreach (Ticket t in ticket)
             {
                 Manifestation manTemp = manifestationDB.GetOneById(t.ManifestationId);
-                if (manTemp.UserId == Id)
+                if (manTemp.SellerId == Id)
                 {
                     User temp = userDB.GetOne((t.Buyer));
                     ret.Add(temp);
