@@ -9,9 +9,9 @@ import {Event} from '../classes/Event';
 
 
 @Component({
-  selector: 'app-addevents',
-  templateUrl: './addeventComponent.component.html',
-  styleUrls: ['./addeventComponent.component.css']
+  selector: 'app-addevent',
+  templateUrl: './addevent.component.html',
+  styleUrls: ['./addevent.component.css']
 })
 export class AddeventComponent implements OnInit {
 

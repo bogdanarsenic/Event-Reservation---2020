@@ -14,6 +14,11 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AddsellerComponent } from './addseller/addseller.component';
 import { AllusersComponent } from './allusers/allusers.component';
 import { AddeventComponent } from './addevent/addevent.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import {GoogleMapsModule} from '@angular/google-maps';
+import { AgmCoreModule } from '@agm/core';
+
+
 
 const appRoutes:Routes=[
   { path: 'registration',component:RegisterComponent},
@@ -24,7 +29,7 @@ const appRoutes:Routes=[
   { path: 'addseller',component:AddsellerComponent},
   { path: 'allusers',component:AllusersComponent},
   { path: 'addevent',component:AddeventComponent},
-
+  { path: ':eventId/upload',component:UploadImageComponent},
 
 
 
@@ -40,13 +45,19 @@ const appRoutes:Routes=[
     EditprofileComponent,
     AddsellerComponent,
     AllusersComponent,
-    AddeventComponent
+    AddeventComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4'
+    }),
+    GoogleMapsModule,
     HttpClientModule
 
   ],
