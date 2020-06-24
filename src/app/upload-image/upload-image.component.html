@@ -1,1 +1,20 @@
-<p>upload-image works!</p>
+<body>
+
+    <h3> Upload images</h3>
+    <form  enctype="multipart/form-data" id="js-upload-form">
+    
+        
+        <input type="file" (change)="File($event)" ngModel name="file" id="js-upload-files">
+    
+        <button type="submit" (click)="UploadFile()" id="js-upload-submit"> Upload</button>
+        <button type="submit" (click)="OnSubmit()" id="js-upload-submit">Submit</button>
+    
+        <button type="submit" (click)="OnFinish()" id="js-upload-submit">Finish</button>
+    </form>
+    
+    <br/>
+    
+                <div *ngFor="let pic of pictures3" class="gallery_product col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                    <img src={{pic}} class="img-responsive">
+                </div>
+    </body>

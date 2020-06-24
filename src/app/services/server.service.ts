@@ -56,10 +56,25 @@ export class ServerService {
   }
 
   postLocation(location:Location):Observable<any>{
-    return this.http.post("http://localhost:52294/api/Location",location);
+    return this.http.post("http://localhost:52294/api/Location/RegisterLocation",location);
   }
 
   postEvent(register:Event):Observable<any>{
-    return this.http.post("http://localhost:52294/api/Manifestation",register);
+    return this.http.post("http://localhost:52294/api/Manifestation/RegisterManifestation",register);
+  }
+
+  AddingImage(fd:FormData):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/Upload", fd)
+  }
+
+  GetImage(idEvent:string,ImgName:string):Observable<any>
+  {
+    return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetImage`,{params:{idEvent,ImgName}});
+  }
+
+  GetEvent(idEvent:string):Observable<any>
+  {
+    return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetOneManifestation`,{params:{idEvent}});
   }
 }

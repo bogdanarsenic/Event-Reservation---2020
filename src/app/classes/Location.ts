@@ -5,8 +5,9 @@ export class Location{
     Longitude:number;
     Address:string;
 
-    constructor(lattitude:number,longitude:number,address:string)
+    constructor(id:string,lattitude:number,longitude:number,address:string)
     {
+        this.Id=id;
         this.Lattitude=lattitude;
         this.Longitude=longitude;
         this.Address=address;

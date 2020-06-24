@@ -17,10 +17,11 @@ export class Event{
     UserId:string;
     SellerId:string;
     FrontPicture:string;
+    Place:string
 
 
 
-    constructor(id:string,name:string,type:string,capacity:number,eventtime:string,price:number,status:string,locationId:string,lattitude:number,longitude:number,address:string,userId:string,sellerId:string,frontpicture:string)
+    constructor(id:string,name:string,type:string,capacity:number,eventtime:string,price:number,status:string,place:string,locationId:string,lattitude:number,longitude:number,address:string,userId:string,sellerId:string,frontpicture:string)
     {
         this.Id=id;
         this.Name=name;
@@ -36,6 +37,7 @@ export class Event{
         this.UserId=userId;
         this.SellerId=sellerId;
         this.FrontPicture=frontpicture;
+        this.Place=place;
     }
 
 }

@@ -81,7 +81,7 @@ export class AddeventComponent implements OnInit {
         lng: 19.833549,
       }
 
-      this.loc=new Location(this.center.lat,this.center.lng,"");
+      this.loc=new Location("",this.center.lat,this.center.lng,"");
       this.templat=""
       this.templong=""
   }
@@ -157,11 +157,14 @@ export class AddeventComponent implements OnInit {
 
         this.service.postLocation(this.loc).subscribe(
           data=>{
-              this.loc.Id=data.Id;
-              this.AddApartment(this.loc);
+              this.loc.Id=data;
+              this.AddEvent(this.loc);
+             
+
           }
+          
         )
-        }
+      }
       
   else
       {
@@ -170,26 +173,32 @@ export class AddeventComponent implements OnInit {
     
   }
 
-  AddApartment(loc:Location)
+  AddEvent(loc:Location)
   {
     this.event.Lattitude=this.templat;
     this.event.Longitude=this.templong;
     this.event.Type=this.event.Type;
     this.event.Name=this.event.Name;
     this.event.LocationId=this.loc.Id;
+    this.event.Place=loc.Address;
     this.event.Capacity=this.event.Capacity;
     this.event.Price=this.event.Price;
-    this.event.SellerId=localStorage.getItem('Username');
-    this.event.Address=loc.Address;
-    this.event.LocationId=loc.Id;
+    this.event.SellerId=sessionStorage.getItem('Username');
     this.event.Status="NotActive";
     
 
     this.service.postEvent(this.event).subscribe(
       data=>
       {
-          this.eventId=data.Id;
+        if(data=="Already has event in that time and place")
+        {
+          alert("Already has event in that time and place");
+        }
+        else
+        {
+          this.eventId=data;
           this.router.navigateByUrl(`${this.eventId}/upload`);
+        }
       }
     )
     this.eventUserForm.reset();

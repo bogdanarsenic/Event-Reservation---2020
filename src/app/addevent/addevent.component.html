@@ -1,4 +1,4 @@
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4&callback=initMap"
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4&callback=initMap&language=en"
   type="text/javascript"></script>
 <body>
 
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <span class="form-label">Capacity: </span>
-                <input class="form-control" type="number" name="Capacity" id="Capacity" formControlName="Capacity" placeholder="Capacity for the event">
+                <input class="form-control" type="number" name="Capacity" id="Capacity" min="1" formControlName="Capacity" placeholder="Capacity for the event">
                 <span *ngIf="eventUserForm.controls.Capacity.touched">
                     <small *ngIf="eventUserForm.controls.Capacity.errors?.required">
                             <div class="attent">
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <span class="form-label">Price(per Day): </span>
-                <input class="form-control" type="number" name="Price" id="Price" formControlName="Price" placeholder="How much Price">
+                <input class="form-control" type="number"  name="Price" id="Price" min="1" formControlName="Price" placeholder="How much Price">
                 <span *ngIf="eventUserForm.controls.Price.touched">
                     <small *ngIf="eventUserForm.controls.Price.errors?.required">
                             <div class="attent">
@@ -45,7 +45,7 @@
 
             <div class="form-group">
                 <span class="form-label">Event Time: </span>
-                <input class="form-control" type="date" name="EventTime" id="EventTime" formControlName="EventTime" placeholder="Event Time">
+                <input class="form-control" type="datetime-local" name="EventTime" id="EventTime" formControlName="EventTime" placeholder="Event Time">
                 <span *ngIf="eventUserForm.controls.EventTime.touched">
                     <small *ngIf="eventUserForm.controls.EventTime.errors?.required">
                             <div class="attent">
@@ -65,7 +65,8 @@
                 [zoom]="zoom"
                 [center]="center"
                 [options]="options"
-                (mapClick)="click($event)"         
+                (mapClick)="click($event)"  
+                       
               >
               
               <map-marker
@@ -73,8 +74,8 @@
                [position]="optionsMark.position"
                [title]="optionsMark.title"
              >
-             <span>Address
-             <textarea width="300px" height="100px">{{address2}}</textarea> </span>
+            <span> <h6 style="margin-top: 30px;">Address: </h6>
+             <textarea style="width:300px;height:65px">{{address2}}</textarea></span>
             </map-marker>
             </google-map>
              
@@ -91,7 +92,7 @@
         </div>
 
             <div class="form-btn">
-                <button class="submitbutton" type="submit"  [disabled]="eventUserForm.invalid"> Add Apartment
+                <button class="submitbutton" type="submit"  [disabled]="eventUserForm.invalid"> Add Event
                 </button>
               </div>
                    
