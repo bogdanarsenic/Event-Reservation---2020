@@ -1,4 +1,4 @@
-<div class="containter">
+<div class="containter" *ngIf="isAdmin()">
      
       <table class="table table-hover table-sm ">
        <thead>
@@ -27,3 +27,32 @@
        </tbody>
      </table>
  </div>
+
+ <div class="containter" *ngIf="isSeller()">
+     
+  <table class="table table-hover table-sm ">
+   <thead>
+     <tr>
+       <th scope="col">Name</th>
+       <th scope="col">Last name</th>
+       <th scope="col">Username</th>
+       <th scope="col">Gender</th>
+       <th scope="col">Role</th>
+       <th scope="col">IsActive</th>
+     </tr>
+   </thead>
+
+   <tbody class="table table-hover table-sm " *ngFor="let user of sellerUsers">
+       <tr>
+           <td>{{user.Name}}</td>
+           <td>{{user.Surname}}</td>
+           <td>{{user.Username}}</td>
+           <td>{{user.Gender}}</td>
+           <td>{{user.Role}}</td>
+           <td>{{user.IsActive}}</td>
+           
+       </tr>
+    
+   </tbody>
+ </table>
+</div>

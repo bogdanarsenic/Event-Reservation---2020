@@ -13,8 +13,8 @@ export class AllusersComponent implements OnInit {
 
   user:User;
   users:User[];
-  korisnici:User[];
-  hostId:string;
+  sellerUsers:User[];
+  sellerId:string;
   Admin:string
   IsActive:string
 
@@ -49,7 +49,7 @@ export class AllusersComponent implements OnInit {
      this.korisnik=new User("","","","","","","");
       this.user=new User("","","","","","","");
       this.users=[]
-      this.korisnici=[]
+      this.sellerUsers=[]
 
       if(this.isAdmin())
       {
@@ -61,6 +61,24 @@ export class AllusersComponent implements OnInit {
           }
         )
       }   
+
+      if(this.isSeller())
+     {
+        this.sellerId=sessionStorage.getItem('Username');
+        this.service.GetAllTicketsByUserId(this.sellerId).subscribe(
+          data=>
+          {
+              if(data.length==0)
+              {
+                alert("No users bought ticket for your event")
+              }
+              else
+              {
+                this.sellerUsers=data;
+              }
+          }
+        )
+    }
       
   }
 
@@ -75,6 +93,14 @@ export class AllusersComponent implements OnInit {
   isAdmin()
   {
     if(sessionStorage.getItem('Role')=="Admin")
+    return true;
+    else 
+    return false;
+  }
+
+  isSeller()
+  {
+    if(sessionStorage.getItem('Role')=="Seller")
     return true;
     else 
     return false;

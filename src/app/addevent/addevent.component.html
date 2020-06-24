@@ -1,0 +1,101 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nGj_TeEUiCpwOfGXAE4LyNzkYgB4U3o&callback=initMap"
+  type="text/javascript"></script>
+<body>
+
+
+<div class="section-center">
+    <div class="booking-form">
+        <form [formGroup]="eventUserForm" (submit)="onSubmit()" novalidate>
+          <h3 class="register"> ADD Event:</h3>
+            <div class="form-group">
+                <span class="form-label">Name: </span>
+                <input class="form-control" type="text" name="Name" id="Name" formControlName="Name" placeholder="Name of Event">
+                <span *ngIf="eventUserForm.controls.Name.touched">
+                    <small *ngIf="eventUserForm.controls.Name.errors?.required">
+                            <div class="attent">
+                                    How many rooms is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Capacity: </span>
+                <input class="form-control" type="number" name="Capacity" id="Capacity" formControlName="Capacity" placeholder="Capacity for the event">
+                <span *ngIf="eventUserForm.controls.Capacity.touched">
+                    <small *ngIf="eventUserForm.controls.Capacity.errors?.required">
+                            <div class="attent">
+                                Capacity is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Price(per Day): </span>
+                <input class="form-control" type="number" name="Price" id="Price" formControlName="Price" placeholder="How much Price">
+                <span *ngIf="eventUserForm.controls.Price.touched">
+                    <small *ngIf="eventUserForm.controls.Price.errors?.required">
+                            <div class="attent">
+                                    How much is the Price is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Event Time: </span>
+                <input class="form-control" type="date" name="EventTime" id="EventTime" formControlName="EventTime" placeholder="Event Time">
+                <span *ngIf="eventUserForm.controls.EventTime.touched">
+                    <small *ngIf="eventUserForm.controls.EventTime.errors?.required">
+                            <div class="attent">
+                                    Time of Event is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+
+            <h6>Location:</h6>
+            <div class="form-group">
+
+             <google-map
+                height="500px"
+                width="500px"
+                [zoom]="zoom"
+                [center]="center"
+                [options]="options"
+                (mapClick)="click($event)"         
+              >
+              
+              <map-marker
+               
+               [position]="optionsMark.position"
+               [title]="optionsMark.title"
+             >
+             <span>Address
+             <textarea width="300px" height="100px">{{address2}}</textarea> </span>
+            </map-marker>
+            </google-map>
+             
+             </div>
+
+            <div class="form-group">
+
+            <span class="form-label">Type: </span>
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Concert" checked/> Concert
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Festival"/> Festival
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Theatre"/> Theatre
+    
+            
+        </div>
+
+            <div class="form-btn">
+                <button class="submitbutton" type="submit"  [disabled]="apartmentUserForm.invalid"> Add Apartment
+                </button>
+              </div>
+                   
+        </form>
+      </div>
+    </div>
+</body>

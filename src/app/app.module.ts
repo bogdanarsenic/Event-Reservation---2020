@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AddsellerComponent } from './addseller/addseller.component';
 import { AllusersComponent } from './allusers/allusers.component';
+import { AddeventComponent } from './addevent/addevent.component';
 
 const appRoutes:Routes=[
   { path: 'registration',component:RegisterComponent},
@@ -22,6 +23,7 @@ const appRoutes:Routes=[
   { path: 'editprofile',component:EditprofileComponent},
   { path: 'addseller',component:AddsellerComponent},
   { path: 'allusers',component:AllusersComponent},
+  { path: 'addevent',component:AddeventComponent},
 
 
 
@@ -37,7 +39,8 @@ const appRoutes:Routes=[
     RegisterComponent,
     EditprofileComponent,
     AddsellerComponent,
-    AllusersComponent
+    AllusersComponent,
+    AddeventComponent
   ],
   imports: [
     BrowserModule,

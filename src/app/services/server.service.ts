@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '../classes/Login';
 import { Observable } from 'rxjs';
 import { User } from '../classes/User';
+import { Location } from '../classes/Location';
+import { Event } from '../classes/Event';
 
 
 @Injectable({
@@ -37,6 +39,12 @@ export class ServerService {
     return this.http.get('http://localhost:52294/api/User/GetAllUsers');
   }
 
+  GetAllTicketsByUserId(idSeller:string):Observable<any>
+  {
+    return this.http.get('http://localhost:52294/api/Ticket/GetAllTicketsUser',{params:{idSeller}});
+  }
+
+
   GetUserByUsername(Username:string):Observable<User>
   {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrentByUsername`,{params:{Username}});
@@ -45,5 +53,13 @@ export class ServerService {
   PutUser(user:User):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/User/Update", user);
+  }
+
+  postLocation(location:Location):Observable<any>{
+    return this.http.post("http://localhost:52294/api/Location",location);
+  }
+
+  postEvent(register:Event):Observable<any>{
+    return this.http.post("http://localhost:52294/api/Manifestation",register);
   }
 }
