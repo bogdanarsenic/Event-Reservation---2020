@@ -28,10 +28,10 @@ namespace TicketReservation.Controllers
         }
 
 
-        [Route("GetOneManifestationAddedImage")]
-        public string GetOneManifestationAddedImage(string IdMan, string ImgName)
+        [Route("GetImage")]
+        public string GetImage(string idEvent, string ImgName)
         {
-            Manifestation temp = manifestationDB.GetOneById(IdMan);
+            Manifestation temp = manifestationDB.GetOneById(idEvent);
             if (temp.Pictures == "")
             {
                 temp.Pictures = ImgName;
@@ -88,9 +88,9 @@ namespace TicketReservation.Controllers
         }
 
         [Route("GetOneManifestation")]
-        public Manifestation GetOneManifestation(Guid Id)
+        public Manifestation GetOneManifestation(string idEvent)
         {
-            string idTemp = Id.ToString();
+            string idTemp = idEvent;
             Manifestation ret = null;
             ret = manifestationDB.GetOneById(idTemp);
             return ret;

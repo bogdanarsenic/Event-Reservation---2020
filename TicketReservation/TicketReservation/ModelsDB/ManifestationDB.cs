@@ -50,7 +50,7 @@ namespace TicketReservation.ModelsDB
 
         public void Update(Manifestation manifestation)
         {
-            string Query = "UPDATE Manifestations set Id = @Id, Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, Status=@Status, LocationId=@LocationId,Place=@Place, SellerId=@SellerId, Pictures=@Pictures, IsActive=@IsActive" +
+            string Query = "UPDATE Manifestations set Id = @Id, Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, Status=@Status, LocationId=@LocationId,Place=@Place, SellerId=@SellerId, Pictures=@Pictures, IsActive=@IsActive " +
                "WHERE Id = @id";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -156,7 +156,7 @@ namespace TicketReservation.ModelsDB
 
         public Manifestation GetOneById(string Id)
         {
-            string Query = "SELECT * FROM Manifestations WHERE IsActive='True' and Id='" + Id + "'";
+            string Query = "SELECT * FROM Manifestations WHERE Id='" + Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
