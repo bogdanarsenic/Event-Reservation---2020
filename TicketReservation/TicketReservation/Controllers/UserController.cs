@@ -60,7 +60,7 @@ namespace TicketReservation.Controllers
             temp.Surname = register.Surname;   
             temp.Password = register.Password;
             temp.Gender = register.Gender;
-            temp.Role = "Guest";
+            temp.Role = "Buyer";
             userDB.Insert(temp);
             return "Success!";
         }
@@ -94,7 +94,7 @@ namespace TicketReservation.Controllers
             temp.Surname = register.Surname;
             temp.Password = register.Password;
             temp.Gender = register.Gender;
-            temp.Role = "Host";
+            temp.Role = "Seller";
             userDB.Insert(temp);
             return "Success!";
         }

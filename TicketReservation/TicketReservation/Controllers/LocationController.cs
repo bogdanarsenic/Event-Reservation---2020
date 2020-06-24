@@ -20,5 +20,12 @@ namespace TicketReservation.Controllers
             ret = locationDB.GetAll();
             return ret;
         }
+
+        [Route("RegisterLocation")]
+        public string RegisterLocation(Location location)
+        {
+            locationDB.Insert(location);
+            return "Success";
+        }
     }
 }

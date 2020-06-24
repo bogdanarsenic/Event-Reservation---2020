@@ -39,7 +39,9 @@ namespace TicketReservation.Controllers
         [Route("RegisterTicket")]
         public string RegisterTicket(Ticket ticket)
         {
-            ticket.Id = Guid.NewGuid();
+            string nesto = Convert.ToString(Guid.NewGuid());
+            ticket.Id =nesto.Substring(0, 10);
+
             ticketDB.Insert(ticket);
             return "Success";
         }
@@ -49,13 +51,13 @@ namespace TicketReservation.Controllers
         {
             List<Ticket> ret1 = null;
             List<Ticket> ret2 = new List<Ticket>();
-            User U = userDB.GetOne(IdSeller);
+            User u = userDB.GetOne(IdSeller);
             ret1 = ticketDB.GetAll();
             foreach (Ticket t in ret1)
             {
                 t.Manifestation = manifestationDB.GetOneById(t.ManifestationId);
 
-                if (t.Manifestation.UserId == U.Name + " " + U.Surname)
+                if (t.Manifestation.UserId == u.Username)
                 {
                     ret2.Add(t);
                 }

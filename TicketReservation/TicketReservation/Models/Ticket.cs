@@ -7,12 +7,13 @@ namespace TicketReservation.Models
 {
     public class Ticket
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string ManifestationId { get; set; }
         public Manifestation Manifestation { get; set; }
         public DateTime? EventTime { get; set; }
         public int Price { get; set; }
         public string Buyer { get; set; }
+        public string SellerId { get; set; }
         public string Status { get; set; }
         public string Type { get; set; }
 
@@ -21,12 +22,12 @@ namespace TicketReservation.Models
 
         }
 
-        public Ticket(string manifestationId,DateTime eventTime, int price, string buyer, string status, string type)
+        public Ticket(string manifestationId,DateTime eventTime, int price, string buyer,string sellerId, string status, string type)
         {
-            Id = Guid.NewGuid();
             ManifestationId = manifestationId;
             Price = price;
             Buyer = buyer;
+            SellerId = sellerId;
             Status = status;
             Type = type;
         }

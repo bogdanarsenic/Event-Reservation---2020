@@ -55,6 +55,17 @@ namespace TicketReservation.Controllers
             register.Id = Guid.NewGuid();
             register.Pictures = "";
             register.IsActive = false;
+
+            List<Manifestation> manifestations = new List<Manifestation>();
+            manifestations = GetAllManifestations();
+
+            foreach(Manifestation m in manifestations)
+            {
+                if(m.EventTime==register.EventTime && m.Place==register.Place)
+                {
+                    return "Already has event in that time and place";
+                }
+            }
            
             manifestationDB.Insert(register);
 
@@ -81,8 +92,8 @@ namespace TicketReservation.Controllers
             return ret;
         }
 
-        [Route("GetOneApartmentUpdate")]
-        public string GetOneApartmentUpdate(Guid IdA)
+        [Route("GetOneManifestationUpdate")]
+        public string GetOneManifestationUpdate(Guid IdA)
         {
             try
             {

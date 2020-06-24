@@ -19,7 +19,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(Ticket ticket)
         {
-            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, Status, Type) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer,  @Status, @Type)";
+            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, SellerId, Status, Type) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer,@SellerId  @Status, @Type)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -32,6 +32,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@EventTime", SqlDbType.DateTime2).Value = ticket.EventTime;
                     cmd.Parameters.Add("@Price", SqlDbType.Int).Value = ticket.Price;
                     cmd.Parameters.Add("@Buyer", SqlDbType.NVarChar).Value = ticket.Buyer;
+                    cmd.Parameters.Add("@SellerId", SqlDbType.NVarChar).Value = ticket.SellerId;
                     cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = ticket.Status;
                     cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value = ticket.Type;
                     cmd.ExecuteNonQuery();
@@ -57,11 +58,12 @@ namespace TicketReservation.ModelsDB
                     while (reader.Read())
                     {
                         Ticket ticket = new Ticket();
-                        ticket.Id = new Guid(reader["Id"].ToString());
+                        ticket.Id = reader["Id"].ToString();
                         ticket.ManifestationId = reader["ManifestationId"].ToString();
                         ticket.EventTime = Convert.ToDateTime(reader["EventTime"].ToString());
                         ticket.Price = Convert.ToInt32(reader["Price"].ToString());
                         ticket.Buyer = reader["Buyer"].ToString();
+                        ticket.SellerId = reader["SellerId"].ToString();
                         ticket.Status = reader["Status"].ToString();
                         ticket.Type = reader["Type"].ToString();
                         tickets.Add(ticket);
@@ -88,11 +90,12 @@ namespace TicketReservation.ModelsDB
                     while (reader.Read())
                     {
                         Ticket ticket = new Ticket();
-                        ticket.Id = new Guid(reader["Id"].ToString());
+                        ticket.Id = reader["Id"].ToString();
                         ticket.ManifestationId = reader["ManifestationId"].ToString();
                         ticket.EventTime = Convert.ToDateTime(reader["EventTime"].ToString());
                         ticket.Price = Convert.ToInt32(reader["Price"].ToString());
                         ticket.Buyer = reader["Buyer"].ToString();
+                        ticket.SellerId = reader["SellerId"].ToString();
                         ticket.Status = reader["Status"].ToString();
                         ticket.Type = reader["Type"].ToString();
                         tickets.Add(ticket);
