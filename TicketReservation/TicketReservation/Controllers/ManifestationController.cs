@@ -79,10 +79,10 @@ namespace TicketReservation.Controllers
 
 
         [Route("GetAllManifestationsByUserId")]
-        public List<Manifestation> GetAllManifestationsByUserId(string IdAp)
+        public List<Manifestation> GetAllManifestationsByUserId(string id)
         {
             List<Manifestation> ret = null;
-            ret = manifestationDB.GetAllBySellerId(IdAp);
+            ret = manifestationDB.GetAllBySellerId(id);
             return ret;
 
         }

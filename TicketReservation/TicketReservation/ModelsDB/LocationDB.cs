@@ -88,6 +88,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Longitude", SqlDbType.Float).Value = location.Longitude;
                     cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = location.Address;
 
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

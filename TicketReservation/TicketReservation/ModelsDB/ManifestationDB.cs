@@ -220,7 +220,7 @@ namespace TicketReservation.ModelsDB
 
             List<Manifestation> manifestations = new List<Manifestation>();
 
-            string Query = "SELECT * FROM Manifestations WHERE IsActive='True'";
+            string Query = "SELECT * FROM Manifestations";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))
@@ -243,6 +243,7 @@ namespace TicketReservation.ModelsDB
                         manifestation.Pictures = reader["Pictures"].ToString();
                         manifestation.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
 
+                        manifestations.Add(manifestation);
                     }
                 }
             }
