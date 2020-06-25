@@ -16,7 +16,7 @@ import { AllusersComponent } from './allusers/allusers.component';
 import { AddeventComponent } from './addevent/addevent.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import {GoogleMapsModule} from '@angular/google-maps';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, AgmMap, AgmMarker } from '@agm/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -86,10 +86,10 @@ const appRoutes:Routes=[
     MatInputModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule,
-    MatMomentDateModule, 
+    MatMomentDateModule
 
   ],
-  providers: [ServerService,{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: 'sr-SR'},],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

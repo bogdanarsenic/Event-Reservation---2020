@@ -1,3 +1,6 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4&callback=initMap&language=en">
+</script>
+
 <body>
     <div class="containter">
         
@@ -6,7 +9,13 @@
                    
                         <img class="w3-card-4" src={{pic}} width="300" height="200" style="margin: 0px 20px">
                 </div>
+                
+                <button (click)="showPlace()">Show Address on Map </button>
 
+                <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
     </div>
-
+    
 </body>

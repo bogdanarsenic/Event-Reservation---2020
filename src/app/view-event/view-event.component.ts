@@ -20,15 +20,27 @@ aps:string
 temp:string
 nesto:boolean
 
-  constructor(private router:Router,private service:ServerService) { }
+address:string
 
-  ngOnInit() {
+clicked:boolean
+
+zoom = 12;
+
+
+lng:number
+lat:number
+
+locationId:string
+constructor(private router:Router,private service:ServerService) { }
+
+ngOnInit() {
 
     this.id=sessionStorage.getItem('EventId');
     this.pictures3=[]
     this.nesto=false;
     this.local="http://localhost:52294/";
     this.folder="Content/";
+    this.clicked=false;
     
     this.service.GetEvent(this.id).subscribe(
       data=>{
@@ -40,8 +52,27 @@ nesto:boolean
             this.temp=this.local+this.folder+this.pictures2[this.pictures2.length-1];
             this.pictures3.push(this.temp);
           });
+        this.address=data.Place;
+        this.locationId=data.LocationId;
+      }
+    )
+    
+
+  }
+
+  showPlace()
+  {
+    this.clicked=true;
+    this.service.GetLongLat(this.locationId).subscribe(
+      data=>
+      {
+        this.lat=data.Lattitude;
+        this.lng=data.Longitude;
       }
     )
   }
-
 }
+
+
+
+

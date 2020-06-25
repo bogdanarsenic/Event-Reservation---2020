@@ -88,4 +88,9 @@ export class ServerService {
   {
     return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetOneManifestation`,{params:{idEvent}});
   }
+
+  GetLongLat(id:string):Observable<any>
+  {
+    return this.http.get<any>(`http://localhost:52294/api/Location/GetOneLocation`,{params:{id}});
+  }
 }

@@ -10,3 +10,8 @@ img{
     display: flex;
     align-items: center;
 }
+
+agm-map{
+    height: 150px;
+    width: 250px;
+}
