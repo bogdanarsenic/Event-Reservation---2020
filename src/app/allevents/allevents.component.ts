@@ -60,10 +60,8 @@ createForm()
             {
               data.forEach(element=>
                 {
-                  
-                    element.EventTime=element.EventTime.replace('T'," ");
-                    element.EventTime=element.EventTime.slice(0,16);
-                    
+
+
                     element.Pictures=element.Pictures.replace(/\\/g,"/");
                     element.Pictures=element.Pictures.split(';');
                     element.FrontPicture=element.Pictures[0];

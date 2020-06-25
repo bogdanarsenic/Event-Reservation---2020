@@ -31,6 +31,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import { AlleventsComponent } from './allevents/allevents.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { EditeventComponent } from './editevent/editevent.component';
 
 
 
@@ -67,7 +68,8 @@ const appRoutes:Routes=[
     AddeventComponent,
     UploadImageComponent,
     AlleventsComponent,
-    ViewEventComponent
+    ViewEventComponent,
+    EditeventComponent
   ],
   imports: [
     BrowserModule,

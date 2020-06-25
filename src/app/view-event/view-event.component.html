@@ -2,20 +2,34 @@
 </script>
 
 <body>
-    <div class="containter">
+    <div class="container">
+        <div class="row justify-content-center align-self-center">
+
+      
+                <div class="col-4" >
+
+                    <div class="my-list">
+                    <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
+                    
+                    
+                    <h6>Name: {{event.Name}} </h6>
+                    <h6>Type: {{event.Type}}</h6>
+                    <h6>Capacity: {{event.Capacity}}</h6>
+                    <h6>EventTime:{{event.EventTime}}</h6>
+                    <h6>Price: {{event.Price}}</h6>
+                    <h6>Status: {{event.Status}}</h6>
+                    <h6>Place:{{event.Place}}</h6> 
+                    
+
+                    </div>
+                    <button class="btn btn-info" (click)="showPlace()">Show Address on Map </button>
+
+                    <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
         
-               
-                <div *ngFor="let pic of pictures3">
-                   
-                        <img class="w3-card-4" src={{pic}} width="300" height="200" style="margin: 0px 20px">
-                </div>
-                
-                <button (click)="showPlace()">Show Address on Map </button>
-
-                <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
-
                     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-                </agm-map>
-    </div>
-    
+                    </agm-map>
+                   
+                </div>
+            </div>
+        </div>
 </body>
