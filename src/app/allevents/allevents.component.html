@@ -17,8 +17,15 @@
             <h6>Status: {{event.Status}}</h6>
             <h6>Place:{{event.Place}}</h6> 
 
-            
+            <div class="detail">
+                <ul>
+                  <li>
+                      <div class="btn btn-info" (click)="ViewEvent(event.Id,event)">View Event</div> 
+                  </li>
+                  
+               </ul>
             </div>
+        </div>
         </div>
       </div>
      

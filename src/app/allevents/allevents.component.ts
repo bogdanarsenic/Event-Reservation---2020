@@ -3,6 +3,7 @@ import {Event} from '../classes/Event';
 import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import { FormBuilder } from '@angular/forms';
+import { Geocoder } from '@agm/core';
 
 @Component({
   selector: 'app-allevents',
@@ -25,8 +26,6 @@ active:string
 aps:string
 brojac:number
 filteredStatus:string
-
-
 
 Clicked:boolean
   constructor(private router:Router,private service:ServerService,private fb:FormBuilder) { 
@@ -100,18 +99,18 @@ createForm()
               data.forEach(element=>
                 {
                     
-                    element.Picture=element.Picture.replace(/\\/g,"/");
-                    element.Picture=element.Picture.split(';');
-                    element.FrontPicture=element.Picture[0];
-                    element.FrontPicture=this.local+this.folder+element.FrontPicture;
-                    
-                    this.pictures1=element.Picture;
-                    this.pictures1.forEach(element=>
-                      {
-                        this.pictures3=element.split('/');
-                        element=this.pictures3[this.pictures3.length-1];
-                      });
-                      element.AllPictures=this.pictures1;
+                  element.Pictures=element.Pictures.replace(/\\/g,"/");
+                  element.Pictures=element.Pictures.split(';');
+                  element.FrontPicture=element.Pictures[0];
+                  element.FrontPicture=this.local+this.folder+element.FrontPicture;
+                  
+                  this.pictures1=element.Pictures;
+                  this.pictures1.forEach(element=>
+                    {
+                      this.pictures3=element.split('/');
+                      element=this.pictures3[this.pictures3.length-1];
+                    });
+                    element.AllPictures=this.pictures1;
 
                   
                 });
@@ -142,12 +141,12 @@ createForm()
 
                     this.active="Active";
 
-                    element.Picture=element.Picture.replace(/\\/g,"/");
-                    element.Picture=element.Picture.split(';');
-                    element.FrontPicture=element.Picture[0];
+                    element.Pictures=element.Pictures.replace(/\\/g,"/");
+                    element.Pictures=element.Pictures.split(';');
+                    element.FrontPicture=element.Pictures[0];
                     element.FrontPicture=this.local+this.folder+element.FrontPicture;
                     
-                    this.pictures1=element.Picture;
+                    this.pictures1=element.Pictures;
                     this.pictures1.forEach(element=>
                       {
                         this.pictures3=element.split('/');
@@ -179,7 +178,12 @@ createForm()
 
   }
   
-
+  ViewEvent(id:string,ev:Event)
+  {
+    sessionStorage.setItem('EventId',id);
+    this.router.navigateByUrl('/viewevent');
+  }
+  
   Click()
   {
     this.Clicked=true;
@@ -221,7 +225,6 @@ createForm()
       return false;
   }
 
-  
 
   IsLogged()
   {

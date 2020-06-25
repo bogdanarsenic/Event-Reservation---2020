@@ -30,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import { AlleventsComponent } from './allevents/allevents.component';
+import { ViewEventComponent } from './view-event/view-event.component';
 
 
 
@@ -46,6 +47,8 @@ const appRoutes:Routes=[
   { path: 'addevent',component:AddeventComponent},
   { path: ':eventId/upload',component:UploadImageComponent},
   { path: 'allevents',component:AlleventsComponent},
+  { path: 'viewevent',component:ViewEventComponent},
+
 
 
 
@@ -63,7 +66,8 @@ const appRoutes:Routes=[
     AllusersComponent,
     AddeventComponent,
     UploadImageComponent,
-    AlleventsComponent
+    AlleventsComponent,
+    ViewEventComponent
   ],
   imports: [
     BrowserModule,
