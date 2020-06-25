@@ -5,6 +5,7 @@
         <div *ngIf="ShowLogin()">
             <button routerLink="/login"> Login </button> 
             <button routerLink="/registration">Registration</button>  
+            <button routerLink="/allevents"> Events </button>
             
             <div *ngIf="(CurrentComponent()=='LoginComponent' || CurrentComponent()=='RegisterComponent')" (click)="BackToCheck()">
               <button class="back" style="float:left" routerLink="">Back </button>
@@ -20,15 +21,21 @@
             <div *ngIf="IsAdmin()">
                 <button routerLink="/addseller"> AddNewSeller </button>
                 <button routerLink="/allusers"> Users </button>
+                <button routerLink="/allevents"> Events </button>
+
             </div>
 
             <div *ngIf="IsSeller()">
                 <button routerLink="/allusers">Users</button>
                 <button routerLink="/addevent"> AddEvent</button>
+                <button routerLink="/allevents"> Events </button>
+
                     
             </div>
             
             <div *ngIf="IsBuyer()">
+                <button routerLink="/allevents"> Events </button>
+
             </div>
         </div>
 

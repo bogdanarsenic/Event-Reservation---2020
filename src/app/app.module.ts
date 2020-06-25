@@ -29,6 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import { AlleventsComponent } from './allevents/allevents.component';
 
 
 
@@ -44,6 +45,7 @@ const appRoutes:Routes=[
   { path: 'allusers',component:AllusersComponent},
   { path: 'addevent',component:AddeventComponent},
   { path: ':eventId/upload',component:UploadImageComponent},
+  { path: 'allevents',component:AlleventsComponent},
 
 
 
@@ -60,7 +62,8 @@ const appRoutes:Routes=[
     AddsellerComponent,
     AllusersComponent,
     AddeventComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    AlleventsComponent
   ],
   imports: [
     BrowserModule,

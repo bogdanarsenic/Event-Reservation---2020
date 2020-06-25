@@ -39,6 +39,17 @@ export class ServerService {
     return this.http.get('http://localhost:52294/api/User/GetAllUsers');
   }
 
+  GetAllEvents():Observable<any>
+  {
+    return this.http.get<any>("http://localhost:52294/api/Manifestation/GetAllManifestations");
+  }
+
+  GetEventbyUser(id:string):Observable<any>
+  {
+      return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetAllManifestationsByUserId`,{params:{id}});
+  }
+
+
   GetAllTicketsByUserId(idSeller:string):Observable<any>
   {
     return this.http.get('http://localhost:52294/api/Ticket/GetAllTicketsUser',{params:{idSeller}});

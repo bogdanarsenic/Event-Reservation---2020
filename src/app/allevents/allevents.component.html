@@ -1,0 +1,27 @@
+<body>
+
+   
+
+                
+      <hr>
+      <div class="row" *ngFor="let event of allEvents">
+        <div class="col-4" >
+
+            <div class="my-list">
+            <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
+            <h6>Name: {{event.Name}} </h6>
+            <h6>Type: {{event.Type}}</h6>
+            <h6>Capacity: {{event.Capacity}}</h6>
+            <h6>EventTime:{{event.EventTime}}</h6>
+            <h6>Price: {{event.Price}}</h6>
+            <h6>Status: {{event.Status}}</h6>
+            <h6>Place:{{event.Place}}</h6> 
+
+            
+            </div>
+        </div>
+      </div>
+     
+
+
+</body>
