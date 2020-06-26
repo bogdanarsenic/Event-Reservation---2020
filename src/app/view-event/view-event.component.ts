@@ -81,7 +81,17 @@ ngOnInit() {
       }
     )
   }
+
+   
+  isSeller()
+  {
+    if(sessionStorage.getItem('Role')=="Seller")
+      return true;
+    else
+      return false;
+  }
 }
+
 
 
 

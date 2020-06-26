@@ -49,6 +49,9 @@ const appRoutes:Routes=[
   { path: ':eventId/upload',component:UploadImageComponent},
   { path: 'allevents',component:AlleventsComponent},
   { path: 'viewevent',component:ViewEventComponent},
+  { path: 'editevent',component:EditeventComponent},
+
+
 
 
 

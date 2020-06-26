@@ -2,8 +2,8 @@
 
                 
       <hr>
-      <div class="row" *ngFor="let event of allEvents">
-        <div class="col-3" >
+      <div class="row" >
+        <div class="col-3" *ngFor="let event of allEvents" style="margin-left:10px">
 
             <div class="my-list">
             <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
@@ -12,6 +12,9 @@
                     <h5> Click for more info </h5>
                 </div>
             </div>
+            <button *ngIf="isAdmin() && event.Status=='NotActive'" class="btn" (click)="ApproveEvent(event)" style="background-color:green;color:#f4f4f4">
+                Approve
+            </button>
         </div>
       </div>
      

@@ -1,1 +1,90 @@
-<p>editevent works!</p>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4&callback=initMap&language=en"
+  type="text/javascript"></script>
+<body>
+
+
+<div class="section-center">
+    <div class="booking-form">
+        <form [formGroup]="eventUserForm" (submit)="onSubmit()" novalidate>
+          <h3 class="register"> Edit Event:</h3>
+            <div class="form-group">
+                <span class="form-label">Name: </span>
+                <input class="form-control" type="text" name="Name" id="Name" formControlName="Name" placeholder="Name of Event">
+                <span *ngIf="eventUserForm.controls.Name.touched">
+                    <small *ngIf="eventUserForm.controls.Name.errors?.required">
+                            <div class="attent">
+                                    How many rooms is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Capacity: </span>
+                <input class="form-control" type="number" name="Capacity" id="Capacity" min="1" formControlName="Capacity" placeholder="Capacity for the event">
+                <span *ngIf="eventUserForm.controls.Capacity.touched">
+                    <small *ngIf="eventUserForm.controls.Capacity.errors?.required">
+                            <div class="attent">
+                                Capacity is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Price(per Day): </span>
+                <input class="form-control" type="number"  name="Price" id="Price" min="1" formControlName="Price" placeholder="How much Price">
+                <span *ngIf="eventUserForm.controls.Price.touched">
+                    <small *ngIf="eventUserForm.controls.Price.errors?.required">
+                            <div class="attent">
+                                    How much is the Price is required!
+                            </div>
+                    </small>
+                </span>
+            </div>
+
+            <div class="form-group">
+               <span class="form-label">Event Date: </span>
+
+                <mat-form-field style="width:150px;margin-right: 20px;">
+                    <input  matInput [matDatepicker]="picker" [min]="tomorrow" formControlName="EventDay"> 
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true"  #picker></mat-datepicker>
+              </mat-form-field>
+
+              
+
+              <span class="form-label" style="margin-left: 10px;">Event Time: </span>          
+              <ngx-timepicker-field [format]="24" [defaultTime]="'23:11'" formControlName="EventTime2" style="float:right"></ngx-timepicker-field>
+
+
+              <span *ngIf="eventUserForm.controls.EventDay.touched">
+                <small *ngIf="eventUserForm.controls.EventDay.errors?.required">
+                        <div class="attent" style="color: red;">
+                               You need to put event day and event time!
+                        </div>
+                </small>
+            </span>
+             
+            </div>
+
+
+            <div class="form-group">
+
+            <span class="form-label">Type: </span>
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Concert" checked/> Concert
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Festival"/> Festival
+            <input type="radio" name="Type" id="Type" formControlName="Type" value="Theatre"/> Theatre
+    
+            
+        </div>
+
+            <div class="form-btn">
+                <button class="submitbutton" type="submit"  [disabled]="eventUserForm.invalid"> Edit Event
+                </button>
+              </div>
+                   
+        </form>
+      </div>
+    </div>
+</body>

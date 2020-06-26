@@ -93,4 +93,14 @@ export class ServerService {
   {
     return this.http.get<any>(`http://localhost:52294/api/Location/GetOneLocation`,{params:{id}});
   }
+
+  GetStatus(idEvent:string,status:string): Observable<any>{
+    return this.http.get("http://localhost:52294/api/Manifestation/GetStatus",{params:{idEvent,status}});
+  }
+
+  PutEvent(event:Event):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/Manifestation/Update", event);
+  }
+
 }

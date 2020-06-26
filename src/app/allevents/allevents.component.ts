@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import { FormBuilder } from '@angular/forms';
 import { Geocoder } from '@agm/core';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-allevents',
@@ -26,6 +27,10 @@ active:string
 aps:string
 brojac:number
 filteredStatus:string
+
+event:Event
+
+id2:string
 
 Clicked:boolean
   constructor(private router:Router,private service:ServerService,private fb:FormBuilder) { 
@@ -137,7 +142,7 @@ createForm()
           data.forEach(element=>
             {
                 
-                if(element.Active=="Active")
+                if(element.Status=="Active")
                 {
 
                     this.active="Active";
@@ -195,6 +200,22 @@ createForm()
     this.Clicked=false;
   }
 
+  ApproveEvent(event:Event){
+
+    this.id2=String(event.Id);
+
+    this.service.GetStatus(this.id2,event.Status)
+    .subscribe(
+      data =>{
+       console.log("OK");
+       this.router.navigate(['']).then(()=>window.location.reload());
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
   isAdmin()
   {
