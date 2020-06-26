@@ -90,6 +90,14 @@ ngOnInit() {
     else
       return false;
   }
+
+  isBuyer()
+  {
+    if(sessionStorage.getItem('Role')=="Buyer")
+      return true;
+    else
+      return false;
+  }
 }
 
 

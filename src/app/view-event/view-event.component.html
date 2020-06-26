@@ -25,6 +25,8 @@
                     <button class="btn btn-info" (click)="showPlace()">Show Address on Map </button>
                     <button *ngIf="isSeller()" class="btn btn-info" routerLink="/editevent">Edit Event</button>
 
+                    <button *ngIf="isBuyer()" class="btn btn-info" routerLink="/addticket">Reserve</button>
+
                     <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
         
                     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>

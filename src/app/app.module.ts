@@ -32,6 +32,8 @@ import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/mat
 import { AlleventsComponent } from './allevents/allevents.component';
 import { ViewEventComponent } from './view-event/view-event.component';
 import { EditeventComponent } from './editevent/editevent.component';
+import { AddticketComponent } from './addticket/addticket.component';
+import { AllticketsComponent } from './alltickets/alltickets.component';
 
 
 
@@ -50,6 +52,9 @@ const appRoutes:Routes=[
   { path: 'allevents',component:AlleventsComponent},
   { path: 'viewevent',component:ViewEventComponent},
   { path: 'editevent',component:EditeventComponent},
+  { path: 'addticket',component:AddticketComponent},
+
+  
 
 
 
@@ -72,7 +77,9 @@ const appRoutes:Routes=[
     UploadImageComponent,
     AlleventsComponent,
     ViewEventComponent,
-    EditeventComponent
+    EditeventComponent,
+    AddticketComponent,
+    AllticketsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+<body>
+
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="booking-form">
+    
+            <h2> Ticket Price: </h2>
+             <div class="temporal"> 
+                <p class="divp">
+                    {{priceTemporal}} din
+                 </p>
+                 
+                 
+                 <form [formGroup]="reservationUserForm" (submit)="onSubmit()" novalidate>
+        
+
+
+                        
+                        <div class="group">
+                        <span class="span-input">How many tickets:</span>
+                        <input type="number" min="1" class="form-control" name="noTickets" id="noTickets" formControlName="noTickets">
+                        
+                        <span *ngIf="reservationUserForm.controls.noTickets.touched">
+                            <small *ngIf="reservationUserForm.controls.noTickets.errors?.required">
+                                    <div class="attent">
+                                            How many tickets is required!
+                                    </div>
+                            </small>
+                        </span>
+                        </div>
+                
+                        
+                        <div class="group">
+                            <span class="form-label">Type: </span>
+                            <input type="radio" name="Type" id="Type" (click)="onRegular()" formControlName="Type" value="Regular" checked/> Regular
+                            <input type="radio" name="Type" id="Type" (click)="onFunPit()" formControlName="Type" value="Fun Pit"/> Fun Pit
+                            <input type="radio" name="Type" id="Type" (click)="onVIP()" formControlName="Type" value="VIP"/> VIP
+                        </div>
+                        
+                        <div class="form-btn">
+                            <button class="submitbutton" type="submit"  [disabled]="reservationUserForm.invalid"> Reserve
+                            </button>
+                        </div>    
+                 </form>
+              </div>
+         </div>
+    </div>
+ </div> 
+</body>

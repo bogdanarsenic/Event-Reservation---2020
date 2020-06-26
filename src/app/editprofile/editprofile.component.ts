@@ -32,7 +32,7 @@ export class EditprofileComponent implements OnInit {
    }
   ngOnInit() {
 
-    this.user=new User("","","","","","","");
+    this.user=new User("","","","","","","",0);
 
     this.id=sessionStorage.getItem('Username');
     this.getUser();

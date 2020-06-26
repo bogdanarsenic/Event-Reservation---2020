@@ -7,8 +7,9 @@ export class User{
     Gender:string;
     Role:string;
     IsActive:boolean;
+    Points:number;
     
-    constructor(id:string,username:string ,password:string, name:string, surname:string, gender:string, role:string)
+    constructor(id:string,username:string ,password:string, name:string, surname:string, gender:string, role:string, points:number)
     {
         this.Id=id;
         this.Username=username;
@@ -17,6 +18,6 @@ export class User{
         this.Surname=surname;
         this.Gender=gender;
         this.Role=role;
-
+        this.Points=points;
     }
 }

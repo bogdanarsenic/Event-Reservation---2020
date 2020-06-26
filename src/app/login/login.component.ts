@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     sessionStorage.clear();
     this.login=new Login("","");
-    this.selectedUser=new User("","","","","","","");
+    this.selectedUser=new User("","","","","","","",0);
     sessionStorage.setItem('CurrentComponent','LoginComponent');
 
   }

@@ -52,8 +52,6 @@ export class EditeventComponent implements OnInit {
         this.eventUserForm.value.Type=this.event.Type;
         this.eventUserForm.value.Price=this.event.Price;
         this.eventUserForm.value.Capacity=this.event.Capacity;
-        this.eventUserForm.value.EventDay=this.event.EventDay;
-        this.eventUserForm.value.EventTime2=this.event.EventTime2;
 
       }
     )

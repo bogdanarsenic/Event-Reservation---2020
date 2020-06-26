@@ -46,8 +46,8 @@ export class AllusersComponent implements OnInit {
      this.role=""
      this.gender=""
      this.id=""
-     this.korisnik=new User("","","","","","","");
-      this.user=new User("","","","","","","");
+     this.korisnik=new User("","","","","","","",0);
+      this.user=new User("","","","","","","",0);
       this.users=[]
       this.sellerUsers=[]
 
