@@ -19,7 +19,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(Ticket ticket)
         {
-            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, SellerId, Status, Type) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer,@SellerId  @Status, @Type)";
+            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, SellerId, Status, Type) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer, @SellerId, @Status, @Type)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using TicketReservation.Models;
@@ -35,8 +36,11 @@ namespace TicketReservation.ModelsDB
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
                             Role = reader["Role"].ToString(),
-                            
-  
+                            Points= float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                            TicketId = reader["TicketId"].ToString(),
+                            ManifestationId = reader["ManifestationId"].ToString(),
+                            Type= reader["UserType"].ToString()
+
                         };
                     }
                     return user;
@@ -52,7 +56,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(User user)
         {
-            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role)";
+            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -66,6 +70,10 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Surname", SqlDbType.NVarChar).Value = user.Surname;
                     cmd.Parameters.Add("@Gender", SqlDbType.NVarChar).Value = user.Gender;
                     cmd.Parameters.Add("@Role", SqlDbType.NVarChar).Value = user.Role;
+                    cmd.Parameters.Add("@Points", SqlDbType.Float).Value = user.Points;
+                    cmd.Parameters.Add("@TicketId", SqlDbType.NVarChar).Value = user.TicketId;
+                    cmd.Parameters.Add("@ManifestationId", SqlDbType.NVarChar).Value = user.ManifestationId;
+                    cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
 
 
                     if (GetOne(user.Username) == null)
@@ -101,15 +109,16 @@ namespace TicketReservation.ModelsDB
 
         public void UpdateTypePoints(User user)
         {
-            string Query = "UPDATE Users set Points=@Points, UserType=@Type " +
-               "WHERE Id='" + user.Username + "'";
+            string Query = "UPDATE Users set Points=@Points, UserType=@UserType, TicketId=@TicketId " +
+               "WHERE Username='" + user.Username + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))
                 {
                     con.Open();
-                    cmd.Parameters.Add("@Points", SqlDbType.Int).Value = user.Points;
+                    cmd.Parameters.Add("@Points", SqlDbType.Float).Value = user.Points;
                     cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
+                    cmd.Parameters.Add("@TicketId", SqlDbType.NVarChar).Value = user.TicketId;
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -136,7 +145,10 @@ namespace TicketReservation.ModelsDB
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
                             Role = reader["Role"].ToString(),
-
+                            Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                            TicketId = reader["TicketId"].ToString(),
+                            ManifestationId = reader["ManifestationId"].ToString(),
+                            Type = reader["UserType"].ToString()
                         };
                         users.Add(user);
                     }
@@ -170,6 +182,10 @@ namespace TicketReservation.ModelsDB
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
                             Role = reader["Role"].ToString(),
+                            Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                            TicketId = reader["TicketId"].ToString(),
+                            ManifestationId = reader["ManifestationId"].ToString(),
+                            Type = reader["UserType"].ToString()
 
                         };
                         users.Add(user);

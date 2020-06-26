@@ -43,7 +43,7 @@ namespace TicketReservation.Controllers
             ticket.Id =nesto.Substring(0, 10);
 
             ticketDB.Insert(ticket);
-            return "Success";
+            return ticket.Id;
         }
 
         [Route("GetAllTicketsUser")]

@@ -41,7 +41,7 @@ namespace TicketReservation.Controllers
                 temp.Pictures = temp.Pictures + ";" + ImgName;
             }
 
-            manifestationDB.Update(temp);
+            manifestationDB.UpdatePicture(temp);
             return "Success";
 
         }
@@ -106,7 +106,7 @@ namespace TicketReservation.Controllers
                 temp.Status = "Active";
             }
 
-            manifestationDB.Update(temp);
+            manifestationDB.UpdateStatus(temp);
             return "Success";
 
         }

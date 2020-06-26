@@ -47,8 +47,13 @@ namespace TicketReservation
                 admin.Surname = nesto[3];
                 admin.Gender = nesto[4];
                 admin.Role = "Admin";
-
+                admin.ManifestationId = "";
+                admin.TicketId = "";
+                admin.Type = "";
+                admin.Points = 0;
                 userDB.Insert(admin);
+
+                
             }
         }
     }

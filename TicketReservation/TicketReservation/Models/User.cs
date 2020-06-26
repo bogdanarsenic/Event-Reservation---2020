@@ -15,9 +15,9 @@ namespace TicketReservation.Models
         public string Role { get; set; }
         public string Type { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public List<Ticket> Tickets { get; set; }
-        public List<Manifestation>Manifestations { get; set; }
-        public int Points { get; set; }
+        public string TicketId { get; set; }
+        public string ManifestationId { get; set; }
+        public float Points { get; set; }
 
 
         public User()
@@ -25,7 +25,7 @@ namespace TicketReservation.Models
 
         }
 
-        public User(string username, string password, string name, string surname, DateTime dateOfBirth,string gender, string role, string type,int points)
+        public User(string username, string password, string name, string surname, DateTime dateOfBirth,string gender, string role, string type,string ticketId,float points,string manifestationId)
         {
             Username = username;
             Password = password;
@@ -38,12 +38,12 @@ namespace TicketReservation.Models
 
             if (role == "Buyer")
             {
-                Tickets = new List<Ticket>();
+                TicketId = ticketId;
                 Points = points;
             }
             else if (role == "Seller")
             {
-                Manifestations = new List<Manifestation>();
+                ManifestationId = manifestationId;
             }
         }
     }

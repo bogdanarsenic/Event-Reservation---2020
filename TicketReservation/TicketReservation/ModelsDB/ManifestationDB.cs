@@ -68,6 +68,21 @@ namespace TicketReservation.ModelsDB
             }
         }
 
+        public void UpdatePicture(Manifestation manifestation)
+        {
+            string Query = "UPDATE Manifestations set Pictures=@Pictures " +
+               "WHERE Id='" + manifestation.Id + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void UpdateStatus(Manifestation manifestation)
         {
             string Query = "UPDATE Manifestations set Status=@Status " +

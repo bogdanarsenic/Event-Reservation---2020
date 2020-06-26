@@ -61,6 +61,10 @@ namespace TicketReservation.Controllers
             temp.Password = register.Password;
             temp.Gender = register.Gender;
             temp.Role = "Buyer";
+            temp.TicketId = "";
+            temp.ManifestationId = "";
+            temp.Points = 0;
+            temp.Type = "";
             userDB.Insert(temp);
             return "Success!";
         }
@@ -84,7 +88,7 @@ namespace TicketReservation.Controllers
         public string UpdateTypePoints(User register)
         {
             User temp = userDB.GetOne(register.Username);
-
+            temp.TicketId = register.TicketId;
             temp.Type = register.Type;
             temp.Points = register.Points;
 
@@ -108,6 +112,10 @@ namespace TicketReservation.Controllers
             temp.Password = register.Password;
             temp.Gender = register.Gender;
             temp.Role = "Seller";
+            temp.ManifestationId = "";
+            temp.TicketId = "";
+            temp.Type = "";
+            temp.Points = 0;
             userDB.Insert(temp);
             return "Success!";
         }
