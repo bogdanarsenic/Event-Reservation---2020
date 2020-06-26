@@ -4,7 +4,7 @@
         <div class="section-center">
             <div class="booking-form">
     
-            <h2> Ticket Price: </h2>
+            <h4> Ticket Price: </h4>
              <div class="temporal"> 
                 <p class="divp">
                     {{priceTemporal}} din
@@ -13,12 +13,14 @@
                  
                  <form [formGroup]="reservationUserForm" (submit)="onSubmit()" novalidate>
         
-
+                    <div class="group">
+                        <h5>Tickets left <b style="color:red">{{capacity}}</b></h5>
+                    </div>
 
                         
                         <div class="group">
                         <span class="span-input">How many tickets:</span>
-                        <input type="number" min="1" class="form-control" name="noTickets" id="noTickets" formControlName="noTickets">
+                        <input type="number" min="1" onKeyDown="return false" [max]="capacity" class="form-control" name="noTickets" id="noTickets" formControlName="noTickets">
                         
                         <span *ngIf="reservationUserForm.controls.noTickets.touched">
                             <small *ngIf="reservationUserForm.controls.noTickets.errors?.required">
@@ -38,7 +40,7 @@
                         </div>
                         
                         <div class="form-btn">
-                            <button class="submitbutton" type="submit"  [disabled]="reservationUserForm.invalid"> Reserve
+                            <button class="btn btn-info" type="submit"  [disabled]="reservationUserForm.invalid"> Reserve
                             </button>
                         </div>    
                  </form>

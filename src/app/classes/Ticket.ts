@@ -9,6 +9,7 @@ export class Ticket{
     Buyer:string
     Status:string;
     Type:string;
+    SellerId:string;
 
 
 

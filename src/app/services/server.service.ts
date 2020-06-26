@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../classes/User';
 import { Location } from '../classes/Location';
 import { Event } from '../classes/Event';
+import { Ticket } from '../classes/Ticket';
 
 
 @Injectable({
@@ -74,6 +75,10 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/Manifestation/RegisterManifestation",register);
   }
 
+  postTicket(register:Ticket):Observable<any>{
+    return this.http.post("http://localhost:52294/api/Ticket/RegisterTicket",register);
+  }
+
   AddingImage(fd:FormData):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/Upload", fd)
@@ -98,9 +103,23 @@ export class ServerService {
     return this.http.get("http://localhost:52294/api/Manifestation/GetStatus",{params:{idEvent,status}});
   }
 
+  PutSellerId(idEvent:string,idUser:string):Observable<any>{
+    return this.http.get("http://localhost:52294/api/User/PutSellerId",{params:{idEvent,idUser}});
+  }
+
   PutEvent(event:Event):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/Manifestation/Update", event);
+  }
+
+  ChangeUserStatus(user:User):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/User/UpdateTypePoints", user);
+  }
+
+  ChangeEventCapacity(event:Event):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/Manifestation/UpdateCapacity", event);
   }
 
 }

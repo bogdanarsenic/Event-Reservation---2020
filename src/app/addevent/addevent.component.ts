@@ -34,6 +34,7 @@ export class AddeventComponent implements OnInit {
   address2:string;
   eventId:string;
   locId:string;
+  userId:string;
 
   todayDate:Date = new Date();
   tomorrow:Date =  new Date(this.todayDate.setDate(this.todayDate.getDate() + 1));
@@ -92,6 +93,7 @@ export class AddeventComponent implements OnInit {
         lat: 45.267136,
         lng: 19.833549,
       }
+      this.userId=sessionStorage.getItem('Username');
 
       this.loc=new Location("",this.center.lat,this.center.lng,"");
       this.templat=""
@@ -219,10 +221,23 @@ export class AddeventComponent implements OnInit {
         else
         {
           this.eventId=data;
+          this.updateSeller();
           this.router.navigateByUrl(`${this.eventId}/upload`);
         }
       }
     )
     this.eventUserForm.reset();
     }
-  } 
+
+  updateSeller()
+  {
+      this.service.PutSellerId(this.eventId,this.userId).subscribe(
+        data=>
+        {
+          
+        }
+      )
+  }
+} 
+
+  

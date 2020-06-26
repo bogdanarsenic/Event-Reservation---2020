@@ -1,5 +1,5 @@
 export class User{
-    Id:string;
+    
     Username:string;
     Password:string;
     Name:string;
@@ -8,16 +8,20 @@ export class User{
     Role:string;
     IsActive:boolean;
     Points:number;
+    Type:string;
+    ManifestationId:string;
+    TicketId:string;
     
-    constructor(id:string,username:string ,password:string, name:string, surname:string, gender:string, role:string, points:number)
+    constructor(username:string ,password:string, name:string, surname:string, gender:string, role:string, type:string,points:number)
     {
-        this.Id=id;
         this.Username=username;
         this.Password=password;
         this.Name=name;
         this.Surname=surname;
         this.Gender=gender;
         this.Role=role;
-        this.Points=points;
+        this.Type=type;
+        this.Points=points;       
+        
     }
 }
