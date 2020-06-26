@@ -14,7 +14,7 @@ namespace TicketReservation.ModelsDB
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Reservation"].ConnectionString;
 
-        public Location GetOne(Guid Id)
+        public Location GetOne(string Id)
         {
             string Query = "SELECT * FROM Locations WHERE Id='" + Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))

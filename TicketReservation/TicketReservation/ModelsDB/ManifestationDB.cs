@@ -50,33 +50,54 @@ namespace TicketReservation.ModelsDB
 
         public void Update(Manifestation manifestation)
         {
-            string Query = "UPDATE Manifestations set Id = @Id, Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, Status=@Status, LocationId=@LocationId,Place=@Place, SellerId=@SellerId, Pictures=@Pictures, IsActive=@IsActive " +
-               "WHERE Id = @id";
+            string Query = "UPDATE Manifestations set Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price " +
+               "WHERE Id='" + manifestation.Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))
                 {
                     con.Open();
-
-                    cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = manifestation.Id.ToString();
                     cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = manifestation.Name;
                     cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value = manifestation.Type;
                     cmd.Parameters.Add("@Capacity", SqlDbType.Int).Value = manifestation.Capacity;
                     cmd.Parameters.Add("@EventTime", SqlDbType.DateTime2).Value = manifestation.EventTime;
                     cmd.Parameters.Add("@Price", SqlDbType.Int).Value = manifestation.Price;
-                    cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = manifestation.Status;
-                    cmd.Parameters.Add("@LocationId", SqlDbType.NVarChar).Value = manifestation.LocationId;
-                    cmd.Parameters.Add("@Place", SqlDbType.NVarChar).Value = manifestation.Place;
-
-                    cmd.Parameters.Add("@SellerId", SqlDbType.NVarChar).Value = manifestation.SellerId;
-                    cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
-                    cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = manifestation.IsActive;
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
+        public void UpdateStatus(Manifestation manifestation)
+        {
+            string Query = "UPDATE Manifestations set Status=@Status " +
+               "WHERE Id='" + manifestation.Id + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = manifestation.Status;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void UpdateCapacity(Manifestation manifestation)
+        {
+            string Query = "UPDATE Manifestations set Capacity=@Capacity " +
+               "WHERE Id='" + manifestation.Id + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Capacity", SqlDbType.Int).Value = manifestation.Capacity;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
 
         public List<Manifestation> GetAllBySellerId(string SellerId)
@@ -84,7 +105,7 @@ namespace TicketReservation.ModelsDB
 
             List<Manifestation> manifestations = new List<Manifestation>();
 
-            string Query = "SELECT * FROM Manifestation WHERE isActive='True' and SellerId='" + SellerId + "'";
+            string Query = "SELECT * FROM Manifestations WHERE SellerId='" + SellerId + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))

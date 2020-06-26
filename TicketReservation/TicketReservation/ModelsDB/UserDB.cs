@@ -98,6 +98,23 @@ namespace TicketReservation.ModelsDB
             }
         }
 
+
+        public void UpdateTypePoints(User user)
+        {
+            string Query = "UPDATE Users set Points=@Points, UserType=@Type " +
+               "WHERE Id='" + user.Username + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Points", SqlDbType.Int).Value = user.Points;
+                    cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public List<User> GetAllByRole(string Role)
         {
             List<User> users = new List<User>();

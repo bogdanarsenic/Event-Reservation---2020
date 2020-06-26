@@ -14,16 +14,16 @@ namespace TicketReservation.Controllers
     {
         CommentDB commentDB = new CommentDB();
 
-        [Route("GetAllByApartmentId")]
-        public List<Comment> GetAllByApartmentId(string Id)
+        [Route("GetAllByEventId")]
+        public List<Comment> GetAllByEventId(string Id)
         {
             List<Comment> ret = null;
             ret = commentDB.GetAllByManifestationId(Id);
             return ret;
         }
 
-        [Route("GetAllByApartmentIdGuest")]
-        public List<Comment> GetAllByApartmentIdGuest(string Id)
+        [Route("GetAllByEventIdGuest")]
+        public List<Comment> GetAllByEventIdGuest(string Id)
         {
             List<Comment> ret = null;
             ret = commentDB.GetAllByManifestationIdGuest(Id);

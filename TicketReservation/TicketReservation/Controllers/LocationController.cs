@@ -28,5 +28,14 @@ namespace TicketReservation.Controllers
             locationDB.Insert(location);
             return location.Id.ToString();
         }
+
+        [Route("GetOneLocation")]
+        public Location GetOneLocation(string id)
+        {
+            string idTemp = id;
+            Location ret = null;
+            ret = locationDB.GetOne(id);
+            return ret;
+        }
     }
 }

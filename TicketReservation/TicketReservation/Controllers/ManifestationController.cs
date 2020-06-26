@@ -96,8 +96,23 @@ namespace TicketReservation.Controllers
             return ret;
         }
 
-        [Route("GetOneManifestationUpdate")]
-        public string GetOneManifestationUpdate(Guid IdA)
+        [HttpGet]
+        [Route("GetStatus")]
+        public string GetStatus(string idEvent, string status)
+        {
+            Manifestation temp = manifestationDB.GetOneById(idEvent);
+            if (temp.Status == "NotActive")
+            {
+                temp.Status = "Active";
+            }
+
+            manifestationDB.Update(temp);
+            return "Success";
+
+        }
+
+        [Route("GetOneManifestationDelete")]
+        public string GetOneManifestationDelete(Guid IdA)
         {
             try
             {
@@ -109,6 +124,33 @@ namespace TicketReservation.Controllers
                 return "Error!";
             }
 
+            return "Success!";
+        }
+
+        [Route("Update")]
+        public string Update(Manifestation manifestation)
+        {
+
+            Manifestation temp = new Manifestation();
+      
+            temp.Id = manifestation.Id;
+            temp.Name = manifestation.Name;
+            temp.Type = manifestation.Type;
+            temp.Price = manifestation.Price;
+            temp.Capacity = manifestation.Capacity;
+            temp.EventTime = manifestation.EventTime;
+
+            manifestationDB.Update(temp);
+            return "Success!";
+        }
+
+        [Route("UpdateCapacity")]
+        public string UpdateCapacity(Manifestation manifestation)
+        {
+            Manifestation temp = manifestationDB.GetOneById(Convert.ToString(manifestation.Id));
+            temp.Capacity = manifestation.Capacity;
+
+            manifestationDB.UpdateCapacity(temp);
             return "Success!";
         }
 

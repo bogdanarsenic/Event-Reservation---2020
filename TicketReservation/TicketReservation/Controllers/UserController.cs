@@ -80,6 +80,19 @@ namespace TicketReservation.Controllers
             return "Success!";
         }
 
+        [Route("UpdateTypePoints")]
+        public string UpdateTypePoints(User register)
+        {
+            User temp = userDB.GetOne(register.Username);
+
+            temp.Type = register.Type;
+            temp.Points = register.Points;
+
+            userDB.UpdateTypePoints(temp);
+            return "Success!";
+        }
+
+
         [Route("RegisterSeller")]
         public string RegisterSeller(User register)
         {
