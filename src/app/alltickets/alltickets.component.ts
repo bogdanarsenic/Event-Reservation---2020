@@ -4,6 +4,7 @@ import { ServerService } from '../services/server.service';
 import { FormBuilder } from '@angular/forms';
 import { Ticket } from '../classes/Ticket';
 import { DatePipe } from '@angular/common';
+import { User } from '../classes/User';
 
 @Component({
   selector: 'app-alltickets',
@@ -24,6 +25,8 @@ export class AllticketsComponent implements OnInit {
   datePipe = new DatePipe('en-US');
 
   todayDate=Date.now();
+
+  user:User
 
   today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
 
@@ -84,6 +87,7 @@ export class AllticketsComponent implements OnInit {
         {
             this.buyerName=data.Name;
             this.buyerSurname=data.Surname;
+            this.user=data;
             this.getAllReservedTicketsBuyer(this.buyerName,this.buyerSurname);
 
         }
@@ -149,9 +153,29 @@ export class AllticketsComponent implements OnInit {
 
  }
 
- onWithdraw()
+ onWithdraw(ticket:Ticket)
  {
-   
+    this.user.Points=this.user.Points-ticket.Price/1000*133*4;
+    
+    this.user.NoQuit=this.user.NoQuit+1;
+
+
+    ticket.Status="Withdrawed";
+
+
+    this.service.ChangeTicketStatus(ticket).subscribe(
+      data=>
+      {
+
+      }
+    )
+
+    this.service.ChangeUserPointsQuits(this.user).subscribe(
+      data=>
+      {
+
+      }
+    )
  }
 
   isAdmin()

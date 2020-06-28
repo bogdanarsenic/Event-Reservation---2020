@@ -21,7 +21,7 @@
              <td>{{ticket.Status}}</td>
              <td>{{ticket.Type}}</td>
              
-             <button class="btn btn-info" *ngIf="isBuyer() && ticket.Status=='Reserved' && checkWithdrawButton(ticket)" (click)="onWithdraw()" > Withdraw! </button>
+             <button class="btn btn-info" *ngIf="isBuyer() && ticket.Status=='Reserved' && checkWithdrawButton(ticket)" (click)="onWithdraw(ticket)" > Withdraw! </button>
        </tr>
      
      

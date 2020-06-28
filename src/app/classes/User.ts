@@ -11,6 +11,7 @@ export class User{
     Type:string;
     ManifestationId:string;
     TicketId:string;
+    NoQuit:number;
     
     constructor(username:string ,password:string, name:string, surname:string, gender:string, role:string, type:string,points:number)
     {

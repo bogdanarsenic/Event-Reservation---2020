@@ -134,6 +134,16 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/User/UpdateTypePoints", user);
   }
 
+  ChangeUserPointsQuits(user:User):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/User/UpdateUserPointsQuits", user);
+  }
+
+  ChangeTicketStatus(ticket:Ticket):Observable<any>
+  {
+    return this.http.post("http://localhost:52294/api/Ticket/UpdateTicketStatus", ticket);
+  }
+
   ChangeEventCapacity(event:Event):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/Manifestation/UpdateCapacity", event);
