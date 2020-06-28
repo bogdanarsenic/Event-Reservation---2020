@@ -23,6 +23,8 @@ namespace TicketReservation.Controllers
         {
             List<Manifestation> ret = null;
             ret = manifestationDB.GetAll();
+            ret = ret.Where(p => p.EventTime != null).OrderBy(p => p.EventTime).ToList();
+
             return ret;
 
         }
@@ -83,6 +85,9 @@ namespace TicketReservation.Controllers
         {
             List<Manifestation> ret = null;
             ret = manifestationDB.GetAllBySellerId(id);
+
+            ret = ret.Where(p => p.EventTime != null).OrderBy(p => p.EventTime).ToList();
+    
             return ret;
 
         }

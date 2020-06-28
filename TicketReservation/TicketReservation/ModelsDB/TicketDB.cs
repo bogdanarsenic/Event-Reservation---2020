@@ -41,9 +41,23 @@ namespace TicketReservation.ModelsDB
             }
         }
 
+        public void UpdateStatus(Ticket ticket)
+        {
+            string Query = "UPDATE Tickets set Status=@Status " +
+               "WHERE Id='" + ticket.Id + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = ticket.Status;
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
+        }
 
-        public List<Ticket> GetAll()
+            public List<Ticket> GetAll()
         {
 
             List<Ticket> tickets = new List<Ticket>();

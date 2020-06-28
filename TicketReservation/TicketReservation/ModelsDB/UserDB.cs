@@ -36,10 +36,13 @@ namespace TicketReservation.ModelsDB
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
                             Role = reader["Role"].ToString(),
-                            Points= float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                            Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                             TicketId = reader["TicketId"].ToString(),
                             ManifestationId = reader["ManifestationId"].ToString(),
-                            Type= reader["UserType"].ToString()
+                            Type = reader["UserType"].ToString(),
+                            NoQuit = Convert.ToInt32(reader["NoQuit"].ToString()),
+                            IsBlocked= Convert.ToBoolean(reader["IsBlocked"].ToString()),
+
 
                         };
                     }
@@ -56,7 +59,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(User user)
         {
-            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType)";
+            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType, NoQuit, IsBlocked) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType, @NoQuit, @IsBlocked)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -74,6 +77,9 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@TicketId", SqlDbType.NVarChar).Value = user.TicketId;
                     cmd.Parameters.Add("@ManifestationId", SqlDbType.NVarChar).Value = user.ManifestationId;
                     cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
+                    cmd.Parameters.Add("@NoQuit", SqlDbType.Int).Value = user.NoQuit;
+                    cmd.Parameters.Add("@IsBlocked", SqlDbType.Bit).Value = user.IsBlocked;
+
 
 
                     if (GetOne(user.Username) == null)
@@ -119,6 +125,37 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Points", SqlDbType.Float).Value = user.Points;
                     cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
                     cmd.Parameters.Add("@TicketId", SqlDbType.NVarChar).Value = user.TicketId;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateUserPointsQuits(User user)
+        {
+            string Query = "UPDATE Users set Points=@Points, NoQuit=@NoQuit " +
+               "WHERE Username='" + user.Username + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@Points", SqlDbType.Float).Value = user.Points;
+                    cmd.Parameters.Add("@NoQuit", SqlDbType.Int).Value = user.NoQuit;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateSeller(User user)
+        {
+            string Query = "UPDATE Users set ManifestationId=@ManifestationId " +
+               "WHERE Username='" + user.Username + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@ManifestationId", SqlDbType.NVarChar).Value = user.ManifestationId;
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -185,7 +222,9 @@ namespace TicketReservation.ModelsDB
                             Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                             TicketId = reader["TicketId"].ToString(),
                             ManifestationId = reader["ManifestationId"].ToString(),
-                            Type = reader["UserType"].ToString()
+                            Type = reader["UserType"].ToString(),
+                            NoQuit = Convert.ToInt32(reader["NoQuit"].ToString()),
+                            IsBlocked = Convert.ToBoolean(reader["IsBlocked"].ToString()),
 
                         };
                         users.Add(user);

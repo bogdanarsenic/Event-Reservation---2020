@@ -51,6 +51,8 @@ namespace TicketReservation
                 admin.TicketId = "";
                 admin.Type = "";
                 admin.Points = 0;
+                admin.NoQuit = 0;
+                admin.IsBlocked = false;
                 userDB.Insert(admin);
 
                 

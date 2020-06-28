@@ -36,6 +36,14 @@ namespace TicketReservation.Controllers
             return ret;
         }
 
+        [Route("UpdateTicketStatus")]
+        public string UpdateTicketStatus(Ticket ticket)
+        {
+            ticketDB.UpdateStatus(ticket);
+
+            return "Success!";
+        }
+
         [Route("RegisterTicket")]
         public string RegisterTicket(Ticket ticket)
         {
@@ -46,8 +54,8 @@ namespace TicketReservation.Controllers
             return ticket.Id;
         }
 
-        [Route("GetAllTicketsUser")]
-        public List<Ticket> GetAllTicketsUser(string IdSeller)
+        [Route("GetAllReservedTicketsSeller")]
+        public List<Ticket> GetAllReservedTicketsSeller(string IdSeller)
         {
             List<Ticket> ret1 = null;
             List<Ticket> ret2 = new List<Ticket>();
@@ -55,14 +63,31 @@ namespace TicketReservation.Controllers
             ret1 = ticketDB.GetAll();
             foreach (Ticket t in ret1)
             {
-                t.Manifestation = manifestationDB.GetOneById(t.ManifestationId);
-
-                if (t.Manifestation.SellerId == u.Username)
-                {
+                if(t.SellerId==IdSeller && t.Status=="Reserved")
+                { 
                     ret2.Add(t);
                 }
             }
             return ret2;
+        }
+
+        [Route("GetAllReservedTicketsBuyer")]
+        public List<Ticket> GetAllReservedTicketsBuyer(string name,string surname)
+        {
+            List<Ticket> ret = new List<Ticket>();
+            Ticket temp = new Ticket();
+            List<Ticket> ticket = ticketDB.GetAll();
+
+
+            foreach (Ticket t in ticket)
+            {
+                if(t.Buyer==(name+" "+surname))
+                {
+                    ret.Add(t);
+                }
+            }
+            return ret;
+
         }
 
     }

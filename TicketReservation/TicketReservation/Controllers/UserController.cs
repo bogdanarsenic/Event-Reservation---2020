@@ -65,6 +65,8 @@ namespace TicketReservation.Controllers
             temp.ManifestationId = "";
             temp.Points = 0;
             temp.Type = "";
+            temp.NoQuit = 0;
+            temp.IsBlocked = false;
             userDB.Insert(temp);
             return "Success!";
         }
@@ -96,6 +98,28 @@ namespace TicketReservation.Controllers
             return "Success!";
         }
 
+        [Route("UpdateUserPointsQuits")]
+        public string UpdateUserPointsQuits(User register)
+        {
+            User temp = userDB.GetOne(register.Username);
+            temp.Points = register.Points;
+            temp.NoQuit = register.NoQuit;
+
+            userDB.UpdateUserPointsQuits(temp);
+            return "Success!";
+        }
+
+        [HttpGet]
+        [Route("PutSellerId")]
+        public string PutSellerId(string idEvent, string idUser)
+        {
+            User temp = userDB.GetOne(idUser);
+            temp.ManifestationId = idEvent;
+
+            userDB.UpdateSeller(temp);
+            return "Success!";
+        }
+
 
         [Route("RegisterSeller")]
         public string RegisterSeller(User register)
@@ -116,6 +140,8 @@ namespace TicketReservation.Controllers
             temp.TicketId = "";
             temp.Type = "";
             temp.Points = 0;
+            temp.NoQuit = 0;
+            temp.IsBlocked = false;
             userDB.Insert(temp);
             return "Success!";
         }
@@ -129,22 +155,29 @@ namespace TicketReservation.Controllers
 
         }
 
-        [Route("GetAllTicketsUsers")]
-        public List<User> GetAllTicketsUsers(string Id)
+        [Route("GetAllUserTicket")]
+        public List<User> GetAllUserTicket()
         {
             List<User> ret = new List<User>();
+            User temp = new User();
             List<Ticket> ticket = ticketDB.GetAll();
+            List<User> tempUsers = userDB.GetAll();
+
             foreach (Ticket t in ticket)
             {
-                Manifestation manTemp = manifestationDB.GetOneById(t.ManifestationId);
-                if (manTemp.SellerId == Id)
+                foreach(User i in tempUsers)
+
                 {
-                    User temp = userDB.GetOne((t.Buyer));
-                    ret.Add(temp);
+                    if(t.Buyer==i.Name+" "+i.Surname)
+                    {
+                        ret.Add(i);
+                    }
                 }
             }
             return ret;
 
         }
+
+
     }
 }
