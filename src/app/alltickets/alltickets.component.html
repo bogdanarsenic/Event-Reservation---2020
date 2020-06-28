@@ -1,1 +1,32 @@
-<p>alltickets works!</p>
+<div class="containter">
+     
+    <table class="table table-hover table-sm ">
+     <thead>
+       <tr>
+         <th scope="col">Event: </th>
+         <th scope="col">DateTime:</th>
+         <th scope="col">Price: </th>
+         <th scope="col">Buyer: </th>
+         <th scope="col">Status: </th>
+         <th scope="col">Type: </th>
+       </tr>
+     </thead>
+ 
+     <tbody class="table table-hover table-sm " *ngFor="let ticket of tickets">
+         <tr>
+             <td>{{ticket.ManifestationId}}</td>
+             <td>{{ticket.EventTime}}</td>
+             <td>{{ticket.Price}}</td>
+             <td>{{ticket.Buyer}}</td>
+             <td>{{ticket.Status}}</td>
+             <td>{{ticket.Type}}</td>
+             
+             <button class="btn btn-info" *ngIf="isBuyer() && ticket.Status=='Reserved' && checkWithdrawButton(ticket)" (click)="onWithdraw()" > Withdraw! </button>
+       </tr>
+     
+     
+     </tbody>
+   </table>
+</div>
+
+

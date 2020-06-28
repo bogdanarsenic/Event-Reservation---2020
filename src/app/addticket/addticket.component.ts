@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Event} from '../classes/Event';
 import { User } from '../classes/User';
 import { Ticket } from '../classes/Ticket';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-addticket',
@@ -18,6 +19,8 @@ export class AddticketComponent implements OnInit {
 
   ticketId:string
   sellerId:string
+
+
 
   reservationUserForm:FormGroup;
 
@@ -34,6 +37,7 @@ export class AddticketComponent implements OnInit {
   event:Event
   typeOfUser:string
   capacity:number;
+
 
   buyer:string;
 

@@ -40,6 +40,23 @@ export class ServerService {
     return this.http.get('http://localhost:52294/api/User/GetAllUsers');
   }
 
+  GetAllTickets():Observable<any>
+  {
+    return this.http.get('http://localhost:52294/api/Ticket/GetAllTickets');
+  }
+
+  GetAllReservedTicketsSeller(IdSeller:string):Observable<any>
+  {
+    return this.http.get(`http://localhost:52294/api/Ticket/GetAllReservedTicketsSeller`,{params:{IdSeller}});
+  }
+
+
+  GetAllReservedTicketsBuyer(name:string,surname:string):Observable<any>
+  {
+    return this.http.get(`http://localhost:52294/api/Ticket/GetAllReservedTicketsBuyer`,{params:{name,surname}});
+  }
+
+
   GetAllEvents():Observable<any>
   {
     return this.http.get<any>("http://localhost:52294/api/Manifestation/GetAllManifestations");
@@ -51,9 +68,9 @@ export class ServerService {
   }
 
 
-  GetAllTicketsByUserId(idSeller:string):Observable<any>
+  GetAllUsersWhoReserved():Observable<any>
   {
-    return this.http.get('http://localhost:52294/api/Ticket/GetAllTicketsUser',{params:{idSeller}});
+    return this.http.get("http://localhost:52294/api/User/GetAllUserTicket");
   }
 
 

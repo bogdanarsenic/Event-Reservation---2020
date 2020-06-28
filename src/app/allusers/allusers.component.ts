@@ -15,7 +15,6 @@ export class AllusersComponent implements OnInit {
   users:User[];
   sellerUsers:User[];
   sellerId:string;
-  Admin:string
   IsActive:string
 
   byRole:FormGroup;
@@ -40,7 +39,6 @@ export class AllusersComponent implements OnInit {
  
   ngOnInit()
    {
-     this.Admin="Admin"
      this.Clicked=false
      this.ClickedId=false
      this.role=""
@@ -65,7 +63,7 @@ export class AllusersComponent implements OnInit {
       if(this.isSeller())
      {
         this.sellerId=sessionStorage.getItem('Username');
-        this.service.GetAllTicketsByUserId(this.sellerId).subscribe(
+        this.service.GetAllUsersWhoReserved().subscribe(
           data=>
           {
               if(data.length==0)
@@ -74,7 +72,7 @@ export class AllusersComponent implements OnInit {
               }
               else
               {
-                this.sellerUsers=data;
+                this.users=data;
               }
           }
         )

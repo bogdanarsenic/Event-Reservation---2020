@@ -17,25 +17,17 @@
         <div *ngIf="ShowLogout()">
             <button  (click)="CallLogout()"> Logout </button>
             <button routerLink="/editprofile"> Edit Profile </button>
+            <button routerLink="/allevents"> Events </button>
+            <button routerLink="/alltickets"> Tickets </button>
 
             <div *ngIf="IsAdmin()">
                 <button routerLink="/addseller"> AddNewSeller </button>
                 <button routerLink="/allusers"> Users </button>
-                <button routerLink="/allevents"> Events </button>
-
             </div>
 
             <div *ngIf="IsSeller()">
-                <button routerLink="/allusers">Users</button>
                 <button routerLink="/addevent"> AddEvent</button>
-                <button routerLink="/allevents"> Events </button>
-
-                    
-            </div>
-            
-            <div *ngIf="IsBuyer()">
-                <button routerLink="/allevents"> Events </button>
-
+                <button routerLink="/allusers">Users</button>                 
             </div>
         </div>
 

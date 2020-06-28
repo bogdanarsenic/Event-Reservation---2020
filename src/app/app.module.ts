@@ -53,6 +53,8 @@ const appRoutes:Routes=[
   { path: 'viewevent',component:ViewEventComponent},
   { path: 'editevent',component:EditeventComponent},
   { path: 'addticket',component:AddticketComponent},
+  { path: 'alltickets',component:AllticketsComponent},
+
 
   
 

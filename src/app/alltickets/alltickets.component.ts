@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ServerService } from '../services/server.service';
+import { FormBuilder } from '@angular/forms';
+import { Ticket } from '../classes/Ticket';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-alltickets',
@@ -7,9 +12,170 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllticketsComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  tickets:Ticket[]
+  userId:string
+
+  buyerName:string
+  buyerSurname:string
+
+  sellerTickets:Ticket[]
+
+  datePipe = new DatePipe('en-US');
+
+  todayDate=Date.now();
+
+  today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
+
+  constructor(private router:Router,private service:ServerService,private fb:FormBuilder) {
+    
+    this.createForm();
+  }
+
+  createForm()
+   {
+   }
+ 
+  ngOnInit()
+   {
+
+      this.tickets=[]
+      this.sellerTickets=[]
+
+      if(this.isAdmin())
+      {
+        this.service.GetAllTickets().subscribe(
+          data=>{
+
+                this.tickets=data;
+                this.changeManifestationId();
+
+          }
+        )
+      }   
+
+      if(this.isSeller())
+     {
+        this.userId=sessionStorage.getItem('Username');
+        this.service. GetAllReservedTicketsSeller(this.userId).subscribe(
+          data=>
+          {
+              if(data.length==0)
+              {
+                alert("No users bought ticket for your event")
+              }
+              else
+              {
+                this.tickets=data;
+                this.changeManifestationId();
+
+
+              }
+          }
+        )
+     }
+
+     if(this.isBuyer())
+     {
+      this.userId=sessionStorage.getItem('Username');
+
+      this.service.GetUserByUsername(this.userId).subscribe(
+        data=>
+        {
+            this.buyerName=data.Name;
+            this.buyerSurname=data.Surname;
+            this.getAllReservedTicketsBuyer(this.buyerName,this.buyerSurname);
+
+        }
+      )
+
+
+     }
+
+     
+  }
+
+  getAllReservedTicketsBuyer(name:string,surname:string)
+  {
+    this.service. GetAllReservedTicketsBuyer(this.buyerName,this.buyerSurname).subscribe(
+      data=>
+      {
+          if(data.length==0)
+          {
+            alert("You haven't bought any ticket")
+          }
+          else
+          {
+            this.tickets=data;
+            this.changeManifestationId();
+
+          }
+      }
+    )
+  }
+
+  changeManifestationId()
+  {
+    this.tickets.forEach(
+      data=>
+        {
+          this.service.GetEvent(data.ManifestationId).subscribe(
+            data2=>
+            {
+                data.ManifestationId=data2.Name;
+            }
+          )
+        }
+    )   
+      
+  }
+  
+ checkWithdrawButton(ticket:Ticket)
+ {
+   
+    let eventTime=new Date(ticket.EventTime);
+    eventTime=new Date(eventTime.setDate(eventTime.getDate()-7))
+
+    let todayTime=new Date(this.today);
+
+      if(todayTime<=eventTime)
+      {
+          return true;
+      }
+      else
+      {
+          return false;         
+      }
+
+ }
+
+ onWithdraw()
+ {
+   
+ }
+
+  isAdmin()
+  {
+    if(sessionStorage.getItem('Role')=="Admin")
+    return true;
+    else 
+    return false;
+  }
+
+  isBuyer()
+  {
+    if(sessionStorage.getItem('Role')=="Buyer")
+    return true;
+    else 
+    return false;
+  }
+
+  isSeller()
+  {
+    if(sessionStorage.getItem('Role')=="Seller")
+    return true;
+    else 
+    return false;
   }
 
 }
