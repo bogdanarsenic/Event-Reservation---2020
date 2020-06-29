@@ -61,6 +61,7 @@ namespace TicketReservation.ModelsDB
                             ManifestationId = reader["ApartmentId"].ToString(),
                             Text = reader["Text"].ToString(),
                             Rating = Convert.ToInt32(reader["Rating"]),
+                            IsActive= Convert.ToBoolean(reader["IsActive"].ToString())
                         };
                     }
                     return comment;
@@ -92,6 +93,7 @@ namespace TicketReservation.ModelsDB
                         comment.ManifestationId = reader["ManifestationId"].ToString();
                         comment.Text = reader["Text"].ToString();
                         comment.Rating = Convert.ToInt32(reader["Rating"]);
+                        comment.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
 
 
                         comments.Add(comment);

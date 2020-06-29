@@ -120,5 +120,43 @@ namespace TicketReservation.ModelsDB
             return tickets;
         }
 
+        public Ticket GetOne(string idUser,string idEvent)
+        {
+
+
+            string Query = "SELECT * FROM Tickets WHERE Buyer='" + idUser + "' AND ManifestationId='"+idEvent+"'";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    Ticket ticket = null;
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ticket = new Ticket()
+                        {
+                            Id = reader["Id"].ToString(),
+                            ManifestationId = reader["ManifestationId"].ToString(),
+                            EventTime = Convert.ToDateTime(reader["EventTime"].ToString()),
+                            Price = Convert.ToInt32(reader["Price"].ToString()),
+                            Buyer = reader["Buyer"].ToString(),
+                            SellerId = reader["SellerId"].ToString(),
+                            Status = reader["Status"].ToString(),
+                            Type = reader["Type"].ToString(),
+
+                        };
+                    }
+                    return ticket;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
     }
 }

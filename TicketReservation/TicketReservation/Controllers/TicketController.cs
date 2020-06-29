@@ -90,5 +90,19 @@ namespace TicketReservation.Controllers
 
         }
 
+        [Route("GetTicketUserEvent")]
+        public Ticket GetTicketUserEvent(string userId,string idEvent)
+        {
+            Ticket t = null;
+            t = ticketDB.GetOne(userId,idEvent);
+            if (t == null)
+            {
+                return null;
+            }
+            return t;
+        }
+
+
+
     }
 }

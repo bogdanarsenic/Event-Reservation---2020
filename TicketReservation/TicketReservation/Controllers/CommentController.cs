@@ -22,6 +22,14 @@ namespace TicketReservation.Controllers
             return ret;
         }
 
+        [Route("GetAllComments")]
+        public List<Comment> GetAllComments()
+        {
+            List<Comment> ret = null;
+            ret = commentDB.GetAll();
+            return ret;
+        }
+
         [Route("GetAllByEventIdGuest")]
         public List<Comment> GetAllByEventIdGuest(string Id)
         {
