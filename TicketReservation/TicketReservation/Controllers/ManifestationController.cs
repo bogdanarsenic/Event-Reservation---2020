@@ -56,7 +56,7 @@ namespace TicketReservation.Controllers
         {
             register.Id = Guid.NewGuid();
             register.Pictures = "";
-            register.IsActive = false;
+            register.IsActive = true;
 
 
             List<Manifestation> manifestations = new List<Manifestation>();

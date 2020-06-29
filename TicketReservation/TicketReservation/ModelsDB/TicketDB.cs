@@ -19,7 +19,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(Ticket ticket)
         {
-            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, SellerId, Status, Type) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer, @SellerId, @Status, @Type)";
+            string Query = "INSERT INTO Tickets(Id, ManifestationId, EventTime, Price, Buyer, SellerId, Status, Type, IsActive) VALUES(@Id, @ManifestationId, @EventTime, @Price, @Buyer, @SellerId, @Status, @Type, @IsActive)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -35,6 +35,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@SellerId", SqlDbType.NVarChar).Value = ticket.SellerId;
                     cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = ticket.Status;
                     cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value = ticket.Type;
+                    cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = ticket.IsActive;
                     cmd.ExecuteNonQuery();
 
                 }
@@ -80,6 +81,7 @@ namespace TicketReservation.ModelsDB
                         ticket.SellerId = reader["SellerId"].ToString();
                         ticket.Status = reader["Status"].ToString();
                         ticket.Type = reader["Type"].ToString();
+                        ticket.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
                         tickets.Add(ticket);
                     }
                 }
@@ -94,7 +96,7 @@ namespace TicketReservation.ModelsDB
             //LibraryDAL library = new LibraryDAL();
             List<Ticket> tickets = new List<Ticket>();
 
-            string Query = "SELECT * FROM Tickets WHERE ManifestationId='" + ManId + "'";
+            string Query = "SELECT * FROM Tickets WHERE ManifestationId='" + ManId + "' AND IsActive='True'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))
@@ -112,6 +114,7 @@ namespace TicketReservation.ModelsDB
                         ticket.SellerId = reader["SellerId"].ToString();
                         ticket.Status = reader["Status"].ToString();
                         ticket.Type = reader["Type"].ToString();
+                        ticket.IsActive = Convert.ToBoolean(reader["IsActive"].ToString());
                         tickets.Add(ticket);
                     }
                 }
@@ -124,7 +127,7 @@ namespace TicketReservation.ModelsDB
         {
 
 
-            string Query = "SELECT * FROM Tickets WHERE Buyer='" + idUser + "' AND ManifestationId='"+idEvent+"'";
+            string Query = "SELECT * FROM Tickets WHERE Buyer='" + idUser + "' AND ManifestationId='"+idEvent+ "' AND IsActive='True'";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -146,6 +149,7 @@ namespace TicketReservation.ModelsDB
                             SellerId = reader["SellerId"].ToString(),
                             Status = reader["Status"].ToString(),
                             Type = reader["Type"].ToString(),
+                            IsActive = Convert.ToBoolean(reader["IsActive"].ToString()),
 
                         };
                     }

@@ -20,6 +20,7 @@ namespace TicketReservation.Models
         public float Points { get; set; }
         public int NoQuit { get; set; }
         public bool IsBlocked { get; set; }
+        public bool IsActive { get; set; }
 
 
         public User()
@@ -27,7 +28,7 @@ namespace TicketReservation.Models
 
         }
 
-        public User(string username, string password, string name, string surname, DateTime dateOfBirth,string gender, string role, string type,string ticketId,float points,string manifestationId, int noQuit, bool isBlocked)
+        public User(string username, string password, string name, string surname, DateTime dateOfBirth,string gender, string role, string type,string ticketId,float points,string manifestationId, int noQuit, bool isBlocked, bool isActive)
         {
             Username = username;
             Password = password;
@@ -39,6 +40,7 @@ namespace TicketReservation.Models
             DateOfBirth = dateOfBirth;
             NoQuit = noQuit;
             IsBlocked = isBlocked;
+            IsActive = isActive;
 
             if (role == "Buyer")
             {

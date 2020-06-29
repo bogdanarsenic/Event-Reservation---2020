@@ -47,15 +47,13 @@ namespace TicketReservation.Controllers
             return "Success";
         }
 
-
-
+        [HttpGet]
         [Route("GetOneCommentApproved")]
-        public string GetOneCommentApproved(Guid IdA)
+        public string GetOneCommentApproved(string comId)
         {
             try
             {
-                string IdTemp = IdA.ToString();
-                commentDB.Approve(IdTemp);
+                commentDB.Approve(comId);
             }
             catch
             {

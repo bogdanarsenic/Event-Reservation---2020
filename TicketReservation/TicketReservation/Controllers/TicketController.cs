@@ -49,6 +49,7 @@ namespace TicketReservation.Controllers
         {
             string nesto = Convert.ToString(Guid.NewGuid());
             ticket.Id =nesto.Substring(0, 10);
+            ticket.IsActive = true;
 
             ticketDB.Insert(ticket);
             return ticket.Id;

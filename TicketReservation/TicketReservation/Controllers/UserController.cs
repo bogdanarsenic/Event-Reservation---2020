@@ -67,6 +67,7 @@ namespace TicketReservation.Controllers
             temp.Type = "";
             temp.NoQuit = 0;
             temp.IsBlocked = false;
+            temp.IsActive = true;
             userDB.Insert(temp);
             return "Success!";
         }
@@ -109,6 +110,25 @@ namespace TicketReservation.Controllers
             return "Success!";
         }
 
+        [Route("BlockUser")]
+        public string BlockUser(User block)
+        {
+            User temp = userDB.GetOne(block.Username);
+            temp.IsActive = block.IsActive;
+            temp.IsBlocked = block.IsBlocked;
+            userDB.Block(temp);
+            return "Success!";
+        }
+
+        [Route("DeleteUser")]
+        public string DeleteUser(User delete)
+        {
+            User temp = userDB.GetOne(delete.Username);
+            temp.IsActive = delete.IsActive;
+            userDB.Delete(temp);
+            return "Success!";
+        }
+
         [HttpGet]
         [Route("PutSellerId")]
         public string PutSellerId(string idEvent, string idUser)
@@ -142,6 +162,7 @@ namespace TicketReservation.Controllers
             temp.Points = 0;
             temp.NoQuit = 0;
             temp.IsBlocked = false;
+            temp.IsActive = true;
             userDB.Insert(temp);
             return "Success!";
         }

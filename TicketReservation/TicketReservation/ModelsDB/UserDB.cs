@@ -42,7 +42,7 @@ namespace TicketReservation.ModelsDB
                             Type = reader["UserType"].ToString(),
                             NoQuit = Convert.ToInt32(reader["NoQuit"].ToString()),
                             IsBlocked= Convert.ToBoolean(reader["IsBlocked"].ToString()),
-
+                            IsActive = Convert.ToBoolean(reader["IsActive"].ToString()),
 
                         };
                     }
@@ -59,7 +59,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(User user)
         {
-            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType, NoQuit, IsBlocked) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType, @NoQuit, @IsBlocked)";
+            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType, NoQuit, IsBlocked, IsActive) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType, @NoQuit, @IsBlocked, @IsActive)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -79,6 +79,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@UserType", SqlDbType.NVarChar).Value = user.Type;
                     cmd.Parameters.Add("@NoQuit", SqlDbType.Int).Value = user.NoQuit;
                     cmd.Parameters.Add("@IsBlocked", SqlDbType.Bit).Value = user.IsBlocked;
+                    cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = user.IsActive;
 
 
 
@@ -161,6 +162,37 @@ namespace TicketReservation.ModelsDB
             }
         }
 
+        public void Block(User user)
+        {
+            string Query = "UPDATE Users set IsActive=@IsActive, IsBlocked=@IsBlocked " +
+               "WHERE Username='" + user.Username + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = user.IsActive;
+                    cmd.Parameters.Add("@IsBlocked", SqlDbType.Bit).Value = user.IsBlocked;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(User user)
+        {
+            string Query = "UPDATE Users set IsActive=@IsActive " +
+               "WHERE Username='" + user.Username + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(Query, con))
+                {
+                    con.Open();
+                    cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = user.IsActive;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public List<User> GetAllByRole(string Role)
         {
             List<User> users = new List<User>();
@@ -202,7 +234,7 @@ namespace TicketReservation.ModelsDB
             //LibraryDAL library = new LibraryDAL();
             List<User> users = new List<User>();
 
-            string Query = "SELECT * FROM Users";
+            string Query = "SELECT * FROM Users ";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(Query, con))
@@ -225,6 +257,7 @@ namespace TicketReservation.ModelsDB
                             Type = reader["UserType"].ToString(),
                             NoQuit = Convert.ToInt32(reader["NoQuit"].ToString()),
                             IsBlocked = Convert.ToBoolean(reader["IsBlocked"].ToString()),
+                            IsActive = Convert.ToBoolean(reader["IsActive"].ToString()),
 
                         };
                         users.Add(user);

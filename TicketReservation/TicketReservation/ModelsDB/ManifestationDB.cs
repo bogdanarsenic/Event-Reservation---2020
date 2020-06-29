@@ -153,7 +153,7 @@ namespace TicketReservation.ModelsDB
 
         public Manifestation GetOneBySellerId(string SellerId)
         {
-            string Query = "SELECT * FROM Manifestations WHERE IsActive='True' and SellerId='" + SellerId + "'";
+            string Query = "SELECT * FROM Manifestations WHERE and SellerId='" + SellerId + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try

@@ -16,13 +16,14 @@ namespace TicketReservation.Models
         public string SellerId { get; set; }
         public string Status { get; set; }
         public string Type { get; set; }
+        public bool IsActive { get; set; }
 
         public Ticket()
         {
 
         }
 
-        public Ticket(string manifestationId,DateTime eventTime, int price, string buyer,string sellerId, string status, string type)
+        public Ticket(string manifestationId,DateTime eventTime, int price, string buyer,string sellerId, string status, string type,bool isActive)
         {
             ManifestationId = manifestationId;
             Price = price;
@@ -30,6 +31,7 @@ namespace TicketReservation.Models
             SellerId = sellerId;
             Status = status;
             Type = type;
+            IsActive = isActive;
         }
     }
 }
