@@ -104,7 +104,6 @@ export class AllusersComponent implements OnInit {
 
   Remove(user:User)
   {
-      user.IsActive=false;
 
       this.service.DeleteUser(user).subscribe(
         data=>

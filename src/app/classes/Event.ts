@@ -21,6 +21,7 @@ export class Event{
     Pictures:string;
     Place:string;
     EventTime:Date;
+    IsActive:boolean;
 
 
 

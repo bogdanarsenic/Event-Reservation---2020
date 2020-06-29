@@ -77,6 +77,22 @@ ngOnInit() {
 
   }
 
+  Delete(event:Event)
+  {
+    this.service.DeleteEvent(event)
+      .subscribe(
+        data => {
+
+          console.log('ok');
+          
+        },
+        error => {
+          console.log(error);
+        }
+      )
+      this.router.navigate(['/home']).then(()=>window.location.reload());
+  }
+
   showPlace()
   {
     this.clicked=true;
@@ -103,6 +119,14 @@ ngOnInit() {
   isSeller()
   {
     if(sessionStorage.getItem('Role')=="Seller")
+      return true;
+    else
+      return false;
+  }
+
+  isAdmin()
+  {
+    if(sessionStorage.getItem('Role')=="Admin")
       return true;
     else
       return false;

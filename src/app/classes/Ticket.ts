@@ -10,6 +10,7 @@ export class Ticket{
     Status:string;
     Type:string;
     SellerId:string;
+    IsActive:boolean;
 
 
 

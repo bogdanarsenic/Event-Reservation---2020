@@ -199,7 +199,7 @@ export class AddeventComponent implements OnInit {
     this.event.Capacity=this.event.Capacity;
     this.event.Price=this.event.Price;
     this.event.SellerId=sessionStorage.getItem('Username');
-    this.event.Status="NotActive";
+    this.event.Status="NotApproved";
 
     var nesto=moment(this.event.EventDay).format();
 

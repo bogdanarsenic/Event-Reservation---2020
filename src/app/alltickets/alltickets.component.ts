@@ -174,6 +174,22 @@ export class AllticketsComponent implements OnInit {
 
  }
 
+ Delete(ticket:Ticket)
+ {
+   this.service.DeleteTicket(ticket)
+     .subscribe(
+       data => {
+
+         console.log('ok');
+         
+       },
+       error => {
+         console.log(error);
+       }
+     )
+     this.router.navigate(['/home']).then(()=>window.location.reload());
+ }
+
  onWithdraw(ticket:Ticket)
  {
     this.user.Points=this.user.Points-ticket.Price/1000*133*4;

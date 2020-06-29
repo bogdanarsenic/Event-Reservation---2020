@@ -19,15 +19,18 @@
                     <h6>Price: {{event.Price}}</h6>
                     <h6>Status: {{event.Status}}</h6>
                     <h6>Place:{{event.Place}}</h6> 
+                    <h6>Active: {{event.IsActive}}</h6>
                     
 
                     </div>
                     <button class="btn btn-info" (click)="showPlace()">Show Address on Map </button>
                     <button *ngIf="isSeller()" class="btn btn-info" routerLink="/editevent">Edit Event</button>
 
-                    <button *ngIf="isBuyer()" [hidden]="isPast(event)"  class="btn btn-info" routerLink="/addticket">Reserve</button>
+                    <button *ngIf="isBuyer()" [hidden]="isPast(event) || event.Capacity==0"  class="btn btn-info" routerLink="/addticket">Reserve</button>
                     
                     <button  class="btn btn-info" [hidden]="!isPast(event)" routerLink="/comments">Show Comments</button>
+
+                    <button  class="btn btn-info" style="background-color:red" [hidden]="!isAdmin() || event.IsActive==false" (click)="Delete(event)" routerLink="/comments">Delete</button>
 
                     <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
         

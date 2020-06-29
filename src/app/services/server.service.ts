@@ -39,7 +39,17 @@ export class ServerService {
 
   DeleteUser(user:User):Observable<any>{
 
-    return this.http.post("http://localhost:52294/api/User/Delete",user);
+    return this.http.post("http://localhost:52294/api/User/DeleteUser",user);
+  }
+
+  DeleteTicket(ticket:Ticket):Observable<any>{
+
+    return this.http.post("http://localhost:52294/api/Ticket/Delete",ticket);
+  }
+
+  DeleteEvent(event:Event):Observable<any>{
+
+    return this.http.post("http://localhost:52294/api/Manifestation/Delete",event);
   }
 
   RegistrationSeller(seller:User):Observable<any>

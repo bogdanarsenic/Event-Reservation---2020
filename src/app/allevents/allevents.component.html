@@ -1,5 +1,4 @@
 <body>
-
                 
       <hr>
       <div class="row" >
@@ -12,7 +11,7 @@
                     <h5> Click for more info </h5>
                 </div>
             </div>
-            <button *ngIf="isAdmin() && event.Status=='NotActive'" class="btn" (click)="ApproveEvent(event)" style="background-color:green;color:#f4f4f4">
+            <button *ngIf="isAdmin() && event.Status=='NotApproved'" class="btn" (click)="ApproveEvent(event)" style="background-color:green;color:#f4f4f4">
                 Approve
             </button>
         </div>
