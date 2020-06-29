@@ -35,6 +35,7 @@ import { EditeventComponent } from './editevent/editevent.component';
 import { AddticketComponent } from './addticket/addticket.component';
 import { AllticketsComponent } from './alltickets/alltickets.component';
 import { CommentsComponent } from './comments/comments.component';
+import { UserFilterPipe } from './allusers/user-filter.pipe';
 
 
 
@@ -78,7 +79,8 @@ const appRoutes:Routes=[
     EditeventComponent,
     AddticketComponent,
     AllticketsComponent,
-    CommentsComponent
+    CommentsComponent,
+    UserFilterPipe
   ],
   imports: [
     BrowserModule,

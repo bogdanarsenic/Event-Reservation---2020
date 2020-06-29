@@ -1,3 +1,10 @@
+<div *ngIf="isAdmin()">
+
+    <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
+    <input type="text" placeholder="Filter by Role" id="Role" [(ngModel)]="Role">
+    
+</div>
+
 <div class="containter">
      
       <table class="table table-hover table-sm ">
@@ -8,18 +15,20 @@
            <th scope="col">Username</th>
            <th scope="col">Gender</th>
            <th scope="col">Role</th>
+           <th scope="col">Type </th>
            <th scope="col">IsActive</th>
            <th scope="col">IsBlocked</th>
          </tr>
        </thead>
    
-       <tbody class="table table-hover table-sm " *ngFor="let user of users">
+       <tbody class="table table-hover table-sm " *ngFor="let user of users | userFilter:Role:Type">
            <tr>
                <td>{{user.Name}}</td>
                <td>{{user.Surname}}</td>
                <td>{{user.Username}}</td>
                <td>{{user.Gender}}</td>
                <td>{{user.Role}}</td>
+               <td>{{user.Type}}</td>
                <td>{{user.IsActive}}</td>
                <td>{{user.IsBlocked}}</td>
                <div *ngIf="isSuspitious(user) && isAdmin()">
@@ -30,9 +39,7 @@
                  <td *ngIf="isAdmin() && user.Role != 'Admin' && user.IsBlocked==false" ><button class="btn btn-info" (click)="Block(user)">Block</button></td> 
                  <td *ngIf="isAdmin() && user.IsActive==true && user.Role!='Admin'"><button class="btn btn-info" (click)="Remove(user)">Remove user</button></td> 
                 
-           </tr>
-       
-       
-       </tbody>
+           </tr>   
+       </tbody>         
      </table>
 </div>

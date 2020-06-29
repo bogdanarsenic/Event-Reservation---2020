@@ -5,8 +5,10 @@
         <div class="col-3" *ngFor="let event of allEvents" style="margin-left:10px">
 
             <div class="my-list">
+                <h6 > <b style="font-size: large;">{{event.Name}}</b> </h6>
+                <h6 > <b style="font-size: large;">{{event.EventTime}}</b> </h6>
             <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
-                <h6 >Name: <b style="font-size: large;">{{event.Name}}</b> </h6>
+                
                 <div class="detail" (click)="ViewEvent(event.Id,event)">
                     <h5> Click for more info </h5>
                 </div>

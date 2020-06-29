@@ -13,7 +13,6 @@ export class AllusersComponent implements OnInit {
 
   user:User;
   users:User[];
-  sellerUsers:User[];
   sellerId:string;
   IsActive:string
 
@@ -25,6 +24,12 @@ export class AllusersComponent implements OnInit {
   gender:string;
   korisnik:User;
 
+  Type:string
+  Role:string
+
+  filteringusers:User[];
+
+  filterUserForm:FormGroup;
 
   Clicked:boolean;
   ClickedId:boolean;
@@ -35,6 +40,7 @@ export class AllusersComponent implements OnInit {
 
   createForm()
    {
+
    }
  
   ngOnInit()
@@ -44,10 +50,12 @@ export class AllusersComponent implements OnInit {
      this.role=""
      this.gender=""
      this.id=""
+     this.Type=""
+     this.Role=""
      this.korisnik=new User("","","","","","","",0);
       this.user=new User("","","","","","","",0);
       this.users=[]
-      this.sellerUsers=[]
+      this.filteringusers=[]
 
       if(this.isAdmin())
       {
@@ -55,6 +63,7 @@ export class AllusersComponent implements OnInit {
           data=>{
 
                 this.users=data;
+                this.filteringusers=data;
 
           }
         )
@@ -75,7 +84,7 @@ export class AllusersComponent implements OnInit {
               {
                 data.forEach(
                   x=>{
-                    if(x.IsActive=="true")
+                    if(x.IsActive==true)
                     {
                        this.users.push(x);
                     }
@@ -114,13 +123,6 @@ export class AllusersComponent implements OnInit {
     
    
   }
-
-
-  ShowOthers()
-  {
-    this.Clicked=false;
-    this.ClickedId=false;
-  }
  
 
   isAdmin()
@@ -147,4 +149,5 @@ export class AllusersComponent implements OnInit {
       }
       return false;
   }
+
 }

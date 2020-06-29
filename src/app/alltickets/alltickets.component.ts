@@ -147,6 +147,7 @@ export class AllticketsComponent implements OnInit {
   changeManifestationId(ticket:Ticket)
   {
    
+    ticket.EventTime=ticket.EventTime.replace('T'," ");
    this.service.GetEvent(ticket.ManifestationId).subscribe(
             data2=>
             {

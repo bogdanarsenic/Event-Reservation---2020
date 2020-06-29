@@ -60,13 +60,22 @@ export class LoginComponent implements OnInit {
             if(data.IsBlocked!=true)
             {
 
+                if(data.IsActive!=false)
+                {
+                  sessionStorage.setItem('Username',data.Username);
+                  sessionStorage.setItem('Role',data.Role);
+                  sessionStorage.setItem('Logged','Yes');
+          
+                  this.router.navigate(['']).then(()=>window.location.reload());
+                  this.router.navigateByUrl("/home");
+                }
+                else
+                {
+
+                    alert("Invalid Username or Password!");
+                                  
+                }
                 
-                sessionStorage.setItem('Username',data.Username);
-                sessionStorage.setItem('Role',data.Role);
-                sessionStorage.setItem('Logged','Yes');
-        
-                this.router.navigate(['']).then(()=>window.location.reload());
-                this.router.navigateByUrl("/home");
              }
              else
              {

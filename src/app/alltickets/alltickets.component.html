@@ -9,6 +9,7 @@
          <th scope="col">Buyer: </th>
          <th scope="col">Status: </th>
          <th scope="col">Type: </th>
+         <th scope="col">IsActive: </th>
        </tr>
      </thead>
  
@@ -20,6 +21,7 @@
              <td>{{ticket.Buyer}}</td>
              <td>{{ticket.Status}}</td>
              <td>{{ticket.Type}}</td>
+             <td>{{ticket.IsActive}}</td>
              
              <button class="btn btn-info" *ngIf="isAdmin() && ticket.IsActive==true" (click)="Delete(ticket)"> Delete Ticket</button>
 

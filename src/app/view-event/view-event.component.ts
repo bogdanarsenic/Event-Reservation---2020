@@ -69,7 +69,9 @@ ngOnInit() {
         this.locationId=data.LocationId;
           
         
-        this.event=data;                
+        this.event=data;   
+        
+        this.event.EventTime=data.EventTime.replace('T'," ");
 
       }
     )
