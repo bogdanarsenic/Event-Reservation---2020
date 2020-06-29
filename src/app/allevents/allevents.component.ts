@@ -57,7 +57,7 @@ createForm()
     {
       this.service.GetAllEvents().subscribe(
         data=>{
-          if(data==null)
+          if(data.length==0)
             {
               alert("No apartments")
             }
@@ -95,7 +95,7 @@ createForm()
       this.service.GetEventbyUser(this.id).subscribe(
         data=>{
 
-          if(data==null)
+          if(data.length==0)
             {
               alert("No events by this host")
             }
@@ -104,7 +104,7 @@ createForm()
             
               data.forEach(element=>
                 {
-                    
+
                   element.Pictures=element.Pictures.replace(/\\/g,"/");
                   element.Pictures=element.Pictures.split(';');
                   element.FrontPicture=element.Pictures[0];
@@ -118,12 +118,11 @@ createForm()
                     });
                     element.AllPictures=this.pictures1;
 
+
                   
                 });
-                           
 
-            this.allEvents=data;
-
+                this.allEvents=data;
             }
      
         }
@@ -134,7 +133,7 @@ createForm()
     {
       this.service.GetAllEvents().subscribe(
         data=>{
-            if(data==null)
+            if(data.length==0)
             {
               alert("No active apartments")
             }
@@ -142,7 +141,7 @@ createForm()
           data.forEach(element=>
             {
                 
-                if(element.Status=="Active")
+                if(element.Status=="Active" && element.IsActive==true)
                 {
 
                     this.active="Active";
@@ -168,11 +167,6 @@ createForm()
               this.active="NotActive";
 
             });
-       
-            if(this.allEvents==null)
-            {
-              alert("No active apartments");
-            }
      
         }
 

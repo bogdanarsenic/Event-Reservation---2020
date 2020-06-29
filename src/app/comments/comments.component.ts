@@ -113,7 +113,10 @@ export class CommentsComponent implements OnInit {
           if(data!=null)
           {
             this.ticket=data;
-            if(this.today<this.ticket.EventTime && this.ticket.Status=="Reserved")
+            let eventTime=new Date(this.ticket.EventTime);
+            let todayTime=new Date(this.today);
+
+            if(eventTime<todayTime && this.ticket.Status=="Reserved")
             {
                 this.CanWrite=true;
             }
@@ -124,17 +127,17 @@ export class CommentsComponent implements OnInit {
     }
 
     
- /*   ApproveNow(id:string,com:Comment)
+    ApproveNow(comId:string)
     {
-        com.IsActive=true;
-        this.server.putComment(id,com).subscribe(
+
+        this.server.ApproveComment(comId).subscribe(
           data=>
           {
             this.router.navigate(['/comments']).then(()=>window.location.reload());
           }
         )
     }
-   */ 
+   
   
     onSubmit()
     {

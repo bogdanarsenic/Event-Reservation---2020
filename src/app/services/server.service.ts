@@ -32,6 +32,11 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/User/BlockUser",user);
   }
 
+  ApproveComment(comId:string):Observable<any>{
+
+    return this.http.get(`http://localhost:52294/api/Comment/GetOneCommentApproved`,{params:{comId}});
+  }
+
   DeleteUser(user:User):Observable<any>{
 
     return this.http.post("http://localhost:52294/api/User/Delete",user);

@@ -172,6 +172,7 @@ export class AddticketComponent implements OnInit {
         {
             this.ticketId=data;
             this.update();
+            this.router.navigate(['/alltickets']).then(()=>window.location.reload());
         }
       )
      

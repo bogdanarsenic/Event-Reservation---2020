@@ -66,13 +66,22 @@ export class AllusersComponent implements OnInit {
         this.service.GetAllUsersWhoReserved().subscribe(
           data=>
           {
+
               if(data.length==0)
               {
                 alert("No users bought ticket for your event")
               }
               else
               {
-                this.users=data;
+                data.forEach(
+                  x=>{
+                    if(x.IsActive=="true")
+                    {
+                       this.users.push(x);
+                    }
+                  }
+                )
+                
               }
           }
         )

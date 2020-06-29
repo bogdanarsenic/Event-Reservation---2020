@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import {Event} from '../classes/Event';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-view-event',
@@ -30,6 +31,12 @@ zoom = 12;
 event:Event;
 lng:number
 lat:number
+
+datePipe = new DatePipe('en-US');
+
+todayDate=Date.now();
+
+today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
 
 locationId:string
 constructor(private router:Router,private service:ServerService) { }
@@ -82,6 +89,16 @@ ngOnInit() {
     )
   }
 
+  isPast(event:Event)
+  {
+    let eventTime=new Date(this.event.EventTime);
+    let todayTime=new Date(this.today);
+    if(eventTime<todayTime)
+    {
+      return true;
+    }
+    return false;
+  }
    
   isSeller()
   {

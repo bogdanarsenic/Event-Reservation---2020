@@ -50,8 +50,19 @@ export class AllticketsComponent implements OnInit {
         this.service.GetAllTickets().subscribe(
           data=>{
 
-                this.tickets=data;
-                this.changeManifestationId();
+                if(data.length!=0)
+                {
+                  this.tickets=data;
+                  data.forEach(x=>
+                    {
+                      this.changeManifestationId(x);
+                    })
+                  
+                }
+               else
+               {
+                 alert("There is no tickets");
+               }
 
           }
         )
@@ -69,8 +80,16 @@ export class AllticketsComponent implements OnInit {
               }
               else
               {
-                this.tickets=data;
-                this.changeManifestationId();
+                data.forEach(
+                  x=>{
+                    if(x.IsActive==true)
+                    {
+                       this.tickets.push(x);
+                       this.changeManifestationId(x);
+                    }
+                  }
+                )
+                
 
 
               }
@@ -110,29 +129,31 @@ export class AllticketsComponent implements OnInit {
           }
           else
           {
-            this.tickets=data;
-            this.changeManifestationId();
+            data.forEach(
+              x=>{
+                if(x.IsActive==true)
+                {
+                   this.tickets.push(x);
+                   this.changeManifestationId(x);
+                }
+              }
+            )
 
           }
       }
     )
   }
 
-  changeManifestationId()
+  changeManifestationId(ticket:Ticket)
   {
-    this.tickets.forEach(
-      data=>
-        {
-          this.service.GetEvent(data.ManifestationId).subscribe(
+   
+   this.service.GetEvent(ticket.ManifestationId).subscribe(
             data2=>
             {
-                data.ManifestationId=data2.Name;
+                ticket.ManifestationId=data2.Name;
             }
           )
-        }
-    )   
-      
-  }
+   }
   
  checkWithdrawButton(ticket:Ticket)
  {

@@ -17,7 +17,7 @@
                                     <div> "{{com.UserId}}" said "{{com.Text}}" and rated with {{com.Rating}}</div>
                                 
                         
-                                    <button *ngIf="IsSeller()" class="btn btn-info" > Approve</button>
+                                    <button *ngIf="IsSeller() && com.IsActive==false" class="btn btn-info"  (click)="ApproveNow(com.Id)"> Approve</button>
                                   </li>
                                 </div>
                             </div>
