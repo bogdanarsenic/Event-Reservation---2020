@@ -20,7 +20,10 @@
                <td>{{user.Gender}}</td>
                <td>{{user.Role}}</td>
                <td>{{user.IsActive}}</td>
-               
+               <div *ngIf="isSuspitious(user)">
+                  <td  style="color: red;">Suspitous</td>
+                  <button class="btn btn-info">Block</button>
+              </div>
            </tr>
        
        

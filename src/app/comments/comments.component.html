@@ -1,0 +1,66 @@
+<body>
+
+    <div class="container pb-cmnt-container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-info">
+    
+    
+                    <div class="panel-body">
+    
+                        <ul class="list-group">
+                         
+                            
+                            <div class="list-group-item" *ngFor="let com of allComments">
+                                <div class="row">
+                                  <li>
+                                    <div> "{{com.UserId}}" said "{{com.Text}}" and rated with {{com.Rating}}</div>
+                                
+                        
+                                    <button *ngIf="IsSeller()" class="btn btn-info" > Approve</button>
+                                  </li>
+                                </div>
+                            </div>
+                       
+                        </ul>     
+                 
+                                
+                    </div>
+                    
+    
+                    <div *ngIf="IsBuyer() && CanWrite">
+    
+                        <form [formGroup]="commentUserForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                              <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" class="form-control"  name="Text" id="Text" formControlName="Text"></textarea>
+                              <span *ngIf="commentUserForm.controls.Text.touched">
+                                <small *ngIf="commentUserForm.controls.Text.errors?.required">
+                                        <div class="attent">
+                                                Text is required!
+                                        </div>
+                                </small>
+                              </span>
+    
+                              <span><small>Enter rating between 1-5</small></span>
+                              <input class="form-control" formControlName="Rate" name="Rate" id="Rate" min="1" max="5" type="number" />
+                              <span *ngIf="commentUserForm.controls.Rate.touched">
+                                <small *ngIf="commentUserForm.controls.Rate.errors?.required">
+                                        <div class="attent">
+                                                Rating is required!
+                                        </div>
+                                </small>
+                              </span>
+    
+                              
+                              <button class="btn btn-primary pull-right"  type="submit">Share</button>
+        
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </body>

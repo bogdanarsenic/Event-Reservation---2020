@@ -103,4 +103,13 @@ export class AllusersComponent implements OnInit {
     else 
     return false;
   }
+
+  isSuspitious(user:User)
+  {
+      if(user.NoQuit>=5)
+      {
+        return true;
+      }
+      return false;
+  }
 }

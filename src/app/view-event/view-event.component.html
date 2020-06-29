@@ -26,6 +26,8 @@
                     <button *ngIf="isSeller()" class="btn btn-info" routerLink="/editevent">Edit Event</button>
 
                     <button *ngIf="isBuyer()" class="btn btn-info" routerLink="/addticket">Reserve</button>
+                    
+                    <button  class="btn btn-info" routerLink="/comments">Show Comments</button>
 
                     <agm-map [hidden]="!clicked" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
         

@@ -34,6 +34,7 @@ import { ViewEventComponent } from './view-event/view-event.component';
 import { EditeventComponent } from './editevent/editevent.component';
 import { AddticketComponent } from './addticket/addticket.component';
 import { AllticketsComponent } from './alltickets/alltickets.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 
@@ -54,12 +55,7 @@ const appRoutes:Routes=[
   { path: 'editevent',component:EditeventComponent},
   { path: 'addticket',component:AddticketComponent},
   { path: 'alltickets',component:AllticketsComponent},
-
-
-  
-
-
-
+  { path: 'comments',component:CommentsComponent},
 
 
 
@@ -81,7 +77,8 @@ const appRoutes:Routes=[
     ViewEventComponent,
     EditeventComponent,
     AddticketComponent,
-    AllticketsComponent
+    AllticketsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

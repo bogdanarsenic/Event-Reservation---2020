@@ -6,6 +6,7 @@ import { User } from '../classes/User';
 import { Location } from '../classes/Location';
 import { Event } from '../classes/Event';
 import { Ticket } from '../classes/Ticket';
+import { Comment } from '../classes/Comment';
 
 
 @Injectable({
@@ -33,6 +34,11 @@ export class ServerService {
   GetUser(Username:string,Password:string):Observable<User>
   {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
+  }
+
+  GetAllComments():Observable<any>
+  {
+    return this.http.get('http://localhost:52294/api/Comment/GetAllComments');
   }
 
   GetAllUsers():Observable<any>
@@ -96,6 +102,10 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/Ticket/RegisterTicket",register);
   }
 
+  postComment(comment:Comment):Observable<any>{
+    return this.http.post("http://localhost:52294/api/Comment/RegisterComment",comment);
+  }
+
   AddingImage(fd:FormData):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/Upload", fd)
@@ -106,9 +116,19 @@ export class ServerService {
     return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetImage`,{params:{idEvent,ImgName}});
   }
 
+  GetComment(Id:string):Observable<any>
+  {
+    return this.http.get<any>(`http://localhost:52294/api/Comment/GetAllByEventId`,{params:{Id}});
+  }
+
   GetEvent(idEvent:string):Observable<any>
   {
     return this.http.get<any>(`http://localhost:52294/api/Manifestation/GetOneManifestation`,{params:{idEvent}});
+  }
+
+  GetTicketUserEvent(userId:string,idEvent:string):Observable<any>
+  {
+    return this.http.get<any>(`http://localhost:52294/api/Ticket/GetTicketUserEvent`,{params:{userId,idEvent}});
   }
 
   GetLongLat(id:string):Observable<any>
