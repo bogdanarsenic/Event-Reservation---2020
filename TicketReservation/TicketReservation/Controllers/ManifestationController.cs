@@ -106,9 +106,9 @@ namespace TicketReservation.Controllers
         public string GetStatus(string idEvent, string status)
         {
             Manifestation temp = manifestationDB.GetOneById(idEvent);
-            if (temp.Status == "NotActive")
+            if (temp.Status == "NotApproved")
             {
-                temp.Status = "Active";
+                temp.Status = "Approved";
             }
 
             manifestationDB.UpdateStatus(temp);
@@ -146,6 +146,30 @@ namespace TicketReservation.Controllers
             temp.EventTime = manifestation.EventTime;
 
             manifestationDB.Update(temp);
+            return "Success!";
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        public string Delete(Manifestation delete)
+        {
+            string idEvent = delete.Id.ToString();
+            Manifestation m = null;
+            m = manifestationDB.GetOneById(idEvent);
+
+            List<Ticket> t = null;
+            t = ticketDB.GetAllByManifestationId(idEvent);
+
+            if(t.Count!=0)
+            {
+                foreach (Ticket tic in t)
+                    {
+                        string idTic = tic.Id.ToString();
+                        ticketDB.Delete(idTic);
+                    }
+            }
+
+            manifestationDB.Delete(idEvent);
             return "Success!";
         }
 

@@ -44,7 +44,7 @@ namespace TicketReservation.ModelsDB
 
         public void UpdateStatus(Ticket ticket)
         {
-            string Query = "UPDATE Tickets set Status=@Status " +
+            string Query = "UPDATE Tickets set Status=@Status, IsActive='False' " +
                "WHERE Id='" + ticket.Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -159,6 +159,27 @@ namespace TicketReservation.ModelsDB
                 {
                     return null;
                 }
+            }
+        }
+
+        public void Delete(string Id)
+        {
+            string Query = "Update Tickets SET IsActive='False' WHERE Id='" + Id + "'";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                }
+                catch
+                {
+                    return;
+                }
+
             }
         }
 

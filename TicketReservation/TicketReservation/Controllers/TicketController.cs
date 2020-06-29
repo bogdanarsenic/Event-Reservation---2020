@@ -103,6 +103,15 @@ namespace TicketReservation.Controllers
             return t;
         }
 
+        [HttpPost]
+        [Route("Delete")]
+        public string Delete(Ticket delete)
+        {
+            string idTicket = delete.Id.ToString();
+            ticketDB.Delete(idTicket);
+            return "Success!";
+        }
+
 
 
     }

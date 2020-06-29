@@ -180,7 +180,7 @@ namespace TicketReservation.ModelsDB
 
         public void Delete(User user)
         {
-            string Query = "UPDATE Users set IsActive=@IsActive " +
+            string Query = "UPDATE Users set IsActive='False' " +
                "WHERE Username='" + user.Username + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {

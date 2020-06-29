@@ -120,12 +120,54 @@ namespace TicketReservation.Controllers
             return "Success!";
         }
 
+
+        [HttpPost]
         [Route("DeleteUser")]
         public string DeleteUser(User delete)
         {
-            User temp = userDB.GetOne(delete.Username);
-            temp.IsActive = delete.IsActive;
-            userDB.Delete(temp);
+
+            List<Manifestation> m = manifestationDB.GetAllBySellerId(delete.Username);
+            List<Ticket> t = null;
+
+            if(m.Count!=0)
+            {
+                foreach(Manifestation man in m)
+                    {
+                        string id = man.Id.ToString();
+                        manifestationDB.Delete(id);
+                        t=ticketDB.GetAllByManifestationId(id);
+
+                        if(t.Count!=0)
+                        {
+                            foreach(Ticket tic in t)
+                            {
+                                string idTic = tic.Id.ToString();
+                                ticketDB.Delete(idTic);
+                            }
+                        }
+                    }
+
+            }
+
+            else
+            {
+                t = ticketDB.GetAll();
+                if(t.Count!=0)
+                {
+                    foreach(Ticket tic in t)
+                    {
+                        string idTic = tic.Id.ToString();
+
+                        if (tic.Buyer == delete.Name + " " + delete.Surname)
+                        {
+                            ticketDB.Delete(idTic);
+                        }
+                    }
+                }
+            }
+
+
+            userDB.Delete(delete);
             return "Success!";
         }
 
@@ -135,7 +177,6 @@ namespace TicketReservation.Controllers
         {
             User temp = userDB.GetOne(idUser);
             temp.ManifestationId = idEvent;
-
             userDB.UpdateSeller(temp);
             return "Success!";
         }
