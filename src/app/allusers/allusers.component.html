@@ -9,6 +9,7 @@
            <th scope="col">Gender</th>
            <th scope="col">Role</th>
            <th scope="col">IsActive</th>
+           <th scope="col">IsBlocked</th>
          </tr>
        </thead>
    
@@ -20,10 +21,15 @@
                <td>{{user.Gender}}</td>
                <td>{{user.Role}}</td>
                <td>{{user.IsActive}}</td>
-               <div *ngIf="isSuspitious(user)">
+               <td>{{user.IsBlocked}}</td>
+               <div *ngIf="isSuspitious(user) && isAdmin()">
                   <td  style="color: red;">Suspitous</td>
-                  <button class="btn btn-info">Block</button>
               </div>
+
+                
+                 <td *ngIf="isAdmin() && user.Role != 'Admin' && user.IsBlocked==false" ><button class="btn btn-info" (click)="Block(user)">Block</button></td> 
+                 <td *ngIf="isAdmin() && user.IsActive==true && user.Role!='Admin'"><button class="btn btn-info" (click)="Remove(user)">Remove user</button></td> 
+                
            </tr>
        
        

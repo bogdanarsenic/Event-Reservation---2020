@@ -57,12 +57,21 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            sessionStorage.setItem('Username',data.Username);
-            sessionStorage.setItem('Role',data.Role);
-            sessionStorage.setItem('Logged','Yes');
-    
-            this.router.navigate(['']).then(()=>window.location.reload());
-            this.router.navigateByUrl("/home");
+            if(data.IsBlocked!=true)
+            {
+
+                
+                sessionStorage.setItem('Username',data.Username);
+                sessionStorage.setItem('Role',data.Role);
+                sessionStorage.setItem('Logged','Yes');
+        
+                this.router.navigate(['']).then(()=>window.location.reload());
+                this.router.navigateByUrl("/home");
+             }
+             else
+             {
+              alert("You are blocked!")
+             }
           }
         },error=>
         {

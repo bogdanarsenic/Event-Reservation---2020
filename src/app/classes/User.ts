@@ -12,6 +12,7 @@ export class User{
     ManifestationId:string;
     TicketId:string;
     NoQuit:number;
+    IsBlocked:boolean;
     
     constructor(username:string ,password:string, name:string, surname:string, gender:string, role:string, type:string,points:number)
     {

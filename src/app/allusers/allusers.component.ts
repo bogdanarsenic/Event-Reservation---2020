@@ -80,6 +80,33 @@ export class AllusersComponent implements OnInit {
       
   }
 
+  Block(user:User)
+  {
+      user.IsActive=false;
+      user.IsBlocked=true;
+
+      this.service.blockUser(user).subscribe(
+        data=>
+        {
+        this.router.navigate(['/home']).then(()=>window.location.reload());
+        }
+      )  
+  }
+
+  Remove(user:User)
+  {
+      user.IsActive=false;
+
+      this.service.DeleteUser(user).subscribe(
+        data=>
+        {
+        this.router.navigate(['/home']).then(()=>window.location.reload());
+        }
+      )
+    
+   
+  }
+
 
   ShowOthers()
   {

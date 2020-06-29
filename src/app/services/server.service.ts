@@ -26,6 +26,17 @@ export class ServerService {
     return this.http.post("http://localhost:52294/api/User/Register",buyer);
   }
 
+  
+  blockUser(user:User):Observable<any>{
+
+    return this.http.post("http://localhost:52294/api/User/BlockUser",user);
+  }
+
+  DeleteUser(user:User):Observable<any>{
+
+    return this.http.post("http://localhost:52294/api/User/Delete",user);
+  }
+
   RegistrationSeller(seller:User):Observable<any>
   {
     return this.http.post("http://localhost:52294/api/User/RegisterSeller",seller);
