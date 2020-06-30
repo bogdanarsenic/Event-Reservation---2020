@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { User } from '../classes/User';
 
 @Pipe({
-  name: 'userFilter'
+  name: 'userFilter',
+
 })
 
 
@@ -21,5 +22,7 @@ export class UserFilterPipe implements PipeTransform{
           return users.filter(user=>user.Role.indexOf(Role)!==-1);
 
   }
+
+  
 }
 
