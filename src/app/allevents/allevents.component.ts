@@ -26,9 +26,14 @@ folder:string
 active:string
 aps:string
 brojac:number
+brojac2:number
 filteredStatus:string
 
+Type:string
+
 event:Event
+
+filteredEvents : Event[] 
 
 id2:string
 
@@ -46,9 +51,12 @@ createForm()
     this.local="http://localhost:52294/";
     this.folder="Content/";
     this.brojac=0;
+    this.brojac2=0;
 
+    this.Type="";
     this.allEvents=[]
     this.id=""
+    
     
     this.Clicked=false;
     sessionStorage.setItem('CurrentComponent','AllEventsComponent');
@@ -82,6 +90,7 @@ createForm()
                     
                 });
                 this.allEvents=data;
+                this.filteredEvents=this.allEvents;
      
         }
       }
@@ -124,6 +133,7 @@ createForm()
                 });
 
                 this.allEvents=data;
+                this.filteredEvents=this.allEvents;
             }
      
         }
@@ -167,6 +177,7 @@ createForm()
                 }
                 this.brojac++;
               this.active="NotActive";
+              this.filteredEvents=this.allEvents;
 
             });
      
@@ -179,6 +190,25 @@ createForm()
     
 
   }
+
+
+
+  filterChange() {
+
+    this.brojac2++
+
+    if(this.brojac2%2==1)
+    {
+      this.allEvents = this.allEvents.filter(x => 
+        (x.Capacity >0)
+      );      
+    }
+    else
+      {
+          this.allEvents=this.filteredEvents;
+      }
+  }
+  
   
   ViewEvent(id:string,ev:Event)
   {

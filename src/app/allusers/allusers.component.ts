@@ -31,6 +31,9 @@ export class AllusersComponent implements OnInit {
 
   filterUserForm:FormGroup;
 
+  Sort:string;
+  ReverseSort:string;
+
   Clicked:boolean;
   ClickedId:boolean;
   constructor(private router:Router,private service:ServerService,private fb:FormBuilder) {
@@ -52,6 +55,7 @@ export class AllusersComponent implements OnInit {
      this.id=""
      this.Type=""
      this.Role=""
+     this.Sort=""
      this.korisnik=new User("","","","","","","",0);
       this.user=new User("","","","","","","",0);
       this.users=[]

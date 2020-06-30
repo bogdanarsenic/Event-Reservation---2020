@@ -2,6 +2,17 @@
 
     <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
     <input type="text" placeholder="Filter by Role" id="Role" [(ngModel)]="Role">
+
+    <span class="form-label">Sort by: </span>
+     <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name
+     <input type="radio" name="Surname" id="Surname" [(ngModel)]="Sort" value="Surname"/> Surname
+     <input type="radio" name="Username" id="Username" [(ngModel)]="Sort" value="Username"/> Username
+     <input type="radio" name="Points" id="Points" [(ngModel)]="Sort" value="Points"/> Points
+
+     <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> RevName
+     <input type="radio" name="RevSurname" id="RevSurname" [(ngModel)]="Sort" value="RevSurname"/> RevSurname
+     <input type="radio" name="RevUsername" id="RevUsername" [(ngModel)]="Sort" value="RevUsername"/> RevUsername
+     <input type="radio" name="RevPoints" id="RevPoints" [(ngModel)]="Sort" value="RevPoints"/> RevPoints
     
 </div>
 
@@ -18,10 +29,12 @@
            <th scope="col">Type </th>
            <th scope="col">IsActive</th>
            <th scope="col">IsBlocked</th>
+           <th scope="col">Points</th>
+           
          </tr>
        </thead>
    
-       <tbody class="table table-hover table-sm " *ngFor="let user of users | userFilter:Role:Type">
+       <tbody class="table table-hover table-sm " *ngFor="let user of users | userFilter:Role:Type | userSort:Sort">
            <tr>
                <td>{{user.Name}}</td>
                <td>{{user.Surname}}</td>
@@ -31,6 +44,7 @@
                <td>{{user.Type}}</td>
                <td>{{user.IsActive}}</td>
                <td>{{user.IsBlocked}}</td>
+               <td>{{user.Points}}</td>
                <div *ngIf="isSuspitious(user) && isAdmin()">
                   <td  style="color: red;">Suspitous</td>
               </div>

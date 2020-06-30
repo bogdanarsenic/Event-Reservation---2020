@@ -1,5 +1,8 @@
 <div class="containter">
      
+  <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
+  <input type="text" placeholder="Filter by Status" id="Status" [(ngModel)]="Status">
+
     <table class="table table-hover table-sm ">
      <thead>
        <tr>
@@ -13,7 +16,7 @@
        </tr>
      </thead>
  
-     <tbody class="table table-hover table-sm " *ngFor="let ticket of tickets">
+     <tbody class="table table-hover table-sm " *ngFor="let ticket of tickets | ticketFilter:Type:Status ">
          <tr>
              <td>{{ticket.ManifestationId}}</td>
              <td>{{ticket.EventTime}}</td>

@@ -36,6 +36,9 @@ import { AddticketComponent } from './addticket/addticket.component';
 import { AllticketsComponent } from './alltickets/alltickets.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UserFilterPipe } from './allusers/user-filter.pipe';
+import { EventFilterPipe } from './allevents/event-filter.pipe';
+import { TicketFilterPipe } from './alltickets/ticket-filter.pipe';
+import { UserSortPipe } from './allusers/user-sort.pipe';
 
 
 
@@ -80,7 +83,10 @@ const appRoutes:Routes=[
     AddticketComponent,
     AllticketsComponent,
     CommentsComponent,
-    UserFilterPipe
+    UserFilterPipe,
+    EventFilterPipe,
+    TicketFilterPipe,
+    UserSortPipe
   ],
   imports: [
     BrowserModule,

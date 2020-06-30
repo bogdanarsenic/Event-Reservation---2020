@@ -1,8 +1,12 @@
 <body>
-                
+    
+    <div class="row" style="margin-left: 30px;">
+    <input type="text" style="margin-right: 15px;" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
+    <h6 style="margin-top: 10px;" >Check for Unsold events</h6><input type="checkbox" style="margin-left: 15px;margin-top: 15px;" placeholder="Filter by Role" (change)="filterChange()" >
+    </div>
       <hr>
       <div class="row" >
-        <div class="col-3" *ngFor="let event of allEvents" style="margin-left:10px">
+        <div class="col-3" *ngFor="let event of allEvents | eventFilter:Type" style="margin-left:10px">
 
             <div class="my-list">
                 <h6 > <b style="font-size: large;">{{event.Name}}</b> </h6>

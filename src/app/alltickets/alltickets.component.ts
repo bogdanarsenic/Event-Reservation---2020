@@ -24,6 +24,8 @@ export class AllticketsComponent implements OnInit {
 
   datePipe = new DatePipe('en-US');
 
+  Type:string
+  Status:string
   todayDate=Date.now();
 
   user:User
@@ -42,6 +44,8 @@ export class AllticketsComponent implements OnInit {
   ngOnInit()
    {
 
+      this.Type=""
+      this.Status=""
       this.tickets=[]
       this.sellerTickets=[]
 
