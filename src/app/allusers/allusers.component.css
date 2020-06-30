@@ -1,0 +1,10 @@
+.row{
+    margin-top:10px;
+    margin-left:15px;
+}
+
+.btn {
+    padding: 7px 7px;
+    font-size: 10px;
+    border-radius: 15px;
+}

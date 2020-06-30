@@ -1,41 +1,55 @@
 <body>
     
-    <div class="row">
+    <div class="row" style="background-color:rgb(214, 233, 226)">
         <form [formGroup]="searchEvent" (ngSubmit)="Search()">
-
+            <label > Search: </label>
             <input type="text" placeholder="Search by Name" id="Name" formControlName="Name">
 
             <input type="text" placeholder="Search by Address" id="Address" formControlName="Address">
 
             <input type="text" placeholder="Search by Location" id="Location" formControlName="Location">
-      
+            <span> Price From
             <input type="number" id="FromPrice" name="FromPrice" min="1" max="1000" value="1" formControlName="FromPrice">
+            </span>
+            <span> To
             <input type="number" id="ToPrice" name="ToPrice" min="1" max="10000" value="1" formControlName="ToPrice">
-      
+            </span>
+            <span> Date From
             <input type="Date" name="FromDate" id="FromDate" formControlName="FromDate">
+            </span>
+            <span>To
             <input type="Date" name="ToDate" id="ToDate" formControlName="ToDate">
-      
+            </span>
           <button class="btn btn-info" type="submit">Search</button>
           </form>
     </div>
 
-    <div class="row">
-        <span class="form-label">Sort by: </span>
-        <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name
-        <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Date
-        <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/> Price
-        <input type="radio" name="Place" id="Place" [(ngModel)]="Sort" value="Place"/> Place
+    <div class="row" style="background-color: seashell;">
+        <div class="col-xs-6 col-sm-4">
+            <label>Sort by: </label>
+            <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name (A-Z)
+            <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Earliest Date
+            <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/> Lowest Price
+            <input type="radio" name="Place" id="Place" [(ngModel)]="Sort" value="Place"/> Place (A-Z)
+         </div>
 
-        <span class="form-label">Reverse Sort by: </span>
-        <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> RevName
-        <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> RevDate
-        <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> RevPrice
-        <input type="radio" name="RevPlace" id="RevPlace" [(ngModel)]="Sort" value="RevPlace"/> RevPlace
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <label>(Reverse): </label>
+            <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> Name (Z-A)
+            <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> Latest Date
+            <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> Highest Price
+            <input type="radio" name="RevPlace" id="RevPlace" [(ngModel)]="Sort" value="RevPlace"/> Place (Z-A)
+        </div>
     </div>
     
-    <div class="row">
-        <input type="text" style="margin-right: 15px;" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
-    <h6> Check for Unsold events</h6><input type="checkbox" placeholder="Filter by Role" (change)="filterChange()" >
+    <div class="row" style="background-color: bisque;">
+        <label>Fitler by: </label>
+        <div class="col-xs-6 col-sm-4">
+        <input type="text" style="margin-right: 15px;" placeholder="Type" id="Type" [(ngModel)]="Type">
+        </div>
+        <div class="col-sm-4">
+        <label> Check for Unsold events</label><input type="checkbox" placeholder="Filter by Role" (change)="filterChange()" >
+        </div>
     </div>
 
       <hr>
@@ -43,9 +57,12 @@
         <div class="col-3" *ngFor="let event of allEvents | eventFilter:Type | eventSort:Sort" style="margin-left:10px">
 
             <div class="my-list">
-                <h6 > <b style="font-size: large;">{{event.Name}}</b> </h6>
-                <h6 > <b style="font-size: large;">{{event.EventTime}}</b> </h6>
-                <h6 > <b style="font-size: large;">{{event.City}}</b> </h6>
+                   <label>Name</label> <h6> <b>{{event.Name}}</b></h6>
+                   <label>Time</label> <h6> <b >{{event.EventTime}}</b> </h6>
+                   <label>Place</label> <h6> <b >{{event.City}}</b> </h6>
+                   <label>Type</label><h6> <b >{{event.Type}}</b> </h6>
+                   <label>TicketPrice</label><h6 > <b >{{event.Price}}</b> </h6>
+
             <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
                 
                 <div class="detail" (click)="ViewEvent(event.Id,event)">

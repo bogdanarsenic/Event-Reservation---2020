@@ -98,7 +98,7 @@ export class AllusersComponent implements OnInit {
               {
                 data.forEach(
                   x=>{
-                    if(x.IsActive==true)
+                    if(x.IsActive==true && this.users.findIndex(y=>y.Username==x.Username)==-1)
                     {
                        this.users.push(x);
                     }

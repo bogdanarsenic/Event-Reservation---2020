@@ -1,36 +1,52 @@
 <div *ngIf="isAdmin()">
 
-    <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
-    <input type="text" placeholder="Filter by Role" id="Role" [(ngModel)]="Role">
+  <div class="row" style="background-color:rgb(214, 233, 226)">
+    <form [formGroup]="searchUser" (ngSubmit)="Search()">
+      <label > Search: </label>
+      <input type="text" placeholder="Search by Name" id="gender" formControlName="Name">
 
-    <span class="form-label">Sort by: </span>
-     <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name
-     <input type="radio" name="Surname" id="Surname" [(ngModel)]="Sort" value="Surname"/> Surname
-     <input type="radio" name="Username" id="Username" [(ngModel)]="Sort" value="Username"/> Username
-     <input type="radio" name="Points" id="Points" [(ngModel)]="Sort" value="Points"/> Points
+      <input type="text" placeholder="Search by LastName" id="gender" formControlName="Surname">
 
-     <span class="form-label">Reverse Sort by: </span>
-     <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> RevName
-     <input type="radio" name="RevSurname" id="RevSurname" [(ngModel)]="Sort" value="RevSurname"/> RevSurname
-     <input type="radio" name="RevUsername" id="RevUsername" [(ngModel)]="Sort" value="RevUsername"/> RevUsername
-     <input type="radio" name="RevPoints" id="RevPoints" [(ngModel)]="Sort" value="RevPoints"/> RevPoints
+      <input type="text" placeholder="Search by Username" id="gender" formControlName="Username">
 
-     <form [formGroup]="searchUser" (ngSubmit)="Search()">
+    <button class="btn btn-info" type="submit">Search</button>
+  </form>
 
-        <input type="text" placeholder="Search by Name" id="gender" formControlName="Name">
+  </div>
 
-        <input type="text" placeholder="Search by LastName" id="gender" formControlName="Surname">
+  <div class="row" style="background-color: seashell;">
+    <div class="col-md-6">
 
-        <input type="text" placeholder="Search by Username" id="gender" formControlName="Username">
+    <label>Sort by: </label>
+     <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name (A-Z)
+     <input type="radio" name="Surname" id="Surname" [(ngModel)]="Sort" value="Surname"/> Surname (A-Z)
+     <input type="radio" name="Username" id="Username" [(ngModel)]="Sort" value="Username"/> Username (A-Z)
+     <input type="radio" name="Points" id="Points" [(ngModel)]="Sort" value="Points"/> Lowest Points
+    </div>
+     <div class="col-md-6">
+     <label>(Reverse): </label>
+     <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> Name (Z-A)
+     <input type="radio" name="RevSurname" id="RevSurname" [(ngModel)]="Sort" value="RevSurname"/> Surname(Z-A)
+     <input type="radio" name="RevUsername" id="RevUsername" [(ngModel)]="Sort" value="RevUsername"/> Username(Z-A)
+     <input type="radio" name="RevPoints" id="RevPoints" [(ngModel)]="Sort" value="RevPoints"/> Highest Points
+     </div>
+  </div>
 
-      <button class="btn btn-info" type="submit">Search</button>
-    </form>
+    <div class="row" style="background-color: bisque;">
+      <label>Fitler by: </label>
+      <div class="col-xs-6 col-sm-4">
+        <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <input type="text" placeholder="Filter by Role" id="Role" [(ngModel)]="Role">
+      </div>
+    </div>
     
 </div>
 
 <div class="containter">
      
-      <table class="table table-hover table-sm ">
+      <table class="table table-hover table-sm " style="margin-top: 20px;">
        <thead>
          <tr>
            <th scope="col">Name</th>

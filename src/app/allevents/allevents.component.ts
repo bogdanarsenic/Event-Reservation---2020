@@ -5,6 +5,7 @@ import { ServerService } from '../services/server.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Geocoder } from '@agm/core';
 import { stringify } from 'querystring';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-allevents',
@@ -19,6 +20,9 @@ allEvents:Event[]
 eventBuyer:Event;
 
 searchedEvents:Event[]
+
+noRates:number
+rate:number
 
 pictures1:string[]
 pictures2:string[]
@@ -37,6 +41,12 @@ Sort:string
 Type:string
 
 event:Event
+
+datePipe = new DatePipe('en-US');
+
+todayDate=Date.now();
+
+today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
 
 filteredEvents : Event[] 
 
@@ -65,6 +75,8 @@ createForm()
   ngOnInit() {
     this.local="http://localhost:52294/";
     this.folder="Content/";
+    this.noRates=0;
+    this.rate=0
     this.brojac=0;
     this.brojac2=0;
     this.Sort="";
@@ -253,8 +265,6 @@ createForm()
     }
 
   }
-
-
 
   filterChange() {
 
