@@ -3,7 +3,7 @@
   <input type="text" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
   <input type="text" placeholder="Filter by Status" id="Status" [(ngModel)]="Status">
 
-  <span class="form-label">Sort by: </span>
+   <span class="form-label">Sort by: </span>
      <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name
      <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/> Price
      <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Date
@@ -12,6 +12,19 @@
      <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> RevName
      <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> RevPrice
      <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> RevDate
+
+     <form [formGroup]="searchTicket" (ngSubmit)="Search()">
+
+      <input type="text" placeholder="Search by Name" id="gender" formControlName="Name">
+
+      <input type="number" id="FromPrice" name="FromPrice" min="1" max="1000" value="1" formControlName="FromPrice">
+      <input type="number" id="ToPrice" name="ToPrice" min="FromPrice" max="10000" value="1" formControlName="ToPrice">
+
+      <input type="Date" name="FromDate" id="FromDate" formControlName="FromDate">
+      <input type="Date" name="ToDate" id="ToDate" formControlName="ToDate">
+
+    <button class="btn btn-info" type="submit">Search</button>
+    </form>
 
     <table class="table table-hover table-sm ">
      <thead>

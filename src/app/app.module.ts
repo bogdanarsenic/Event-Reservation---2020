@@ -21,7 +21,11 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
+import { MatCardModule } from "@angular/material/card";
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -107,9 +111,11 @@ const appRoutes:Routes=[
     MatNativeDateModule, 
     MatFormFieldModule,
     MatInputModule,
+    MatNativeDateModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatCardModule,
 
   ],
   providers: [ServerService],

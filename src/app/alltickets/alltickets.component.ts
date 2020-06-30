@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ticket } from '../classes/Ticket';
 import { DatePipe } from '@angular/common';
 import { User } from '../classes/User';
+import { NgxDrpOptions, PresetItem, Range } from 'ngx-mat-daterange-picker';
 
 @Component({
   selector: 'app-alltickets',
@@ -14,6 +15,7 @@ import { User } from '../classes/User';
 export class AllticketsComponent implements OnInit {
 
 
+  searchedTickets:Ticket[]
   tickets:Ticket[]
   userId:string
 
@@ -22,11 +24,15 @@ export class AllticketsComponent implements OnInit {
 
   sellerTickets:Ticket[]
 
+
   datePipe = new DatePipe('en-US');
 
   Type:string
   Status:string
-  todayDate=Date.now();
+  todayDate:Date = new Date();
+
+  tomorrow:Date =  new Date(this.todayDate.setDate(this.todayDate.getDate() + 1));
+  searchTicket:FormGroup
 
   user:User
 
@@ -41,6 +47,13 @@ export class AllticketsComponent implements OnInit {
 
   createForm()
    {
+    this.searchTicket=this.fb.group({
+      Name: [''],
+      FromPrice:[0],
+      ToPrice:[0],
+      FromDate:[''],
+      ToDate:[''],
+    });
    }
  
   ngOnInit()
@@ -51,6 +64,7 @@ export class AllticketsComponent implements OnInit {
       this.Sort=""
       this.tickets=[]
       this.sellerTickets=[]
+      this.searchedTickets=[]
 
       if(this.isAdmin())
       {
@@ -161,6 +175,7 @@ export class AllticketsComponent implements OnInit {
                 ticket.Name=data2.Name;
             }
           )
+    this.searchedTickets=this.tickets;
    }
   
  checkWithdrawButton(ticket:Ticket)
@@ -197,6 +212,39 @@ export class AllticketsComponent implements OnInit {
      )
      this.router.navigate(['/home']).then(()=>window.location.reload());
  }
+
+
+  Search()
+  {
+      this.tickets=[]
+
+      if(this.searchTicket.value.Name!="" || this.searchTicket.value.FromPrice!=0 ||this.searchTicket.value.ToPrice!=0 || this.searchTicket.value.FromDate!="" ||this.searchTicket.value.ToDate!="")
+      {   
+            this.searchedTickets.forEach(
+              x=>
+              {
+                  let date=x.EventTime.split(" ")[0];
+                  let proba=new Date(date);
+
+                  if((x.Name==this.searchTicket.value.Name || this.searchTicket.value.Name=="") && ((proba<=new Date(this.searchTicket.value.ToDate) && proba>=new Date(this.searchTicket.value.FromDate))|| (this.searchTicket.value.FromDate=="" && this.searchTicket.value.FromDate==""))  && ((x.Price<=this.searchTicket.value.ToPrice && x.Price>=this.searchTicket.value.FromPrice)|| (this.searchTicket.value.ToPrice==0 && this.searchTicket.value.FromPrice==0)))
+                    {
+                      if(this.tickets.findIndex(x=>x.Name==this.searchTicket.value.Name)==-1)
+                      {
+                            this.tickets.push(x);
+                      }
+                    }
+                }
+            )
+            
+      }
+
+      else
+      {
+         alert("You need to put some input!");
+         this.tickets=this.searchedTickets;
+      }
+
+  }
 
  onWithdraw(ticket:Ticket)
  {
