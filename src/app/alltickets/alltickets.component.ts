@@ -30,6 +30,8 @@ export class AllticketsComponent implements OnInit {
 
   user:User
 
+  Sort:string
+
   today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
 
   constructor(private router:Router,private service:ServerService,private fb:FormBuilder) {
@@ -46,6 +48,7 @@ export class AllticketsComponent implements OnInit {
 
       this.Type=""
       this.Status=""
+      this.Sort=""
       this.tickets=[]
       this.sellerTickets=[]
 
@@ -155,7 +158,7 @@ export class AllticketsComponent implements OnInit {
    this.service.GetEvent(ticket.ManifestationId).subscribe(
             data2=>
             {
-                ticket.ManifestationId=data2.Name;
+                ticket.Name=data2.Name;
             }
           )
    }

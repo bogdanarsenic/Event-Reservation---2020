@@ -29,6 +29,7 @@ brojac:number
 brojac2:number
 filteredStatus:string
 
+Sort:string
 Type:string
 
 event:Event
@@ -52,6 +53,7 @@ createForm()
     this.folder="Content/";
     this.brojac=0;
     this.brojac2=0;
+    this.Sort="";
 
     this.Type="";
     this.allEvents=[]
@@ -87,8 +89,9 @@ createForm()
                         element=this.pictures3[this.pictures3.length-1];
                       });
                       element.AllPictures=this.pictures1;
-                    
+                    element.City=element.Place.split(',')[1];
                 });
+                
                 this.allEvents=data;
                 this.filteredEvents=this.allEvents;
      
@@ -129,7 +132,7 @@ createForm()
                     element.AllPictures=this.pictures1;
 
 
-                  
+                    element.City=element.Place.split(',')[1];
                 });
 
                 this.allEvents=data;
@@ -170,7 +173,7 @@ createForm()
                         element=this.pictures3[this.pictures3.length-1];
                       });
                       element.AllPictures=this.pictures1;
-                      
+                      element.City=element.Place.split(',')[1];
                     this.eventBuyer=data[this.brojac];
                     this.allEvents.push(this.eventBuyer);
                     

@@ -11,6 +11,7 @@ export class Ticket{
     Type:string;
     SellerId:string;
     IsActive:boolean;
+    Name:string;
 
 
 

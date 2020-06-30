@@ -22,6 +22,7 @@ export class Event{
     Place:string;
     EventTime:Date;
     IsActive:boolean;
+    City:string;
 
 
 

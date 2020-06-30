@@ -4,13 +4,29 @@
     <input type="text" style="margin-right: 15px;" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
     <h6 style="margin-top: 10px;" >Check for Unsold events</h6><input type="checkbox" style="margin-left: 15px;margin-top: 15px;" placeholder="Filter by Role" (change)="filterChange()" >
     </div>
+
+    <div class="row">
+        <span class="form-label">Sort by: </span>
+        <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name
+        <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Date
+        <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/> Price
+        <input type="radio" name="Place" id="Place" [(ngModel)]="Sort" value="Place"/> Place
+
+        <span class="form-label">Reverse Sort by: </span>
+        <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> RevName
+        <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> RevDate
+        <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> RevPrice
+        <input type="radio" name="RevPlace" id="RevPlace" [(ngModel)]="Sort" value="RevPlace"/> RevPlace
+    </div>
+    
       <hr>
       <div class="row" >
-        <div class="col-3" *ngFor="let event of allEvents | eventFilter:Type" style="margin-left:10px">
+        <div class="col-3" *ngFor="let event of allEvents | eventFilter:Type | eventSort:Sort" style="margin-left:10px">
 
             <div class="my-list">
                 <h6 > <b style="font-size: large;">{{event.Name}}</b> </h6>
                 <h6 > <b style="font-size: large;">{{event.EventTime}}</b> </h6>
+                <h6 > <b style="font-size: large;">{{event.City}}</b> </h6>
             <img width="300" height="200" src={{event.FrontPicture}} alt=""/>   
                 
                 <div class="detail" (click)="ViewEvent(event.Id,event)">

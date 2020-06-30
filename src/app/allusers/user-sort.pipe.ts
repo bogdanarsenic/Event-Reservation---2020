@@ -6,7 +6,6 @@ import { User } from '../classes/User';
 })
 export class UserSortPipe implements PipeTransform {
 
-  points:number[]
   transform(users:User[],Sort:string):User[]
   {
           if(Sort=="")
