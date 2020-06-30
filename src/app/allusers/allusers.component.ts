@@ -27,6 +27,10 @@ export class AllusersComponent implements OnInit {
   Type:string
   Role:string
 
+  brojac:number
+
+  searchedUsers:User[]
+  searchUser:FormGroup
   filteringusers:User[];
 
   filterUserForm:FormGroup;
@@ -43,11 +47,16 @@ export class AllusersComponent implements OnInit {
 
   createForm()
    {
-
+    this.searchUser=this.fb.group({
+      Name: [''],
+      Surname:[''],
+      Username:['']
+    });
    }
  
   ngOnInit()
    {
+     this.brojac=0
      this.Clicked=false
      this.ClickedId=false
      this.role=""
@@ -68,6 +77,7 @@ export class AllusersComponent implements OnInit {
 
                 this.users=data;
                 this.filteringusers=data;
+                this.searchedUsers=data;
 
           }
         )
@@ -128,6 +138,35 @@ export class AllusersComponent implements OnInit {
    
   }
  
+  Search()
+  {
+      this.users=[]
+
+      if(this.searchUser.value.Name!="" || this.searchUser.value.Surname!="" || this.searchUser.value.Username!="")
+      {
+            
+            this.searchedUsers.forEach(
+              x=>
+              {
+                  if((x.Name==this.searchUser.value.Name || this.searchUser.value.Name=="") && (x.Surname==this.searchUser.value.Surname || this.searchUser.value.Surname=="") && (x.Username==this.searchUser.value.Username || this.searchUser.value.Username==""))
+                    {
+                      if(this.users.findIndex(x=>x.Name==this.searchUser.value.Name && x.Surname==this.searchUser.value.Surname && x.Username==this.searchUser.value.Username)==-1)
+                      {
+                        this.users.push(x);
+                      }
+                    }
+                }
+            )
+            
+      }
+
+      else
+      {
+         alert("You need to put some input!");
+         this.users=this.searchedUsers;
+      }
+
+  }
 
   isAdmin()
   {
