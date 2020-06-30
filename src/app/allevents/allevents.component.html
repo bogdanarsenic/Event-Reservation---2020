@@ -1,8 +1,22 @@
 <body>
     
-    <div class="row" style="margin-left: 30px;">
-    <input type="text" style="margin-right: 15px;" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
-    <h6 style="margin-top: 10px;" >Check for Unsold events</h6><input type="checkbox" style="margin-left: 15px;margin-top: 15px;" placeholder="Filter by Role" (change)="filterChange()" >
+    <div class="row">
+        <form [formGroup]="searchEvent" (ngSubmit)="Search()">
+
+            <input type="text" placeholder="Search by Name" id="Name" formControlName="Name">
+
+            <input type="text" placeholder="Search by Address" id="Address" formControlName="Address">
+
+            <input type="text" placeholder="Search by Location" id="Location" formControlName="Location">
+      
+            <input type="number" id="FromPrice" name="FromPrice" min="1" max="1000" value="1" formControlName="FromPrice">
+            <input type="number" id="ToPrice" name="ToPrice" min="1" max="10000" value="1" formControlName="ToPrice">
+      
+            <input type="Date" name="FromDate" id="FromDate" formControlName="FromDate">
+            <input type="Date" name="ToDate" id="ToDate" formControlName="ToDate">
+      
+          <button class="btn btn-info" type="submit">Search</button>
+          </form>
     </div>
 
     <div class="row">
@@ -19,6 +33,11 @@
         <input type="radio" name="RevPlace" id="RevPlace" [(ngModel)]="Sort" value="RevPlace"/> RevPlace
     </div>
     
+    <div class="row">
+        <input type="text" style="margin-right: 15px;" placeholder="Filter by Type" id="Type" [(ngModel)]="Type">
+    <h6> Check for Unsold events</h6><input type="checkbox" placeholder="Filter by Role" (change)="filterChange()" >
+    </div>
+
       <hr>
       <div class="row" >
         <div class="col-3" *ngFor="let event of allEvents | eventFilter:Type | eventSort:Sort" style="margin-left:10px">
