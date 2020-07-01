@@ -42,7 +42,12 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = manifestation.IsActive;
 
-                    cmd.ExecuteNonQuery();
+                    string id = manifestation.Id.ToString();
+
+                    if (GetOneById(id) == null)
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
 
                 }
             }
@@ -231,7 +236,7 @@ namespace TicketReservation.ModelsDB
 
         public void Delete(string Id)
         {
-            string Query = "Update Apartments SET IsActive='False' WHERE Id='" + Id + "'";
+            string Query = "Update Manifestations SET IsActive='False' WHERE Id='" + Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try

@@ -37,6 +37,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value = ticket.Type;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = ticket.IsActive;
                     cmd.ExecuteNonQuery();
+                    
 
                 }
             }
