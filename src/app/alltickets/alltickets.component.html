@@ -27,14 +27,14 @@
 
       <label>Sort by: </label>
         <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name (A-Z)
-        <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/>Lowest Price 
+        <input type="radio" name="Price" id="Price" [(ngModel)]="Sort" value="Price"/>Highest Price 
         <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Earliest Date
       </div>
 
       <div class="col-xs-12 col-sm-6 col-md-8">
         <span class="form-label">(Reverse): </span>
         <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> Name (Z-A)
-        <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> Highest Price
+        <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> Lowest Price
         <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> Latest Date
       </div>
       

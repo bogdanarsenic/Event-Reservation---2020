@@ -24,6 +24,8 @@ export class CommentsComponent implements OnInit {
     CanWrite:boolean
     buyer:string
 
+    rate:number
+    noCom:number
     datePipe = new DatePipe('en-US');
 
     todayDate=Date.now();
@@ -48,6 +50,8 @@ export class CommentsComponent implements OnInit {
   
     ngOnInit() {
   
+      this.rate=0;
+      this.noCom=0;
       this.Approve=false;
       this.allComments=[]
       this.ticket
@@ -61,7 +65,18 @@ export class CommentsComponent implements OnInit {
         this.server.GetComment(this.idEvent).subscribe(
           data=>
           {
-            this.allComments=data;           
+            this.allComments=data; 
+            this.noCom=this.allComments.length; 
+
+            if(this.noCom!=0)
+{            {
+              data.forEach(x=>
+                {
+                  this.rate=this.rate+x.Rating;
+                })
+              this.rate=this.rate/this.noCom;
+              }   
+          }    
           }
         )
       }
@@ -72,18 +87,25 @@ export class CommentsComponent implements OnInit {
         this.server.GetComment(this.idEvent).subscribe(
                 data=>
                 {
-                  if(data!=null)
+                  this.noCom=data.length;
+                  
+                  if(this.noCom!=0)
                   {
-                  data.forEach(
-                    element=>
-                    {
-                        if(element.IsActive==true)
+                      data.forEach(
+                        element=>
                         {
-                          this.approvedComment=element;
-                          this.allComments.push(this.approvedComment);
+                           this.rate=this.rate+element.Rating;
+ 
+                          
+                            if(element.IsActive==true)
+                            {
+                              this.approvedComment=element;
+                              this.allComments.push(this.approvedComment);
+                            }
+                       
                         }
-                    }
-                  )
+                      )
+                    this.rate=this.rate/this.noCom;
                   }
                 }
               )

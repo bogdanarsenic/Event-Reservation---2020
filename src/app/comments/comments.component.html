@@ -20,6 +20,8 @@
                                     <button *ngIf="IsSeller() && com.IsActive==false" class="btn btn-info"  (click)="ApproveNow(com.Id)"> Approve</button>
                                   </li>
                                 </div>
+
+                                
                             </div>
                        
                         </ul>     
@@ -27,7 +29,10 @@
                                 
                     </div>
                     
-    
+                    <div>
+                                    Average rate is: {{rate}}
+      
+                    </div>
                     <div *ngIf="IsBuyer() && CanWrite">
     
                         <form [formGroup]="commentUserForm" (ngSubmit)="onSubmit()">
