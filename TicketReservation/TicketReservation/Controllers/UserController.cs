@@ -218,7 +218,7 @@ namespace TicketReservation.Controllers
         }
 
         [Route("GetAllUserTicket")]
-        public List<User> GetAllUserTicket()
+        public List<User> GetAllUserTicket(string id)
         {
             List<User> ret = new List<User>();
             User temp = new User();
@@ -227,12 +227,15 @@ namespace TicketReservation.Controllers
 
             foreach (Ticket t in ticket)
             {
-                foreach(User i in tempUsers)
-
+                if (t.SellerId == id)
                 {
-                    if(t.Buyer==i.Name+" "+i.Surname)
+                    foreach (User i in tempUsers)
+
                     {
-                        ret.Add(i);
+                        if (t.Buyer == i.Name + " " + i.Surname)
+                        {
+                            ret.Add(i);
+                        }
                     }
                 }
             }
