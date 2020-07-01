@@ -86,7 +86,7 @@ export class AllusersComponent implements OnInit {
       if(this.isSeller())
      {
         this.sellerId=sessionStorage.getItem('Username');
-        this.service.GetAllUsersWhoReserved().subscribe(
+        this.service.GetAllUsersWhoReserved(this.sellerId).subscribe(
           data=>
           {
 

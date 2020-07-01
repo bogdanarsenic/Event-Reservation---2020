@@ -100,9 +100,9 @@ export class ServerService {
   }
 
 
-  GetAllUsersWhoReserved():Observable<any>
+  GetAllUsersWhoReserved(id:string):Observable<any>
   {
-    return this.http.get("http://localhost:52294/api/User/GetAllUserTicket");
+    return this.http.get(`http://localhost:52294/api/User/GetAllUserTicket`,{params:{id}});
   }
 
 
