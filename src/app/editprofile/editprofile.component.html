@@ -35,37 +35,55 @@
                 <div class="form-group">
                     <span class="form-label">Your Password: </span>
                     <input class="form-control" type="password" [(ngModel)]="user.Password" value="{{user.Password}}" formControlName="Password" placeholder="Enter your password">
-                    <span *ngIf="registerUserForm.controls.Password.touched">
-                            <small *ngIf="registerUserForm.controls.Password.errors?.required">
-                               <div class="attent">
-                                Password is required!
-                                </div>
-                            </small>
-                        </span>
+                    <div *ngIf="registerUserForm.controls.Password.invalid && (registerUserForm.controls.Password.dirty || registerUserForm.controls.Password.touched)">
+                        <div class="attent" *ngIf="registerUserForm.controls.Password.errors?.required">
+                         Password is required!
+                         </div>
+                         <div class="attent" *ngIf="registerUserForm.controls.Password.errors.minlength">
+                             Must have 8 characters!
+                           </div>
+                           <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasNumber">
+                             Must have number!
+                           </div>
+                           <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasCapitalCase">
+                             Must have Capitala Case!
+                           </div>
+                           <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasSmallCase">
+                             Must have Small Case!
+                           </div>
+                           <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasSpecialCharacters">
+                             Must have Special Character!
+                           </div>
+                           <div class="attent" *ngIf="registerUserForm.controls.Password.errors.maxlength">
+                             Must have less than 50 characters!
+                           </div>
+               </div>
                 </div>
 
                     <div class="form-group">
                         <span class="form-label"> Name: </span>
                         <input class="form-control" type="text" [(ngModel)]="user.Name" value="{{user.Name}}" formControlName="Name" placeholder="Name">
-                        <span *ngIf="registerUserForm.controls.Name.touched">
-                                <small *ngIf="registerUserForm.controls.Name.errors?.required">
-                                        <div class="attent">
-                                                Name is required!
-                                         </div>
-                                </small>
-                            </span>
+                        <div *ngIf="registerUserForm.controls.Name.invalid && (registerUserForm.controls.Name.dirty || registerUserForm.controls.Name.touched)">  
+                            <div class="attent" *ngIf="registerUserForm.controls.Name.errors?.required">
+                                    Name is required!
+                             </div>
+                             <div class="attent" *ngIf="registerUserForm.controls.Name.errors.maxlength">
+                                Must have less than 30 characters!
+                              </div>
+                      </div>
                     </div>
 
                     <div class="form-group">
                         <span class="form-label">Last Name: </span>
                         <input class="form-control" type="text" [(ngModel)]="user.Surname" value="{{user.Surname}}"  formControlName="Surname" placeholder="Last Name">
-                        <span *ngIf="registerUserForm.controls.Surname.touched">
-                                <small *ngIf="registerUserForm.controls.Surname.errors?.required">
-                                        <div class="attent">
-                                                Lastname is required!
-                                        </div>
-                                </small>
-                            </span>
+                        <div *ngIf="registerUserForm.controls.Surname.invalid && (registerUserForm.controls.Surname.dirty || registerUserForm.controls.Surname.touched)">  
+                            <div class="attent" *ngIf="registerUserForm.controls.Surname.errors?.required">
+                                    SurName is required!
+                            </div>
+                            <div class="attent" *ngIf="registerUserForm.controls.Surname.errors.maxlength">
+                                Must have less than 30 characters!
+                              </div>
+                       </div>
                     </div>
                     
 

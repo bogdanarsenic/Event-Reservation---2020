@@ -31,6 +31,8 @@ export class CommentsComponent implements OnInit {
     todayDate=Date.now();
 
     today = this.datePipe.transform(this.todayDate, 'MM/dd/yyyy HH:mm:ss');
+
+    empty:boolean
   
     comment:Comment
     constructor(private router:Router,private server:ServerService,private fb:FormBuilder)
@@ -55,10 +57,11 @@ export class CommentsComponent implements OnInit {
       this.Approve=false;
       this.allComments=[]
       this.ticket
+      this.empty=false;
       this.CanWrite=false;
       this.comment=new Comment("","",0,"","");
-      this.idEvent=sessionStorage.getItem('EventId');
-      this.userId=sessionStorage.getItem('Username');  
+      this.idEvent=localStorage.getItem('EventId');
+      this.userId=localStorage.getItem('Username');  
   
       if(this.IsSeller() || this.IsAdmin())
       {
@@ -69,14 +72,21 @@ export class CommentsComponent implements OnInit {
             this.noCom=this.allComments.length; 
 
             if(this.noCom!=0)
-{            {
+            {  
+              
+              {
               data.forEach(x=>
                 {
                   this.rate=this.rate+x.Rating;
                 })
               this.rate=this.rate/this.noCom;
+              this.rate=(Number)(this.rate.toFixed(2));
               }   
-          }    
+           }
+          else
+                  {
+                    alert("There is no comments for this event");
+                  }    
           }
         )
       }
@@ -106,6 +116,11 @@ export class CommentsComponent implements OnInit {
                         }
                       )
                     this.rate=this.rate/this.noCom;
+                    this.rate=(Number)(this.rate.toFixed(2));
+                  }
+                  else
+                  {
+                    alert("There is no comments for this event");
                   }
                 }
               )
@@ -178,7 +193,7 @@ export class CommentsComponent implements OnInit {
   
     IsBuyer()
     {
-      if(sessionStorage.getItem('Role')=="Buyer")
+      if(localStorage.getItem('Role')=="Buyer")
       {
         return true;
       }
@@ -187,7 +202,7 @@ export class CommentsComponent implements OnInit {
 
     IsAdmin()
     {
-      if(sessionStorage.getItem('Role')=="Admin")
+      if(localStorage.getItem('Role')=="Admin")
       {
           return true;
       }
@@ -195,7 +210,7 @@ export class CommentsComponent implements OnInit {
     }
     IsSeller()
     {
-      if(sessionStorage.getItem('Role')=="Seller")
+      if(localStorage.getItem('Role')=="Seller")
       {
         return true;
       }

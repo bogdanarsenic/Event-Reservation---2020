@@ -85,7 +85,7 @@ export class AllusersComponent implements OnInit {
 
       if(this.isSeller())
      {
-        this.sellerId=sessionStorage.getItem('Username');
+        this.sellerId=localStorage.getItem('Username');
         this.service.GetAllUsersWhoReserved(this.sellerId).subscribe(
           data=>
           {
@@ -170,7 +170,7 @@ export class AllusersComponent implements OnInit {
 
   isAdmin()
   {
-    if(sessionStorage.getItem('Role')=="Admin")
+    if(localStorage.getItem('Role')=="Admin")
     return true;
     else 
     return false;
@@ -178,7 +178,7 @@ export class AllusersComponent implements OnInit {
 
   isSeller()
   {
-    if(sessionStorage.getItem('Role')=="Seller")
+    if(localStorage.getItem('Role')=="Seller")
     return true;
     else 
     return false;

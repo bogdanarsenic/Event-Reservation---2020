@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import {Event} from '../classes/Event';
 import { DatePipe } from '@angular/common';
+import { Ticket } from '../classes/Ticket';
 
 @Component({
   selector: 'app-view-event',
@@ -32,6 +33,8 @@ event:Event;
 lng:number
 lat:number
 
+tickets:Ticket[]
+
 datePipe = new DatePipe('en-US');
 
 todayDate=Date.now();
@@ -43,12 +46,13 @@ constructor(private router:Router,private service:ServerService) { }
 
 ngOnInit() {
 
-    this.id=sessionStorage.getItem('EventId');
+    this.id=localStorage.getItem('EventId');
     this.pictures3=[]
     this.nesto=false;
     this.local="http://localhost:52294/";
     this.folder="Content/";
     this.clicked=false;
+    this.tickets=[]
     
     this.service.GetEvent(this.id).subscribe(
       data=>{
@@ -117,10 +121,26 @@ ngOnInit() {
     }
     return false;
   }
+
+  hasReservation(event:Event)
+  {
+    this.service.GetAllTicketsEvent(event.Id).subscribe(
+      data=>
+      {
+          this.tickets=data;
+      }
+    )
+
+    if(this.tickets.length==0)
+    {
+        return false;
+    }
+    return true;
+  }
    
   isSeller()
   {
-    if(sessionStorage.getItem('Role')=="Seller")
+    if(localStorage.getItem('Role')=="Seller")
       return true;
     else
       return false;
@@ -128,7 +148,7 @@ ngOnInit() {
 
   isAdmin()
   {
-    if(sessionStorage.getItem('Role')=="Admin")
+    if(localStorage.getItem('Role')=="Admin")
       return true;
     else
       return false;
@@ -136,7 +156,7 @@ ngOnInit() {
 
   isBuyer()
   {
-    if(sessionStorage.getItem('Role')=="Buyer")
+    if(localStorage.getItem('Role')=="Buyer")
       return true;
     else
       return false;

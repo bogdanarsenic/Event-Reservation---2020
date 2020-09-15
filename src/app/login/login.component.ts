@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.login=new Login("","");
     this.selectedUser=new User("","","","","","","",0);
-    sessionStorage.setItem('CurrentComponent','LoginComponent');
+    localStorage.setItem('CurrentComponent','LoginComponent');
 
   }
 
@@ -62,11 +62,19 @@ export class LoginComponent implements OnInit {
 
                 if(data.IsActive!=false)
                 {
-                  sessionStorage.setItem('Username',data.Username);
-                  sessionStorage.setItem('Role',data.Role);
-                  sessionStorage.setItem('Logged','Yes');
+                  localStorage.setItem('Username',data.Username);
+                  localStorage.setItem('Role',data.Role);
+                  localStorage.setItem('Logged','Yes');
           
+                  this.loginService.GetCookie(data.Username).subscribe(
+                    data=>
+                    {
+                      
+                    }
+                  )
+
                   this.router.navigate(['']).then(()=>window.location.reload());
+
                   this.router.navigateByUrl("/home");
                 }
                 else

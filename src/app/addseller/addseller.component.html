@@ -29,70 +29,114 @@
     <div id="booking" class="section">
         <div class="section-center">
             <div class="booking-form">
-                <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
-                  <h3 class="register"> REGISTER HOST:</h3>
-                    <div class="form-group">
-                        <span class="form-label"> Username/Email: </span>
-                        <input class="form-control" type="text" name="Username" id="Username" formControlName="Username" placeholder="Enter your username or your email">
-                        <span *ngIf="registerUserForm.controls.Username.touched">
-                            <small *ngIf="registerUserForm.controls.Username.errors?.required">
-                                    <div class="attent">
-                                            Username is required!
+              <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
+                <h3 class="register"> REGISTER Seller:</h3>
+                  <div class="form-group">
+                      <span class="form-label"> Username/Email: </span>
+                      <input class="form-control" type="text" name="Username" id="Username" formControlName="Username" placeholder="Enter your username or your email">
+                      <div *ngIf="registerUserForm.controls.Username.invalid && (registerUserForm.controls.Username.dirty || registerUserForm.controls.Username.touched)">
+                                  <div class="attent" *ngIf="registerUserForm.controls.Username.errors?.required">
+                                          Username is required!
+                                  </div>
+                                  <div class="attent" *ngIf="registerUserForm.controls.Username.errors.maxlength">
+                                      Must have less than 50 characters!
+                                  </div>
+                       </div>
+                  </div>
+
+                  <div class="form-group">
+                      <span class="form-label"> Password: </span>
+                      <input class="form-control" type="password" name="Password" id="Password" formControlName="Password" placeholder="Enter your password">
+                      <div *ngIf="registerUserForm.controls.Password.invalid && (registerUserForm.controls.Password.dirty || registerUserForm.controls.Password.touched)">
+                                 <div class="attent" *ngIf="registerUserForm.controls.Password.errors?.required">
+                                  Password is required!
+                                  </div>
+                                  <div class="attent" *ngIf="registerUserForm.controls.Password.errors.minlength">
+                                      Must have 8 characters!
                                     </div>
-                            </small>
-                        </span>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="form-label"> Password: </span>
-                        <input class="form-control" type="password" name="Password" id="Password" formControlName="Password" placeholder="Enter your password">
-                        <span *ngIf="registerUserForm.controls.Password.touched">
-                                <small *ngIf="registerUserForm.controls.Password.errors?.required">
-                                   <div class="attent">
-                                    Password is required!
+                                    <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasNumber">
+                                      Must have number!
                                     </div>
-                                </small>
-                            </span>
-                    </div>
+                                    <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasCapitalCase">
+                                      Must have Capitala Case!
+                                    </div>
+                                    <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasSmallCase">
+                                      Must have Small Case!
+                                    </div>
+                                    <div class="attent" *ngIf="registerUserForm.controls.Password.errors.hasSpecialCharacters">
+                                      Must have Special Character!
+                                    </div>
+                                    <div class="attent" *ngIf="registerUserForm.controls.Password.errors.maxlength">
+                                      Must have less than 50 characters!
+                                    </div>
+                        </div>
+                  </div>
 
-                    <div class="form-group">
-                        <span class="form-label"> Name: </span>
-                        <input class="form-control" type="text" name="Name" id="Name" formControlName="Name" placeholder="Name">
-                        <span *ngIf="registerUserForm.controls.Name.touched">
-                                <small *ngIf="registerUserForm.controls.Name.errors?.required">
-                                        <div class="attent">
-                                                Name is required!
-                                         </div>
-                                </small>
-                            </span>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="form-label">Last Name: </span>
-                        <input class="form-control" type="text" name="Surname" id="Surname" formControlName="Surname" placeholder="Last Name">
-                        <span *ngIf="registerUserForm.controls.Surname.touched">
-                                <small *ngIf="registerUserForm.controls.Surname.errors?.required">
-                                        <div class="attent">
-                                                Lastname is required!
+                  <div class="form-group">
+                      <span class="form-label"> Name: </span>
+                      <input class="form-control" type="text" name="Name" id="Name" formControlName="Name" placeholder="Name">
+                      <div *ngIf="registerUserForm.controls.Name.invalid && (registerUserForm.controls.Name.dirty || registerUserForm.controls.Name.touched)">  
+                                      <div class="attent" *ngIf="registerUserForm.controls.Name.errors?.required">
+                                              Name is required!
+                                       </div>
+                                       <div class="attent" *ngIf="registerUserForm.controls.Name.errors.maxlength">
+                                          Must have less than 30 characters!
                                         </div>
-                                </small>
-                            </span>
-                    </div>
+                       </div>
+                  </div>
+
+                  <div class="form-group">
+                      <span class="form-label">Last Name: </span>
+                      <input class="form-control" type="text" name="Surname" id="Surname" formControlName="Surname" placeholder="Last Name">
+                      <div *ngIf="registerUserForm.controls.Surname.invalid && (registerUserForm.controls.Surname.dirty || registerUserForm.controls.Surname.touched)">  
+                          <div class="attent" *ngIf="registerUserForm.controls.Surname.errors?.required">
+                                  Name is required!
+                          </div>
+                          <div class="attent" *ngIf="registerUserForm.controls.Surname.errors.maxlength">
+                              Must have less than 30 characters!
+                            </div>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                      <span class="form-label">Date of Birth: </span>
+       
+                       <mat-form-field style="width:150px;margin-right: 20px;">
+                           <input  matInput [matDatepicker]="picker" formControlName="DateOfBirth"> 
+                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                           <mat-datepicker touchUi="true"  #picker></mat-datepicker>
+                     </mat-form-field>
+       
+                     
+                     <span *ngIf="registerUserForm.controls.DateOfBirth.touched">
+                       <small *ngIf="registerUserForm.controls.DateOfBirth.errors?.required">
+                               <div class="attent" style="color: red;">
+                                      You need to put date of birth!
+                               </div>
+                       </small>
+                   </span>
                     
-                    <div class="form-group">
+                   </div>
+                  
+                  <div class="form-group">
 
                     <span class="form-label">Gender: </span>
                     <input type="radio" name="Gender" id="Gender" formControlName="Gender" value="male" checked/> Male
                     <input type="radio" name="Gender" id="Gender" formControlName="Gender" value="female"/> Female
                     
-                </div>
+                    <div *ngIf="registerUserForm.controls.Gender.touched">
+                              <div class="attent" *ngIf="registerUserForm.controls.Gender.errors?.required">
+                                    You need to put the gender!
+                              </div>
+                    </div>
+                 </div>
 
-                    <div class="form-btn">
-                        <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Register
-                        </button>
-                      </div>
-                           
-                </form>
+                  <div class="form-btn">
+                      <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Register
+                      </button>
+                    </div>
+                         
+              </form>
               </div>
         </div>
     </div>

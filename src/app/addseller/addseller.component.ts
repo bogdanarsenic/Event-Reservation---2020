@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Login } from '../classes/Login';
 import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
+import { CustomValidators } from '../validator/customValidator';
 
 @Component({
   selector: 'app-addseller',
@@ -26,16 +27,25 @@ export class AddsellerComponent implements OnInit {
   createForm()
   {
     this.registerUserForm=this.fb.group({
-      Username: ['',Validators.required],
-      Password:['',Validators.required],
-      Name:['',Validators.required],
-      Surname:['',Validators.required],
+      Username: ["",[Validators.required,Validators.maxLength(50)]],
+      
+      Password:["",[
+        Validators.required,CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,{hasSpecialCharacters: true}),
+        Validators.minLength(8),
+        Validators.maxLength(50)
+      ]],
+      Name:["",[Validators.required,Validators.maxLength(30)]],
+      Surname:["",[Validators.required,Validators.maxLength(30)]],
+      DateOfBirth:['',Validators.required],
       Gender:['',Validators.required]
     });
 
   }
   ngOnInit() {
-    sessionStorage.setItem('CurrentComponent','AddSellerComponent');
+    localStorage.setItem('CurrentComponent','AddSellerComponent');
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
   }

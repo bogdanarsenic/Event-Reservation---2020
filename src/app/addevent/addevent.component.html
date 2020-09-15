@@ -10,18 +10,19 @@
             <div class="form-group">
                 <span class="form-label">Name: </span>
                 <input class="form-control" type="text" name="Name" id="Name" formControlName="Name" placeholder="Name of Event">
-                <span *ngIf="eventUserForm.controls.Name.touched">
-                    <small *ngIf="eventUserForm.controls.Name.errors?.required">
-                            <div class="attent">
-                                    The name is required!
-                            </div>
-                    </small>
-                </span>
+                <div *ngIf="eventUserForm.controls.Name.invalid && (eventUserForm.controls.Name.dirty || eventUserForm.controls.Name.touched)">
+                    <div class="attent" *ngIf="eventUserForm.controls.Name.errors?.required">
+                            Username is required!
+                    </div>
+                    <div class="attent" *ngIf="eventUserForm.controls.Name.errors.maxlength">
+                        Must have less than 50 characters!
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
                 <span class="form-label">Capacity: </span>
-                <input class="form-control" type="number" name="Capacity" id="Capacity" min="1" formControlName="Capacity" placeholder="Capacity for the event">
+                <input class="form-control" type="number" name="Capacity" id="Capacity" min="1" max="10000" formControlName="Capacity" placeholder="Capacity for the event">
                 <span *ngIf="eventUserForm.controls.Capacity.touched">
                     <small *ngIf="eventUserForm.controls.Capacity.errors?.required">
                             <div class="attent">
@@ -33,7 +34,7 @@
 
             <div class="form-group">
                 <span class="form-label">Price(per Day): </span>
-                <input class="form-control" type="number"  name="Price" id="Price" min="1" formControlName="Price" placeholder="How much Price">
+                <input class="form-control" type="number"  name="Price" id="Price" min="1" max="10000" formControlName="Price" placeholder="How much Price">
                 <span *ngIf="eventUserForm.controls.Price.touched">
                     <small *ngIf="eventUserForm.controls.Price.errors?.required">
                             <div class="attent">
@@ -101,8 +102,12 @@
             <input type="radio" name="Type" id="Type" formControlName="Type" value="Festival"/> Festival
             <input type="radio" name="Type" id="Type" formControlName="Type" value="Theatre"/> Theatre
     
-            
-        </div>
+                <div *ngIf="eventUserForm.controls.Type.touched">
+                <div class="attent" *ngIf="eventUserForm.controls.Type.errors?.required">
+                      You need to put the type!
+                </div>
+                 </div>
+            </div>
 
             <div class="form-btn">
                 <button class="submitbutton" type="submit"  [disabled]="eventUserForm.invalid"> Add Event

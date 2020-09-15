@@ -59,8 +59,8 @@ export class AddticketComponent implements OnInit {
 
   ngOnInit(): void {
     this.sellerId="";
-    this.id=sessionStorage.getItem('EventId');
-    this.userId=sessionStorage.getItem('Username');
+    this.id=localStorage.getItem('EventId');
+    this.userId=localStorage.getItem('Username');
     this.popust=false;
     this.ticket=new Ticket("","","",0,"","","");
     this.buyer="";

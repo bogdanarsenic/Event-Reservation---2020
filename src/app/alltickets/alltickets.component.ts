@@ -91,7 +91,7 @@ export class AllticketsComponent implements OnInit {
 
       if(this.isSeller())
      {
-        this.userId=sessionStorage.getItem('Username');
+        this.userId=localStorage.getItem('Username');
         this.service. GetAllReservedTicketsSeller(this.userId).subscribe(
           data=>
           {
@@ -120,7 +120,7 @@ export class AllticketsComponent implements OnInit {
 
      if(this.isBuyer())
      {
-      this.userId=sessionStorage.getItem('Username');
+      this.userId=localStorage.getItem('Username');
 
       this.service.GetUserByUsername(this.userId).subscribe(
         data=>
@@ -273,7 +273,7 @@ export class AllticketsComponent implements OnInit {
 
   isAdmin()
   {
-    if(sessionStorage.getItem('Role')=="Admin")
+    if(localStorage.getItem('Role')=="Admin")
     return true;
     else 
     return false;
@@ -281,7 +281,7 @@ export class AllticketsComponent implements OnInit {
 
   isBuyer()
   {
-    if(sessionStorage.getItem('Role')=="Buyer")
+    if(localStorage.getItem('Role')=="Buyer")
     return true;
     else 
     return false;
@@ -289,7 +289,7 @@ export class AllticketsComponent implements OnInit {
 
   isSeller()
   {
-    if(sessionStorage.getItem('Role')=="Seller")
+    if(localStorage.getItem('Role')=="Seller")
     return true;
     else 
     return false;

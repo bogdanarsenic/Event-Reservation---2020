@@ -1,3 +1,5 @@
+import { DateTimeAdapter, OwlDateTimeInlineComponent } from 'ng-pick-datetime';
+
 export class User{
     
     Username:string;
@@ -6,6 +8,7 @@ export class User{
     Surname:string;
     Gender:string;
     Role:string;
+    DateOfBirth:Date;
     IsActive:boolean;
     Points:number;
     Type:string;

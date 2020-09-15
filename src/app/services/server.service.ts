@@ -62,6 +62,16 @@ export class ServerService {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
   }
 
+  GetCookie(username:string):Observable<User>
+  {
+      return this.http.get<User>(`http://localhost:52294/api/User/Get`,{params:{username}});
+  }
+
+  Logout(Username:string):Observable<User>
+  {
+      return this.http.get<User>(`http://localhost:52294/api/User/Logout`,{params:{Username}});
+  }
+
   GetAllComments():Observable<any>
   {
     return this.http.get('http://localhost:52294/api/Comment/GetAllComments');
@@ -76,6 +86,12 @@ export class ServerService {
   {
     return this.http.get('http://localhost:52294/api/Ticket/GetAllTickets');
   }
+
+  GetAllTicketsEvent(IdMan:string):Observable<any>
+  {
+    return this.http.get(`http://localhost:52294/api/Ticket/GetAllTicketsManifestation`,{params:{IdMan}});
+  }
+
 
   GetAllReservedTicketsSeller(IdSeller:string):Observable<any>
   {

@@ -23,7 +23,7 @@
 
                     </div>
                     <button class="btn btn-info" (click)="showPlace()">Show Address on Map </button>
-                    <button *ngIf="isSeller()" [hidden]="isPast(event)" class="btn btn-info" routerLink="/editevent">Edit Event</button>
+                    <button *ngIf="isSeller()" [hidden]="isPast(event) || hasReservation(event)" class="btn btn-info" routerLink="/editevent">Edit Event</button>
 
                     <button *ngIf="isBuyer()" [hidden]="isPast(event) || event.Capacity==0"  class="btn btn-info" routerLink="/addticket">Reserve</button>
                     

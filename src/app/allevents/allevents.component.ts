@@ -88,7 +88,7 @@ createForm()
     
     
     this.Clicked=false;
-    sessionStorage.setItem('CurrentComponent','AllEventsComponent');
+    localStorage.setItem('CurrentComponent','AllEventsComponent');
 
     if(this.isAdmin())
     {
@@ -131,7 +131,7 @@ createForm()
 
     else if(this.isSeller())
     {
-      this.id=sessionStorage.getItem('Username');
+      this.id=localStorage.getItem('Username');
 
       this.service.GetEventbyUser(this.id).subscribe(
         data=>{
@@ -285,7 +285,7 @@ createForm()
   
   ViewEvent(id:string,ev:Event)
   {
-    sessionStorage.setItem('EventId',id);
+    localStorage.setItem('EventId',id);
     this.router.navigateByUrl('/viewevent');
   }
   
@@ -318,7 +318,7 @@ createForm()
 
   isAdmin()
   {
-    if(sessionStorage.getItem('Role')=='Admin')
+    if(localStorage.getItem('Role')=='Admin')
     {
       return true;
     }
@@ -328,7 +328,7 @@ createForm()
 
   isSeller()
   {
-    if(sessionStorage.getItem('Role')=='Seller')
+    if(localStorage.getItem('Role')=='Seller')
     {
       return true;
     }
@@ -338,7 +338,7 @@ createForm()
 
   isBuyer()
   {
-    if(sessionStorage.getItem('Role')=='Buyer')
+    if(localStorage.getItem('Role')=='Buyer')
     {
       return true;
     }
@@ -349,7 +349,7 @@ createForm()
 
   IsLogged()
   {
-    if(sessionStorage.getItem('Logged')=="Yes")
+    if(localStorage.getItem('Logged')=="Yes")
     {
       return true;
     }

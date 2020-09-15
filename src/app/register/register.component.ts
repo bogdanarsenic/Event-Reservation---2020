@@ -4,6 +4,7 @@ import { User } from '../classes/User';
 import { Login } from '../classes/Login';
 import { ServerService } from '../services/server.service';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../validator/customValidator';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,19 @@ export class RegisterComponent implements OnInit {
   createForm()
   {
     this.registerUserForm=this.fb.group({
-      Username: ['',Validators.required],
-      Password:['',Validators.required],
-      Name:['',Validators.required],
-      Surname:['',Validators.required],
+      Username: ["",[Validators.required,Validators.maxLength(50)]],
+      
+      Password:["",[
+        Validators.required,CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,{hasSpecialCharacters: true}),
+        Validators.minLength(8),
+        Validators.maxLength(50)
+      ]],
+      Name:['',[Validators.required,Validators.maxLength(30)]],
+      Surname:['',[Validators.required,Validators.maxLength(30)]],
+      DateOfBirth:['',Validators.required],
       Gender:['',Validators.required]
     });
 
@@ -37,7 +47,7 @@ export class RegisterComponent implements OnInit {
     
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
-    sessionStorage.setItem('CurrentComponent','RegisterComponent');
+    localStorage.setItem('CurrentComponent','RegisterComponent');
   }
 
   onSubmit()
@@ -45,6 +55,7 @@ export class RegisterComponent implements OnInit {
     this.korisnik=this.registerUserForm.value;
     this.currentUser.Username=this.korisnik.Username;
     this.currentUser.Password=this.korisnik.Password;
+    
 
     console.log(this.korisnik);
 
@@ -64,12 +75,12 @@ export class RegisterComponent implements OnInit {
             {
             
 
-              sessionStorage.setItem('Logged', "Yes")
-              sessionStorage.setItem('Role', "Buyer")
-              sessionStorage.setItem('Username',this.korisnik.Username);
-                
-                this.router.navigate(['']).then(()=>window.location.reload());
-                this.router.navigateByUrl("/home");
+                localStorage.setItem('Logged', "Yes")
+                localStorage.setItem('Role', "Buyer")
+                localStorage.setItem('Username',this.korisnik.Username);
+                  
+                  this.router.navigate(['']).then(()=>window.location.reload());
+                  this.router.navigateByUrl("/home");
                 
             }
           )

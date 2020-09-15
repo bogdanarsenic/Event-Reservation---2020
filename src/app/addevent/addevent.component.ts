@@ -56,7 +56,7 @@ export class AddeventComponent implements OnInit {
 
 
   optionsMark:google.maps.MarkerOptions={
-    position:this.center,
+
     title:'Marker title '
   };
 
@@ -80,7 +80,7 @@ export class AddeventComponent implements OnInit {
    {
      this.eventUserForm=this.fb.group({
 
-      Name: ['',Validators.required],
+      Name: ["",[Validators.required,Validators.maxLength(50)]],
       Type: ['',Validators.required],
       Price:['',Validators.required],
       Capacity:['',Validators.required],
@@ -93,7 +93,7 @@ export class AddeventComponent implements OnInit {
         lat: 45.267136,
         lng: 19.833549,
       }
-      this.userId=sessionStorage.getItem('Username');
+      this.userId=localStorage.getItem('Username');
 
       this.loc=new Location("",this.center.lat,this.center.lng,"");
       this.templat=""
@@ -198,7 +198,7 @@ export class AddeventComponent implements OnInit {
     this.event.Place=loc.Address;
     this.event.Capacity=this.event.Capacity;
     this.event.Price=this.event.Price;
-    this.event.SellerId=sessionStorage.getItem('Username');
+    this.event.SellerId=localStorage.getItem('Username');
     this.event.Status="NotApproved";
 
     var nesto=moment(this.event.EventDay).format();

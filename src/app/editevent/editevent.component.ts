@@ -26,7 +26,7 @@ export class EditeventComponent implements OnInit {
    {
     this.eventUserForm=this.fb.group({
 
-      Name: ['',Validators.required],
+      Name: ["",[Validators.required,Validators.maxLength(50)]],
       Type: ['',Validators.required],
       Price:['',Validators.required],
       Capacity:['',Validators.required],
@@ -36,7 +36,7 @@ export class EditeventComponent implements OnInit {
    }
 
   ngOnInit() {
-      this.id=sessionStorage.getItem('EventId');
+      this.id=localStorage.getItem('EventId');
 
       this.getEvent();
       

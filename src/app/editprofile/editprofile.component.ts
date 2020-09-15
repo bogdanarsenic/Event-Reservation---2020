@@ -3,6 +3,7 @@ import { User } from '../classes/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServerService } from '../services/server.service';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../validator/customValidator';
 
 @Component({
   selector: 'app-editprofile',
@@ -23,18 +24,24 @@ export class EditprofileComponent implements OnInit {
    createForm()
    {
     this.registerUserForm=this.fb.group({
-      
-      Password: ['',Validators.required],
-      Name:['',Validators.required],
-      Surname:['',Validators.required],
-
+            
+      Password:["",[
+        Validators.required,CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,{hasSpecialCharacters: true}),
+        Validators.minLength(8),
+        Validators.maxLength(50)
+      ]],
+      Name:["",[Validators.required,Validators.maxLength(30)]],
+      Surname:["",[Validators.required,Validators.maxLength(30)]]
     });
    }
   ngOnInit() {
 
     this.user=new User("","","","","","","",0);
 
-    this.id=sessionStorage.getItem('Username');
+    this.id=localStorage.getItem('Username');
     this.getUser();
    
     

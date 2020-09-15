@@ -25,7 +25,7 @@
     </div>
 
     <div class="row" style="background-color: seashell;">
-        <div class="col-xs-6 col-sm-4">
+        <div class="col-md-6">
             <label>Sort by: </label>
             <input type="radio" name="Name" id="Name" [(ngModel)]="Sort" value="Name"/> Name (A-Z)
             <input type="radio" name="Date" id="Date" [(ngModel)]="Sort" value="Date"/> Earliest Date
@@ -33,8 +33,7 @@
             <input type="radio" name="Place" id="Place" [(ngModel)]="Sort" value="Place"/> Place (A-Z)
          </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-8">
-            <label>(Reverse): </label>
+         <div class="col-md-6">
             <input type="radio" name="RevName" id="RevName" [(ngModel)]="Sort" value="RevName"/> Name (Z-A)
             <input type="radio" name="RevDate" id="RevDate" [(ngModel)]="Sort" value="RevDate"/> Latest Date
             <input type="radio" name="RevPrice" id="RevPrice" [(ngModel)]="Sort" value="RevPrice"/> Lowest Price
