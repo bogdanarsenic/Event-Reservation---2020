@@ -14,7 +14,10 @@
                  <form [formGroup]="reservationUserForm" (submit)="onSubmit()" novalidate>
         
                     <div class="group">
-                        <h5>Tickets left <b style="color:red">{{capacity}}</b></h5>
+                        <h4>Tickets left <b style="color:red">{{capacity}}</b></h4>
+                        <h6>VIP Tickets left <b style="color:rgb(255, 0, 85)">{{capacityVIP}}</b></h6>
+                        <h6>Regular Tickets left <b style="color:rgb(255, 0, 170)">{{capacityRegular}}</b></h6>
+                        <h6>FunPit Tickets left <b style="color:rgb(255, 0, 76)">{{capacityFunPit}}</b></h6>
                     </div>
 
                         
@@ -34,9 +37,15 @@
                         
                         <div class="group">
                             <span class="form-label">Type: </span>
-                            <input type="radio" name="Type" id="Type" (click)="onRegular()" formControlName="Type" value="Regular" checked/> Regular
-                            <input type="radio" name="Type" id="Type" (click)="onFunPit()" formControlName="Type" value="Fun Pit"/> Fun Pit
+                            <input type="radio" name="Type" id="Type" (click)="onRegular()" formControlName="Type" value="Regular"/> Regular
+                            <input type="radio" name="Type" id="Type" (click)="onFunPit()" formControlName="Type" value="FunPit"/> Fun Pit
                             <input type="radio" name="Type" id="Type" (click)="onVIP()" formControlName="Type" value="VIP"/> VIP
+
+                            <div *ngIf="reservationUserForm.controls.Type.touched">
+                                <div class="attent" *ngIf="reservationUserForm.controls.Type.errors?.required">
+                                      You need to put the Type of the ticket!
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="form-btn">

@@ -28,38 +28,42 @@
                  
                                 
                     </div>
-                    
-                    <div>
-                                    Average rate is: {{rate}}
-      
+
+                    <div *ngIf="noCom==0">
+                      There are no comments on this event
                     </div>
+                    
+                    <div *ngIf="noCom!=0">
+                                    Average rate is: {{rate}}
+                     </div>
                     <div *ngIf="IsBuyer() && CanWrite">
     
                         <form [formGroup]="commentUserForm" (ngSubmit)="onSubmit()">
                             <div class="form-group">
                               <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" class="form-control"  name="Text" id="Text" formControlName="Text"></textarea>
-                              <span *ngIf="commentUserForm.controls.Text.touched">
-                                <small *ngIf="commentUserForm.controls.Text.errors?.required">
-                                        <div class="attent">
-                                                Text is required!
-                                        </div>
-                                </small>
-                              </span>
+                              <div *ngIf="commentUserForm.controls.Text.invalid && (commentUserForm.controls.Text.dirty || commentUserForm.controls.Text.touched)">  
+                                <div class="attent" *ngIf="commentUserForm.controls.Text.errors?.required">
+                                        Text is required!
+                                </div>
+                                <div class="attent" *ngIf="commentUserForm.controls.Text.errors.maxlength">
+                                    Must have less than 100 characters!
+                                  </div>
+                               </div>
+                            </div>
     
+                            <div class="form-group">
                               <span><small>Enter rating between 1-5</small></span>
-                              <input class="form-control" formControlName="Rate" name="Rate" id="Rate" min="1" max="5" type="number" />
-                              <span *ngIf="commentUserForm.controls.Rate.touched">
-                                <small *ngIf="commentUserForm.controls.Rate.errors?.required">
+                              <input class="form-control" formControlName="Rate" name="Rate" onKeyDown="return false" id="Rate" min="1" max="5" type="number" />
+                              <div *ngIf="commentUserForm.controls.Rate.touched">
+                                <div *ngIf="commentUserForm.controls.Rate.errors?.required">
                                         <div class="attent">
                                                 Rating is required!
                                         </div>
-                                </small>
-                              </span>
-    
+                                </div>
+                              </div>
+                            </div>
                               
                               <button class="btn btn-primary pull-right"  type="submit">Share</button>
-        
-                            </div>
     
                         </form>
                     </div>

@@ -36,6 +36,10 @@ export class AddeventComponent implements OnInit {
   locId:string;
   userId:string;
 
+  capacityVIP:number;
+  capacityRegular:number;
+  capacityFunPit:number;
+
   todayDate:Date = new Date();
   tomorrow:Date =  new Date(this.todayDate.setDate(this.todayDate.getDate() + 1));
 
@@ -200,6 +204,9 @@ export class AddeventComponent implements OnInit {
     this.event.Price=this.event.Price;
     this.event.SellerId=localStorage.getItem('Username');
     this.event.Status="NotApproved";
+    this.event.CapacityRegular=Math.round(7/10*this.event.Capacity);
+    this.event.CapacityVIP=Math.round(1/10*this.event.Capacity);
+    this.event.CapacityFunPit=Math.round(2/10*this.event.Capacity);
 
     var nesto=moment(this.event.EventDay).format();
 

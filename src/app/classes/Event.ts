@@ -6,6 +6,9 @@ export class Event{
     Name:string;
     Type:string;
     Capacity:number;
+    CapacityVIP:number;
+    CapacityRegular:number;
+    CapacityFunPit:number;
     EventTime2:string;
     EventDay:string;
     Price:number;

@@ -37,6 +37,9 @@ export class AddticketComponent implements OnInit {
   event:Event
   typeOfUser:string
   capacity:number;
+  capacityVIP:number;
+  capacityRegular:number;
+  capacityFunPit:number;
 
 
   buyer:string;
@@ -70,6 +73,9 @@ export class AddticketComponent implements OnInit {
 
           this.price=data.Price;  
           this.capacity=data.Capacity;
+          this.capacityFunPit=data.CapacityFunPit;
+          this.capacityRegular=data.CapacityRegular;
+          this.capacityVIP=data.CapacityVIP;
           this.event=data;   
           this.sellerId=data.SellerId; 
 
@@ -157,6 +163,13 @@ export class AddticketComponent implements OnInit {
 
   onSubmit()
   {
+    if((this.reservationUserForm.value.Type=="VIP" && this.capacityVIP<this.reservationUserForm.value.noTickets) || (this.reservationUserForm.value.Type=="Regular" && this.capacityRegular<this.reservationUserForm.value.noTickets) || (this.reservationUserForm.value.Type=="FunPit" && this.capacityFunPit<this.reservationUserForm.value.noTickets))
+    {
+      alert("There is no that many tickets available of this type")
+    }
+    else
+    {
+
       this.setStatus();
 
       this.ticket.Buyer=this.buyer;
@@ -176,7 +189,7 @@ export class AddticketComponent implements OnInit {
         }
       )
      
-      
+     }
 
   }
 
@@ -200,7 +213,24 @@ export class AddticketComponent implements OnInit {
     this.user.Points=this.noPoints;
 
     this.capacity=this.capacity-this.reservationUserForm.value.noTickets;
+    
+    if(this.reservationUserForm.value.Type=="VIP")
+    {
+      this.capacityVIP=this.capacityVIP-this.reservationUserForm.value.noTickets;
+    }
+    else if(this.reservationUserForm.value.Type=="FunPit")
+    {
+      this.capacityFunPit=this.capacityFunPit-this.reservationUserForm.value.noTickets;
+    }
+    else
+    {
+      this.capacityRegular=this.capacityRegular-this.reservationUserForm.value.noTickets;
+    }
+
     this.event.Capacity=this.capacity;
+    this.event.CapacityVIP=this.capacityVIP;
+    this.event.CapacityFunPit=this.capacityFunPit;
+    this.event.CapacityRegular=this.capacityRegular;
   }
 
   update()

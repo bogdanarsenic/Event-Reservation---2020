@@ -44,7 +44,7 @@ export class CommentsComponent implements OnInit {
      {
        this.commentUserForm=this.fb.group({
   
-        Text: ['',Validators.required],
+        Text: ["",[Validators.required,Validators.maxLength(100)]],
         Rate:[,Validators.required]
         
        })
@@ -83,10 +83,7 @@ export class CommentsComponent implements OnInit {
               this.rate=(Number)(this.rate.toFixed(2));
               }   
            }
-          else
-                  {
-                    alert("There is no comments for this event");
-                  }    
+
           }
         )
       }
@@ -117,10 +114,6 @@ export class CommentsComponent implements OnInit {
                       )
                     this.rate=this.rate/this.noCom;
                     this.rate=(Number)(this.rate.toFixed(2));
-                  }
-                  else
-                  {
-                    alert("There is no comments for this event");
                   }
                 }
               )

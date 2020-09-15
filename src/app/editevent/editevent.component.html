@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <span class="form-label">Capacity: </span>
-                <input class="form-control" type="number" name="Capacity" id="Capacity" [(ngModel)]="event.Capacity" value="{{event.Capacity}}" min="1" max="10000" formControlName="Capacity" placeholder="Capacity for the event">
+                <input class="form-control" type="number" name="Capacity" id="Capacity" onKeyDown="return false"  [(ngModel)]="event.Capacity" value="{{event.Capacity}}" min="10" max="10000" formControlName="Capacity" placeholder="Capacity for the event">
                 <span *ngIf="eventUserForm.controls.Capacity.touched">
                     <small *ngIf="eventUserForm.controls.Capacity.errors?.required">
                             <div class="attent">
@@ -34,7 +34,7 @@
 
             <div class="form-group">
                 <span class="form-label">Price(per Day): </span>
-                <input class="form-control" type="number"  name="Price" id="Price" min="1" max="10000" [(ngModel)]="event.Price" value="{{event.Price}}" formControlName="Price" placeholder="How much Price">
+                <input class="form-control" type="number"  name="Price" id="Price" min="1" max="10000" onKeyDown="return false" [(ngModel)]="event.Price" value="{{event.Price}}" formControlName="Price" placeholder="How much Price">
                 <span *ngIf="eventUserForm.controls.Price.touched">
                     <small *ngIf="eventUserForm.controls.Price.errors?.required">
                             <div class="attent">
