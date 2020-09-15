@@ -35,6 +35,7 @@ namespace TicketReservation.ModelsDB
                             Name = reader["Name"].ToString(),
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
+                            DateOfBirth= Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                             Role = reader["Role"].ToString(),
                             Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                             TicketId = reader["TicketId"].ToString(),
@@ -59,7 +60,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(User user)
         {
-            string Query = "INSERT INTO Users(Username, Password, Name, Surname,Gender,Role, Points, TicketId, ManifestationId, UserType, NoQuit, IsBlocked, IsActive) VALUES(@Username, @Password, @Name, @Surname, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType, @NoQuit, @IsBlocked, @IsActive)";
+            string Query = "INSERT INTO Users(Username, Password, Name, Surname, DateOfBirth, Gender,Role, Points, TicketId, ManifestationId, UserType, NoQuit, IsBlocked, IsActive) VALUES(@Username, @Password, @Name, @Surname, @DateOfBirth, @Gender, @Role, @Points, @TicketId, @ManifestationId, @UserType, @NoQuit, @IsBlocked, @IsActive)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -71,6 +72,7 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Password", SqlDbType.NChar).Value = user.Password;
                     cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = user.Name;
                     cmd.Parameters.Add("@Surname", SqlDbType.NVarChar).Value = user.Surname;
+                    cmd.Parameters.Add("@DateOfBirth", SqlDbType.DateTime2).Value = user.DateOfBirth;
                     cmd.Parameters.Add("@Gender", SqlDbType.NVarChar).Value = user.Gender;
                     cmd.Parameters.Add("@Role", SqlDbType.NVarChar).Value = user.Role;
                     cmd.Parameters.Add("@Points", SqlDbType.Float).Value = user.Points;
@@ -213,6 +215,7 @@ namespace TicketReservation.ModelsDB
                             Name = reader["Name"].ToString(),
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
+                            DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                             Role = reader["Role"].ToString(),
                             Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                             TicketId = reader["TicketId"].ToString(),
@@ -250,6 +253,7 @@ namespace TicketReservation.ModelsDB
                             Name = reader["Name"].ToString(),
                             Surname = reader["Surname"].ToString(),
                             Gender = reader["Gender"].ToString(),
+                            DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                             Role = reader["Role"].ToString(),
                             Points = float.Parse(reader["Points"].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                             TicketId = reader["TicketId"].ToString(),

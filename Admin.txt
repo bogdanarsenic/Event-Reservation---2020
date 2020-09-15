@@ -1,2 +1,2 @@
-petarjankovic,petar131,petar,jankovic,male
-bogdanarsenic,bogdan131,bogdan,arsenic,male
+petarjankovic,Petar131#,petar,jankovic,male,11/29/1995
+bogdanarsenic,Bogdan131#,bogdan,arsenic,male,01/11/1995

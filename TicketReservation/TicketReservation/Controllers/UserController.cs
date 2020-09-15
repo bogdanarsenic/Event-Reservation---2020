@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
@@ -45,6 +46,19 @@ namespace TicketReservation.Controllers
             return u;
         }
 
+        public HttpResponseMessage Get(string username)
+        {
+            var resp = new HttpResponseMessage();
+
+            var cookie = new CookieHeaderValue("session-id", username);
+            cookie.Expires = DateTimeOffset.Now.AddHours(1);
+            cookie.Domain = Request.RequestUri.Host;
+            cookie.Path = "/";
+
+            resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+            return resp;
+        }
+
 
         [Route("Register")]
         public string Register(User register)
@@ -55,11 +69,13 @@ namespace TicketReservation.Controllers
             }
 
             User temp = new User();
+
             temp.Username = register.Username;
             temp.Name = register.Name;
             temp.Surname = register.Surname;   
             temp.Password = register.Password;
             temp.Gender = register.Gender;
+            temp.DateOfBirth = register.DateOfBirth;
             temp.Role = "Buyer";
             temp.TicketId = "";
             temp.ManifestationId = "";
@@ -196,6 +212,7 @@ namespace TicketReservation.Controllers
             temp.Surname = register.Surname;
             temp.Password = register.Password;
             temp.Gender = register.Gender;
+            temp.DateOfBirth = register.DateOfBirth;
             temp.Role = "Seller";
             temp.ManifestationId = "";
             temp.TicketId = "";

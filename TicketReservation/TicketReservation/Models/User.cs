@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,13 +8,28 @@ namespace TicketReservation.Models
 {
     public class User
     {
+        [Required]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "Username need to be between 1 and 50 long")]
         public string Username { get; set; }
+
+        [Required(ErrorMessage = "Password is required!"), MinLength(8), MaxLength(50)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Name is required!"), MinLength(1), MaxLength(30)]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Surname is required!"), MinLength(1), MaxLength(30)]
         public string Surname { get; set; }
+
+        [Required]
         public string Gender { get; set; }
+
+        [Required]
         public string Role { get; set; }
+
+        [Required]
         public string Type { get; set; }
+
         public DateTime DateOfBirth { get; set; }
         public string TicketId { get; set; }
         public string ManifestationId { get; set; }
