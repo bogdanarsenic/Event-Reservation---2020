@@ -58,7 +58,6 @@ namespace TicketReservation.Controllers
             register.Pictures = "";
             register.IsActive = true;
 
-
             List<Manifestation> manifestations = new List<Manifestation>();
             manifestations = GetAllManifestations();
 
@@ -143,6 +142,9 @@ namespace TicketReservation.Controllers
             temp.Type = manifestation.Type;
             temp.Price = manifestation.Price;
             temp.Capacity = manifestation.Capacity;
+            temp.CapacityVIP = manifestation.CapacityVIP;
+            temp.CapacityRegular = manifestation.CapacityRegular;
+            temp.CapacityFunPit = manifestation.CapacityFunPit;
             temp.EventTime = manifestation.EventTime;
 
             manifestationDB.Update(temp);
@@ -178,6 +180,9 @@ namespace TicketReservation.Controllers
         {
             Manifestation temp = manifestationDB.GetOneById(Convert.ToString(manifestation.Id));
             temp.Capacity = manifestation.Capacity;
+            temp.CapacityFunPit = manifestation.CapacityFunPit;
+            temp.CapacityRegular = manifestation.CapacityRegular;
+            temp.CapacityVIP = manifestation.CapacityVIP;
 
             manifestationDB.UpdateCapacity(temp);
             return "Success!";

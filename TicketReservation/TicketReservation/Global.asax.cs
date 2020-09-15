@@ -139,6 +139,9 @@ namespace TicketReservation
             event1.Name = "Event1";
             event1.Type = "Concert";
             event1.Capacity = 100;
+            event1.CapacityVIP =10;
+            event1.CapacityRegular =70;
+            event1.CapacityFunPit =20;
             event1.Price = 500;
             event1.EventTime = new DateTime(2020, 7, 3);
             event1.Status = "Approved";
@@ -155,6 +158,9 @@ namespace TicketReservation
             event2.Name = "Event2";
             event2.Type = "Festival";
             event2.Capacity = 200;
+            event2.CapacityVIP = 20;
+            event2.CapacityRegular = 140;
+            event2.CapacityFunPit = 40;
             event2.Price = 100;
             event2.EventTime = new DateTime(2020, 6, 30);
             event2.Status = "Approved";
@@ -170,6 +176,9 @@ namespace TicketReservation
             event3.Name = "Event3";
             event3.Type = "Festival";
             event3.Capacity = 50;
+            event3.CapacityVIP = 5;
+            event3.CapacityRegular = 35;
+            event3.CapacityFunPit = 10;
             event3.Price = 1000;
             event3.EventTime = new DateTime(2020, 7, 10);
             event3.Status = "Approved";

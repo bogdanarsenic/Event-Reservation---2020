@@ -15,8 +15,17 @@ namespace TicketReservation.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Capacity is required!")]
-        [Range(1, 10000, ErrorMessage = "Capacity must be in range 1 - 10000")]
+        [Range(10, 10000, ErrorMessage = "Capacity must be in range 10 - 10000")]
         public int Capacity { get; set; }
+
+        [Required(ErrorMessage = "Capacity is required!")]
+        public int CapacityVIP { get; set; }
+
+        [Required(ErrorMessage = "Capacity is required!")]
+        public int CapacityRegular { get; set; }
+
+        [Required(ErrorMessage = "Capacity is required!")]
+        public int CapacityFunPit { get; set; }
 
         [Required(ErrorMessage = "Type is required!")]
         public string Type { get; set; }

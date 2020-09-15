@@ -21,7 +21,7 @@ namespace TicketReservation.ModelsDB
 
         public void Insert(Manifestation manifestation)
         {
-            string Query = "INSERT INTO Manifestations(Id, Name, Type, Capacity, EventTime, Price, Status, LocationId, Place, Pictures,SellerId, IsActive) VALUES(@Id, @Name, @Type, @Capacity, @EventTime, @Price, @Status, @LocationId, @Place, @Pictures,@SellerId, @IsActive)";
+            string Query = "INSERT INTO Manifestations(Id, Name, Type, Capacity, EventTime, Price, Status, LocationId, Place, Pictures,SellerId, IsActive, CapacityVIP, CapacityRegular, CapacityFunPit) VALUES(@Id, @Name, @Type, @Capacity, @EventTime, @Price, @Status, @LocationId, @Place, @Pictures,@SellerId, @IsActive, @CapacityVIP, @CapacityRegular, @CapacityFunPit)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -41,6 +41,10 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Place", SqlDbType.NVarChar).Value = manifestation.Place;
                     cmd.Parameters.Add("@Pictures", SqlDbType.NVarChar).Value = manifestation.Pictures;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = manifestation.IsActive;
+                    cmd.Parameters.Add("@CapacityVIP", SqlDbType.Int).Value = manifestation.CapacityVIP;
+                    cmd.Parameters.Add("@CapacityRegular", SqlDbType.Int).Value = manifestation.CapacityRegular;
+                    cmd.Parameters.Add("@CapacityFunPit", SqlDbType.Int).Value = manifestation.CapacityFunPit;
+
 
                     string id = manifestation.Id.ToString();
 
@@ -55,7 +59,7 @@ namespace TicketReservation.ModelsDB
 
         public void Update(Manifestation manifestation)
         {
-            string Query = "UPDATE Manifestations set Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price " +
+            string Query = "UPDATE Manifestations set Name=@Name,Type = @Type,Capacity = @Capacity, EventTime = @EventTime, Price = @Price, CapacityVIP=@CapacityVIP, CapacityRegular = @CapacityRegular, CapacityFunPit = @CapacityFunPit " +
                "WHERE Id='" + manifestation.Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -67,6 +71,9 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Capacity", SqlDbType.Int).Value = manifestation.Capacity;
                     cmd.Parameters.Add("@EventTime", SqlDbType.DateTime2).Value = manifestation.EventTime;
                     cmd.Parameters.Add("@Price", SqlDbType.Int).Value = manifestation.Price;
+                    cmd.Parameters.Add("@CapacityVIP", SqlDbType.Int).Value = manifestation.CapacityVIP;
+                    cmd.Parameters.Add("@CapacityRegular", SqlDbType.Int).Value = manifestation.CapacityRegular;
+                    cmd.Parameters.Add("@CapacityFunPit", SqlDbType.Int).Value = manifestation.CapacityFunPit;
 
                     cmd.ExecuteNonQuery();
                 }
@@ -106,7 +113,7 @@ namespace TicketReservation.ModelsDB
 
         public void UpdateCapacity(Manifestation manifestation)
         {
-            string Query = "UPDATE Manifestations set Capacity=@Capacity " +
+            string Query = "UPDATE Manifestations set Capacity=@Capacity, CapacityVIP=@CapacityVIP, CapacityRegular=@CapacityRegular, CapacityFunPit=@CapacityFunPit " +
                "WHERE Id='" + manifestation.Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -114,6 +121,9 @@ namespace TicketReservation.ModelsDB
                 {
                     con.Open();
                     cmd.Parameters.Add("@Capacity", SqlDbType.Int).Value = manifestation.Capacity;
+                    cmd.Parameters.Add("@CapacityVIP", SqlDbType.Int).Value = manifestation.CapacityVIP;
+                    cmd.Parameters.Add("@CapacityRegular", SqlDbType.Int).Value = manifestation.CapacityRegular;
+                    cmd.Parameters.Add("@CapacityFunPit", SqlDbType.Int).Value = manifestation.CapacityFunPit;
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -139,6 +149,9 @@ namespace TicketReservation.ModelsDB
                         manifestation.Name = reader["Name"].ToString();
                         manifestation.Type = reader["Type"].ToString();
                         manifestation.Capacity = Convert.ToInt32(reader["Capacity"].ToString());
+                        manifestation.CapacityVIP = Convert.ToInt32(reader["CapacityVIP"].ToString());
+                        manifestation.CapacityRegular = Convert.ToInt32(reader["CapacityRegular"].ToString());
+                        manifestation.CapacityFunPit = Convert.ToInt32(reader["CapacityFunPit"].ToString());
                         manifestation.EventTime = Convert.ToDateTime(reader["EventTime"].ToString());
                         manifestation.Price = Convert.ToInt32(reader["Price"].ToString());
                         manifestation.Status = reader["Status"].ToString();
@@ -175,6 +188,9 @@ namespace TicketReservation.ModelsDB
                             Name = reader["Type"].ToString(),
                             Type = reader["Type"].ToString(),
                             Capacity = Convert.ToInt32(reader["Capacity"].ToString()),
+                            CapacityVIP = Convert.ToInt32(reader["CapacityVIP"].ToString()),
+                            CapacityRegular = Convert.ToInt32(reader["CapacityRegular"].ToString()),
+                            CapacityFunPit = Convert.ToInt32(reader["CapacityFunPit"].ToString()),
                             EventTime = Convert.ToDateTime(reader["EventTime"].ToString()),
                             Price = Convert.ToInt32(reader["Price"].ToString()),
                             Status = reader["Status"].ToString(),
@@ -213,6 +229,9 @@ namespace TicketReservation.ModelsDB
                         manifestation.Name = reader["Name"].ToString();
                         manifestation.Type = reader["Type"].ToString();
                         manifestation.Capacity = Convert.ToInt32(reader["Capacity"].ToString());
+                        manifestation.CapacityVIP = Convert.ToInt32(reader["CapacityVIP"].ToString());
+                        manifestation.CapacityRegular = Convert.ToInt32(reader["CapacityRegular"].ToString());
+                        manifestation.CapacityFunPit = Convert.ToInt32(reader["CapacityFunPit"].ToString());
                         manifestation.EventTime = Convert.ToDateTime(reader["EventTime"].ToString());
                         manifestation.Price = Convert.ToInt32(reader["Price"].ToString());
                         manifestation.Status = reader["Status"].ToString();
@@ -275,6 +294,9 @@ namespace TicketReservation.ModelsDB
                         manifestation.Name = reader["Name"].ToString();
                         manifestation.Type = reader["Type"].ToString();
                         manifestation.Capacity = Convert.ToInt32(reader["Capacity"].ToString());
+                        manifestation.CapacityVIP = Convert.ToInt32(reader["CapacityVIP"].ToString());
+                        manifestation.CapacityRegular = Convert.ToInt32(reader["CapacityRegular"].ToString());
+                        manifestation.CapacityFunPit = Convert.ToInt32(reader["CapacityFunPit"].ToString());
                         manifestation.EventTime = Convert.ToDateTime(reader["EventTime"].ToString());
                         manifestation.Price = Convert.ToInt32(reader["Price"].ToString());
                         manifestation.Status = reader["Status"].ToString();
