@@ -62,14 +62,16 @@ export class ServerService {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
   }
 
-  GetCookie(username:string):Observable<User>
+  GetSession(username:string):Observable<any>
   {
-      return this.http.get<User>(`http://localhost:52294/api/User/GetCookie`,{params:{username}});
+
+    return this.http.get<User>(`http://localhost:52294/api/User/GetSession`,{params:{username}});
   }
 
-  Logout(username:string):Observable<User>
+  Logout():Observable<any>
   {
-      return this.http.get<User>(`http://localhost:52294/api/User/Logout`,{params:{username}});
+    
+    return this.http.get("http://localhost:52294/api/User/Logout");
   }
 
   GetAllComments():Observable<any>

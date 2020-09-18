@@ -58,7 +58,7 @@ export class NavigationComponent implements OnInit {
   {
     this.username=localStorage.getItem('Username');
 
-    this.loginService.Logout(this.username).subscribe(
+    this.loginService.Logout().subscribe(
       data=>
       {
         

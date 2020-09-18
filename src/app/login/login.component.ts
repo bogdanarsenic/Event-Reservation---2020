@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('Role',data.Role);
                   localStorage.setItem('Logged','Yes');
           
-                  this.GetCookie(data.Username);
+                  this.GetSession(data.Username);
 
 
                   this.router.navigate(['']).then(()=>window.location.reload());
@@ -98,13 +98,15 @@ export class LoginComponent implements OnInit {
 
     }
     
- GetCookie(username:string)
+ GetSession(username:string)
   {
-      this.loginService.GetCookie(username).subscribe(
+      this.loginService.GetSession(username).subscribe(
         data=>
         {
-          
-        }
+          let jwt=data;
+          console.log("Nesto da vidimo");
+        },
+      
       )
   }
    
