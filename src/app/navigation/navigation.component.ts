@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { ServerService } from '../services/server.service';
 
 
 @Component({
@@ -9,12 +10,13 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
- 
+ username:string
   
-  constructor(public router:Router) { }
+  constructor(public router:Router,private loginService:ServerService) { }
   
 
   ngOnInit() {
+    this.username="";
   }
 
   BackToCheck()
@@ -54,7 +56,14 @@ export class NavigationComponent implements OnInit {
 
   CallLogout()
   {
+    this.username=localStorage.getItem('Username');
 
+    this.loginService.Logout(this.username).subscribe(
+      data=>
+      {
+        
+      }
+    )
 
     localStorage.clear();
     this.router.navigateByUrl('');

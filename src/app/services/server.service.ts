@@ -64,12 +64,12 @@ export class ServerService {
 
   GetCookie(username:string):Observable<User>
   {
-      return this.http.get<User>(`http://localhost:52294/api/User/Get`,{params:{username}});
+      return this.http.get<User>(`http://localhost:52294/api/User/GetCookie`,{params:{username}});
   }
 
-  Logout(Username:string):Observable<User>
+  Logout(username:string):Observable<User>
   {
-      return this.http.get<User>(`http://localhost:52294/api/User/Logout`,{params:{Username}});
+      return this.http.get<User>(`http://localhost:52294/api/User/Logout`,{params:{username}});
   }
 
   GetAllComments():Observable<any>

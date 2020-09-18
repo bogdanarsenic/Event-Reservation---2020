@@ -66,12 +66,8 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('Role',data.Role);
                   localStorage.setItem('Logged','Yes');
           
-                  this.loginService.GetCookie(data.Username).subscribe(
-                    data=>
-                    {
-                      
-                    }
-                  )
+                  this.GetCookie(data.Username);
+
 
                   this.router.navigate(['']).then(()=>window.location.reload());
 
@@ -101,5 +97,15 @@ export class LoginComponent implements OnInit {
       this.loginUserForm.reset();
 
     }
+    
+ GetCookie(username:string)
+  {
+      this.loginService.GetCookie(username).subscribe(
+        data=>
+        {
+          
+        }
+      )
+  }
    
   }

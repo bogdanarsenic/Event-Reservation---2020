@@ -78,9 +78,9 @@ export class RegisterComponent implements OnInit {
                 localStorage.setItem('Logged', "Yes")
                 localStorage.setItem('Role', "Buyer")
                 localStorage.setItem('Username',this.korisnik.Username);
-                  
-                  this.router.navigate(['']).then(()=>window.location.reload());
-                  this.router.navigateByUrl("/home");
+                this.GetCookie(this.korisnik.Username);
+                this.router.navigate(['']).then(()=>window.location.reload());
+                this.router.navigateByUrl("/home");
                 
             }
           )
@@ -97,5 +97,13 @@ export class RegisterComponent implements OnInit {
     this.registerUserForm.reset();
     
   }
-
+  GetCookie(username:string)
+  {
+      this.registerService.GetCookie(username).subscribe(
+        data=>
+        {
+          
+        }
+      )
+  }
 }
