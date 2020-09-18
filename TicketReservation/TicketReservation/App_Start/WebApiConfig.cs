@@ -10,8 +10,8 @@ namespace TicketReservation
     {
         public static void Register(HttpConfiguration config)
         {
-           var cors = new EnableCorsAttribute("*", "*", "*");//Ovo na kraju treba zabraniti. Trenutno je ovako kako bi se dozvolilo angular aplikaciji.
-           config.EnableCors(cors);
+            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", "*", "*") { SupportsCredentials = true });
+
 
 
             config.MapHttpAttributeRoutes();
