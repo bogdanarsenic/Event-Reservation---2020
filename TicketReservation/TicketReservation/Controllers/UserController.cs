@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
@@ -46,21 +47,77 @@ namespace TicketReservation.Controllers
             return u;
         }
 
-        public HttpResponseMessage Get(string username)
+        [HttpGet]
+        [Route("GetCookie")]
+        public HttpResponseMessage GetCookie(string username)
         {
-            var resp = new HttpResponseMessage();
+            string cookieTxt = "";
+            bool found = false;
+            foreach (CookieHeaderValue chv in Request.Headers.GetCookies())
+            {
+                foreach (CookieState cs in chv.Cookies)
+                {
+                    cookieTxt += cs.Name + "->" + cs.Value + "\n";
 
-            var cookie = new CookieHeaderValue("session-id", username);
-            cookie.Expires = DateTimeOffset.Now.AddHours(1);
-            cookie.Domain = Request.RequestUri.Host;
-            cookie.Path = "/";
+                    if (cs.Name.Equals(username))
+                    {
+                        found = true;
+                    }
+                }
+            }
 
-            resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
-            return resp;
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (!found)
+            {
+                var cookie = new System.Net.Http.Headers.CookieHeaderValue(username, username + " Cookie");
+                cookie.Expires = DateTime.Now.AddDays(1);
+                response.Headers.AddCookies(new System.Net.Http.Headers.CookieHeaderValue[] { cookie });
+                cookieTxt += username + "-> " + username + " kolacic";
+            }
+
+            response.Content = new StringContent("'Cookie': " + cookieTxt);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            return response;
         }
 
+        [HttpGet]
+        [Route("Logout")]
+        public HttpResponseMessage Logout(string username)
+        {
+            string cookieTxt = "";
+            bool found = false;
+            foreach (CookieHeaderValue chv in Request.Headers.GetCookies())
+            {
+                foreach (CookieState cs in chv.Cookies)
+                {
+                    cookieTxt += cs.Name + "->" + cs.Value + "\n";
 
-        [Route("Register")]
+                    if (cs.Name.Equals(username))
+                    {
+                        found = true;
+                    }
+                }
+            }
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (found)
+            {
+                var cookie = new System.Net.Http.Headers.CookieHeaderValue(username, username + " Cookie");
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                response.Headers.AddCookies(new System.Net.Http.Headers.CookieHeaderValue[] { cookie });
+                cookieTxt += username + "-> " + username + " kolacic";
+            }
+
+            response.Content = new StringContent("'Cookie': " + cookieTxt);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            return response;
+
+        }
+        
+
+    [Route("Register")]
         public string Register(User register)
         {
             if (userDB.GetOne(register.Username) != null)

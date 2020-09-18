@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.SessionState;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
 
@@ -203,9 +204,23 @@ namespace TicketReservation
             location2.Longitude = 19.836737f;
             locationDB.Insert(location2);
 
+        }
 
+        public override void Init()
+        {
+            this.PostAuthenticateRequest += MyPostAuthenticateRequest;
+            base.Init();
+        }
 
-
+        /// <summary>
+        /// Uključuje podršku za Session, samo ako URL od zahteva počinje stringom "/rest/"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MyPostAuthenticateRequest(object sender, EventArgs e)
+        {
+                System.Web.HttpContext.Current.SetSessionStateBehavior(
+                SessionStateBehavior.Required);           
         }
     }
 }
