@@ -36,6 +36,9 @@ export class EditeventComponent implements OnInit {
    }
 
   ngOnInit() {
+
+      this.isSeller();
+
       this.id=localStorage.getItem('EventId');
 
       this.getEvent();
@@ -94,6 +97,15 @@ export class EditeventComponent implements OnInit {
               console.log(u);
             }
           )
+  }
+
+  isSeller()
+  {
+    if(localStorage.getItem('Role')=='Seller')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

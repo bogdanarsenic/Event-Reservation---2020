@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit() {
     
+    localStorage.clear();
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
     localStorage.setItem('CurrentComponent','RegisterComponent');

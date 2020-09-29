@@ -60,7 +60,10 @@ export class AddticketComponent implements OnInit {
      })
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.isUser();
+    
     this.sellerId="";
     this.id=localStorage.getItem('EventId');
     this.userId=localStorage.getItem('Username');
@@ -250,6 +253,15 @@ export class AddticketComponent implements OnInit {
         
       }
     )
+  }
+
+  isUser()
+  {
+    if(localStorage.getItem('Role')=='User')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

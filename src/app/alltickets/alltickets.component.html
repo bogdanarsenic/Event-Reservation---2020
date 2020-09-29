@@ -1,4 +1,4 @@
-<div class="containter">
+<div class="containter" *ngIf="isLogged()">
      
   <div class="row" style="background-color:rgb(214, 233, 226)">
       <form [formGroup]="searchTicket" (ngSubmit)="Search()">

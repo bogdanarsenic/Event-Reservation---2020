@@ -46,6 +46,11 @@ constructor(private router:Router,private service:ServerService) { }
 
 ngOnInit() {
 
+    if(localStorage.getItem('EventId')==null)
+    {
+      return this.router.navigateByUrl("/home");
+    }
+    
     this.id=localStorage.getItem('EventId');
     this.pictures3=[]
     this.nesto=false;
@@ -53,6 +58,7 @@ ngOnInit() {
     this.folder="Content/";
     this.clicked=false;
     this.tickets=[]
+    this.event=new Event("","","",0,"","",0,"","","",0,0,"","","","","");
     
     this.service.GetEvent(this.id).subscribe(
       data=>{

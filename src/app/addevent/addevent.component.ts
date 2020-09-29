@@ -3,7 +3,6 @@ import { ServerService } from '../services/server.service';
 import { Router } from '@angular/router';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GoogleMapsModule } from '@angular/google-maps';
 import {Location} from '../classes/Location';
 import {Event} from '../classes/Event';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -14,6 +13,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import * as moment from 'moment';
 
 
+
+declare let google: any;
 
 @Component({
   selector: 'app-addevent',
@@ -48,32 +49,16 @@ export class AddeventComponent implements OnInit {
   
   event:Event;
   
+
   geocoder:google.maps.Geocoder;
   infowindow:google.maps.InfoWindow;
   
 
   zoom = 12;
-  center: google.maps.LatLngLiteral;
+  center: any;
+  centerMark:any;
 
-
-  centerMark:google.maps.LatLngLiteral;
-
-
-  optionsMark:google.maps.MarkerOptions={
-
-    title:'Marker title '
-  };
-
-
-  options: google.maps.MapOptions = {
-    mapTypeId: 'hybrid',
-    zoomControl: true,
-    scrollwheel: true,
-    disableDoubleClickZoom: false,
-    maxZoom: 15,
-    minZoom: 7,
-  }
-
+  optionsMark:any;
 
   constructor(private service:ServerService,private fb:FormBuilder,private router:Router,private ngZone:NgZone) 
   {
@@ -93,10 +78,18 @@ export class AddeventComponent implements OnInit {
      })
    }
   ngOnInit() {
+
+    this.isSeller();
+    localStorage.removeItem('EventId');
       this.center = {
         lat: 45.267136,
         lng: 19.833549,
       }
+      this.centerMark = {
+        lat: 0,
+        lng: 0,
+      }
+
       this.userId=localStorage.getItem('Username');
 
       this.loc=new Location("",this.center.lat,this.center.lng,"");
@@ -105,14 +98,9 @@ export class AddeventComponent implements OnInit {
       this.dateCheck=""
   }
 
-  ItemsChanged(event)
-  {
-    
-  }
-
-  click(event: google.maps.MouseEvent) {
-    this.templat=event.latLng.lat();
-    this.templong=event.latLng.lng();
+  click(event: any) {
+    this.templat=event.coords.lat;
+    this.templong=event.coords.lng;
 
     
     this.centerMark=
@@ -122,7 +110,8 @@ export class AddeventComponent implements OnInit {
     }
 
     this.optionsMark={
-      position:this.centerMark
+      lat:this.centerMark.lat,
+      lng:this.centerMark.lng,
       
     };
 
@@ -244,6 +233,16 @@ export class AddeventComponent implements OnInit {
           
         }
       )
+  }
+
+
+  isSeller()
+  {
+    if(localStorage.getItem('Role')=='Seller')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 } 
 

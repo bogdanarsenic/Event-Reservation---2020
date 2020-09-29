@@ -39,6 +39,8 @@ export class EditprofileComponent implements OnInit {
    }
   ngOnInit() {
 
+    this.isLogged();
+    localStorage.removeItem('EventId');
     this.user=new User("","","","","","","",0);
 
     this.id=localStorage.getItem('Username');
@@ -92,6 +94,13 @@ export class EditprofileComponent implements OnInit {
     
   }
 
-
+  isLogged()
+  {
+    if(localStorage.getItem('Logged')=='Yes')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
+  }
 
 }

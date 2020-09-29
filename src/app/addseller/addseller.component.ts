@@ -45,6 +45,9 @@ export class AddsellerComponent implements OnInit {
 
   }
   ngOnInit() {
+
+    this.isAdmin();
+    localStorage.removeItem('EventId');
     localStorage.setItem('CurrentComponent','AddSellerComponent');
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
@@ -79,6 +82,15 @@ export class AddsellerComponent implements OnInit {
     this.router.navigateByUrl("/home");
     this.registerUserForm.reset();
     
+  }
+
+  isAdmin()
+  {
+    if(localStorage.getItem('Role')=='Admin')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

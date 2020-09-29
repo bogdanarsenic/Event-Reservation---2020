@@ -56,6 +56,8 @@ export class AllusersComponent implements OnInit {
  
   ngOnInit()
    {
+     this.isLogged();
+     localStorage.removeItem('EventId');
      this.brojac=0
      this.Clicked=false
      this.ClickedId=false
@@ -191,6 +193,15 @@ export class AllusersComponent implements OnInit {
         return true;
       }
       return false;
+  }
+
+  isLogged()
+  {
+    if(localStorage.getItem('Logged')=='Yes')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ticket } from '../classes/Ticket';
 import { DatePipe } from '@angular/common';
 import { User } from '../classes/User';
-import { NgxDrpOptions, PresetItem, Range } from 'ngx-mat-daterange-picker';
 
 @Component({
   selector: 'app-alltickets',
@@ -59,6 +58,9 @@ export class AllticketsComponent implements OnInit {
   ngOnInit()
    {
 
+   
+      this.isLogged();
+      localStorage.removeItem('EventId');
       this.Type=""
       this.Status=""
       this.Sort=""
@@ -293,6 +295,15 @@ export class AllticketsComponent implements OnInit {
     return true;
     else 
     return false;
+  }
+
+  isLogged()
+  {
+    if(localStorage.getItem('Logged')=='Yes')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

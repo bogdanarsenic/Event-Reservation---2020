@@ -1,3 +1,5 @@
+<div *ngIf="isSeller()">
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4&callback=initMap&language=en"
   type="text/javascript"></script>
 <body>
@@ -73,26 +75,29 @@
             <h6>Location:</h6>
             <div class="form-group">
 
-             <google-map
+                <agm-map
                 height="500px"
                 width="500px"
                 [zoom]="zoom"
-                [center]="center"
-                [options]="options"
-                (mapClick)="click($event)"  
-                       
-              >
+                (mapClick)="click($event)"
+                [latitude]="center.lat"
+                [longitude]="center.lng"
+                mapTypeId="hybrid"
+                zoomControl="true"
+                scrollwheel= "true"
+                disableDoubleClickZoom="false"
+                maxZoom="15"
+                minZoom= "7">
               
-              <map-marker
-               
-               [position]="optionsMark.position"
-               [title]="optionsMark.title"
-             >
+                <agm-marker
+                [latitude]="centerMark.lat"
+                [longitude]="centerMark.lng">
+
+
+            </agm-marker>         
+            </agm-map>
             <span> <h6 style="margin-top: 30px;">Address: </h6>
              <textarea style="width:300px;height:65px">{{address2}}</textarea></span>
-            </map-marker>
-            </google-map>
-             
              </div>
 
             <div class="form-group">
@@ -118,3 +123,4 @@
       </div>
     </div>
 </body>
+</div>

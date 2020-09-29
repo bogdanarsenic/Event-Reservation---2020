@@ -24,6 +24,7 @@ export class UploadImageComponent implements OnInit {
 
   ngOnInit() 
   {
+    this.isSeller();
     this.id=this.router.url.split('/')[1];
   }
 
@@ -78,6 +79,15 @@ export class UploadImageComponent implements OnInit {
   OnFinish()
   {
     this.router.navigateByUrl('/home');
+  }
+
+  isSeller()
+  {
+    if(localStorage.getItem('Role')=='Seller')
+    {
+        return true;
+    }
+      return this.router.navigateByUrl("/home");
   }
 
 }

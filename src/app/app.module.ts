@@ -15,24 +15,17 @@ import { AddsellerComponent } from './addseller/addseller.component';
 import { AllusersComponent } from './allusers/allusers.component';
 import { AddeventComponent } from './addevent/addevent.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
-import {GoogleMapsModule} from '@angular/google-maps';
-import { AgmCoreModule, AgmMap, AgmMarker } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { MatCardModule } from "@angular/material/card";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
-
-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import { AlleventsComponent } from './allevents/allevents.component';
 import { ViewEventComponent } from './view-event/view-event.component';
 import { EditeventComponent } from './editevent/editevent.component';
@@ -105,7 +98,6 @@ const appRoutes:Routes=[
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyChbe6-AoArrpVJV6fV5CBC5wbyYlKhxa4'
     }),
-    GoogleMapsModule,
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule, 
@@ -114,7 +106,6 @@ const appRoutes:Routes=[
     MatNativeDateModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule,
-    MatMomentDateModule,
     MatCardModule,
 
   ],

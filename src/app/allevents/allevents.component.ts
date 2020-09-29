@@ -3,8 +3,6 @@ import {Event} from '../classes/Event';
 import { Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Geocoder } from '@agm/core';
-import { stringify } from 'querystring';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -75,6 +73,7 @@ createForm()
   ngOnInit() {
     this.local="http://localhost:52294/";
     this.folder="Content/";
+    localStorage.removeItem('EventId');
     this.noRates=0;
     this.rate=0
     this.brojac=0;
