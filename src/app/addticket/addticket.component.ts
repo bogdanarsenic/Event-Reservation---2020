@@ -257,7 +257,7 @@ export class AddticketComponent implements OnInit {
 
   isUser()
   {
-    if(localStorage.getItem('Role')=='User')
+    if(localStorage.getItem('Role')=='Buyer')
     {
         return true;
     }
