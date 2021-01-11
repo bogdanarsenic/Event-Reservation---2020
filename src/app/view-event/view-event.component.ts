@@ -55,7 +55,7 @@ ngOnInit() {
     this.pictures3=[]
     this.nesto=false;
     this.local="http://localhost:52294/";
-    this.folder="Content/";
+    this.folder="Content/images/";
     this.clicked=false;
     this.tickets=[]
     this.event=new Event("","","",0,"","",0,"","","",0,0,"","","","","");

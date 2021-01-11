@@ -59,7 +59,7 @@ export class UploadImageComponent implements OnInit {
   {
     this.pictures3=[]
     this.local="http://localhost:52294/";
-    this.folder="Content/";
+    this.folder="Content/images/";
 
     this.service.GetEvent(this.id).subscribe(
       data=>{

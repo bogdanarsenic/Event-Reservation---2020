@@ -72,7 +72,7 @@ createForm()
  }
   ngOnInit() {
     this.local="http://localhost:52294/";
-    this.folder="Content/";
+    this.folder="Content/images/";
     localStorage.removeItem('EventId');
     this.noRates=0;
     this.rate=0
