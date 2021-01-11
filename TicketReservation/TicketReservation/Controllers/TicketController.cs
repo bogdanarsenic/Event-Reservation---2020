@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
@@ -61,7 +62,8 @@ namespace TicketReservation.Controllers
             List<Ticket> ret1 = null;
             List<Ticket> ret2 = new List<Ticket>();
             User u = userDB.GetOne(IdSeller);
-            ret1 = ticketDB.GetAll();
+
+			ret1 = ticketDB.GetAll();
             foreach (Ticket t in ret1)
             {
                 if(t.SellerId==IdSeller && t.Status=="Reserved")

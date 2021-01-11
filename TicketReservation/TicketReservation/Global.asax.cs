@@ -36,9 +36,11 @@ namespace TicketReservation
             UserDB userDB = new UserDB();
             User admin = new User();
 
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Bogdan\Desktop\Web-2020\Admin.txt");
+			var filePath = HttpContext.Current.Server.MapPath("~/Admin/Admin.txt");
 
-            foreach (string line in lines)
+			string[] lines = System.IO.File.ReadAllLines(filePath);
+
+			foreach (string line in lines)
             {
                 string[] nesto = line.Split(',');
 

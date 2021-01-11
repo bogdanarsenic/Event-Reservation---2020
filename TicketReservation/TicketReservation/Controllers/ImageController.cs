@@ -15,13 +15,13 @@ namespace TicketReservation.Controllers
         [Route("api/Upload")]
         public HttpResponseMessage Upload()
         {
-
-            var httpReq = HttpContext.Current.Request;
+			string finalPath = "http://localhost:52294/";
+			var httpReq = HttpContext.Current.Request;
             var file = httpReq.Files["Image"];
-            string content = @"C:\Users\Bogdan\Desktop\Web-2020\TicketReservation\TicketReservation\Content"; //MENJA SE OVO
 
-            var path = Path.Combine(content, file.FileName);
-            file.SaveAs(path);
+			var filePath = HttpContext.Current.Server.MapPath("~/Content/images/" + file.FileName);
+			finalPath = finalPath + "Content/images/" + file.FileName;
+            file.SaveAs(filePath);
             HttpResponseMessage message = new HttpResponseMessage();
             return message;
         }

@@ -40,7 +40,9 @@ namespace TicketReservation.Controllers
         public User GetCurrentByUsername(string Username)
         {
             User u = null;
+
             u = userDB.GetOne(Username);
+
             if (u == null)
             {
                 return null;
@@ -184,7 +186,8 @@ namespace TicketReservation.Controllers
             temp.IsBlocked = false;
             temp.IsActive = true;
             userDB.Insert(temp);
-            return "Success!";
+
+			return "Success!";
         }
 
         [Route("Update")]

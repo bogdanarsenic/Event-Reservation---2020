@@ -10,7 +10,7 @@ namespace TicketReservation
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", "*", "*") { SupportsCredentials = true });
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*") { SupportsCredentials = true });
 
 
 
