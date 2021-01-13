@@ -49,7 +49,7 @@ namespace TicketReservation
                 admin.Name = nesto[2];
                 admin.Surname = nesto[3];
                 admin.Gender = nesto[4];
-                admin.DateOfBirth = Convert.ToDateTime(nesto[5]);
+                admin.DateOfBirth = DateTime.ParseExact(nesto[5],"mm/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture);
                 admin.Role = "Admin";
                 admin.ManifestationId = "";
                 admin.TicketId = "";
