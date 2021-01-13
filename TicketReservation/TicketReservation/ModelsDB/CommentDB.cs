@@ -31,7 +31,9 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Rating", SqlDbType.Int).Value = comment.Rating;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = comment.IsActive;
 
-                    if (GetOne(comment.Id) == null)
+					string id = comment.Id.ToString();
+
+					if (GetOne(id) == null)
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -41,7 +43,7 @@ namespace TicketReservation.ModelsDB
 
 
 
-        public Comment GetOne(Guid Id)
+        public Comment GetOne(string Id)
         {
             string Query = "SELECT * FROM Comments WHERE Id='" + Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -58,7 +60,7 @@ namespace TicketReservation.ModelsDB
                         {
                             Id = new Guid(reader["Id"].ToString()),
                             UserId = reader["UserId"].ToString(),
-                            ManifestationId = reader["ApartmentId"].ToString(),
+                            ManifestationId = reader["ManifestationId"].ToString(),
                             Text = reader["Text"].ToString(),
                             Rating = Convert.ToInt32(reader["Rating"]),
                             IsActive= Convert.ToBoolean(reader["IsActive"].ToString())

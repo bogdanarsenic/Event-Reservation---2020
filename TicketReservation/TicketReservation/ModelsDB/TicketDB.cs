@@ -36,16 +36,22 @@ namespace TicketReservation.ModelsDB
                     cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = ticket.Status;
                     cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value = ticket.Type;
                     cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = ticket.IsActive;
-                    cmd.ExecuteNonQuery();
-                    
 
-                }
+					string id = ticket.Id.ToString();
+
+					if (GetOne(id) == null)
+					{
+						cmd.ExecuteNonQuery();
+					}
+
+
+				}
             }
         }
 
         public void UpdateStatus(Ticket ticket)
         {
-            string Query = "UPDATE Tickets set Status=@Status, IsActive='False' " +
+            string Query = "UPDATE Tickets set Status=@Status " +
                "WHERE Id='" + ticket.Id + "'";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -124,7 +130,45 @@ namespace TicketReservation.ModelsDB
             return tickets;
         }
 
-        public Ticket GetOne(string idUser,string idEvent)
+		public Ticket GetOne(string id)
+		{
+			string Query = "SELECT * FROM Tickets WHERE Id='" + id + "'";
+			using (SqlConnection con = new SqlConnection(connectionString))
+			{
+				try
+				{
+					Ticket ticket = null;
+					SqlCommand cmd = new SqlCommand(Query, con);
+					con.Open();
+					SqlDataReader reader = cmd.ExecuteReader();
+					while (reader.Read())
+					{
+						ticket = new Ticket()
+						{
+							Id = reader["Id"].ToString(),
+							ManifestationId = reader["ManifestationId"].ToString(),
+							EventTime = Convert.ToDateTime(reader["EventTime"].ToString()),
+							Price = Convert.ToInt32(reader["Price"].ToString()),
+							Buyer = reader["Buyer"].ToString(),
+							SellerId = reader["SellerId"].ToString(),
+							Status = reader["Status"].ToString(),
+							Type = reader["Type"].ToString(),
+							IsActive = Convert.ToBoolean(reader["IsActive"].ToString())
+
+							
+						};
+					}
+					return ticket;
+				}
+				catch
+				{
+					return null;
+				}
+			}
+		}
+
+
+		public Ticket GetOne(string idUser,string idEvent)
         {
 
 

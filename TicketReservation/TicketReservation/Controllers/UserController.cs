@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using TicketReservation.AuthorizeHelper;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
 
@@ -51,36 +52,36 @@ namespace TicketReservation.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetSession")]
-        public User login(string username)
-        {
-            User u = null;
-            u = userDB.GetOne(username);
+        //[HttpGet]
+        //[Route("GetSession")]
+        //public User login(string username)
+        //{
+        //    User u = null;
+        //    u = userDB.GetOne(username);
 
-            User retVal = null;
+        //    User retVal = null;
 
-            retVal = (User)HttpContext.Current.Session["user"];
-            if (retVal == null)
-            {
-                HttpContext.Current.Session["user"] = u;
-                retVal = u;
-            }
-            return retVal;
-        }
+        //    retVal = (User)HttpContext.Current.Session["user"];
+        //    if (retVal == null)
+        //    {
+        //        HttpContext.Current.Session["user"] = u;
+        //        retVal = u;
+        //    }
+        //    return retVal;
+        //}
 
-        [HttpGet]
-        [Route("Logout")]
-        public bool logout()
-        {
-            User user = null;
-            user = (User)HttpContext.Current.Session["user"];
-            if (user != null)
-            {
-                HttpContext.Current.Session.Abandon();
-            }
-            return true;
-        }
+        //[HttpGet]
+        //[Route("Logout")]
+        //public bool logout()
+        //{
+        //    User user = null;
+        //    user = (User)HttpContext.Current.Session["user"];
+        //    if (user != null)
+        //    {
+        //        HttpContext.Current.Session.Abandon();
+        //    }
+        //    return true;
+        //}
 
         /*[HttpGet]
         [Route("GetCookie")]
@@ -190,7 +191,8 @@ namespace TicketReservation.Controllers
 			return "Success!";
         }
 
-        [Route("Update")]
+		[AuthorizeJwt]
+		[Route("Update")]
         public string Update(User register)
         {
 
@@ -228,7 +230,8 @@ namespace TicketReservation.Controllers
             return "Success!";
         }
 
-        [Route("BlockUser")]
+		[AuthorizeJwt]
+		[Route("BlockUser")]
         public string BlockUser(User block)
         {
             User temp = userDB.GetOne(block.Username);
@@ -239,8 +242,9 @@ namespace TicketReservation.Controllers
         }
 
 
-        [HttpPost]
-        [Route("DeleteUser")]
+		[AuthorizeJwt]
+		[HttpPost]
+		[Route("DeleteUser")]
         public string DeleteUser(User delete)
         {
 
@@ -301,7 +305,8 @@ namespace TicketReservation.Controllers
 
 
         [Route("RegisterSeller")]
-        public string RegisterSeller(User register)
+		[AuthorizeJwt]
+		public string RegisterSeller(User register)
         {
             if (userDB.GetOne(register.Username) != null)
             {

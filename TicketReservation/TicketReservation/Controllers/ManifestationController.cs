@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TicketReservation.AuthorizeHelper;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
 
@@ -52,7 +53,9 @@ namespace TicketReservation.Controllers
 
 
         [Route("RegisterManifestation")]
-        public string RegisterManifestation(Manifestation register)
+		[AuthorizeJwt]
+
+		public string RegisterManifestation(Manifestation register)
         {
             register.Id = Guid.NewGuid();
             register.Pictures = "";
@@ -132,7 +135,9 @@ namespace TicketReservation.Controllers
         }
 
         [Route("Update")]
-        public string Update(Manifestation manifestation)
+		[AuthorizeJwt]
+
+		public string Update(Manifestation manifestation)
         {
 
             Manifestation temp = new Manifestation();
@@ -152,7 +157,9 @@ namespace TicketReservation.Controllers
         }
 
         [HttpPost]
-        [Route("Delete")]
+		[AuthorizeJwt]
+
+		[Route("Delete")]
         public string Delete(Manifestation delete)
         {
             string idEvent = delete.Id.ToString();

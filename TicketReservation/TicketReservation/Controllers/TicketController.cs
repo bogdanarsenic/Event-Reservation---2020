@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using TicketReservation.AuthorizeHelper;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
 
@@ -38,7 +39,9 @@ namespace TicketReservation.Controllers
         }
 
         [Route("UpdateTicketStatus")]
-        public string UpdateTicketStatus(Ticket ticket)
+		[AuthorizeJwt]
+
+		public string UpdateTicketStatus(Ticket ticket)
         {
             ticketDB.UpdateStatus(ticket);
 
@@ -46,7 +49,8 @@ namespace TicketReservation.Controllers
         }
 
         [Route("RegisterTicket")]
-        public string RegisterTicket(Ticket ticket)
+		[AuthorizeJwt]
+		public string RegisterTicket(Ticket ticket)
         {
             string nesto = Convert.ToString(Guid.NewGuid());
             ticket.Id =nesto.Substring(0, 10);
@@ -66,7 +70,7 @@ namespace TicketReservation.Controllers
 			ret1 = ticketDB.GetAll();
             foreach (Ticket t in ret1)
             {
-                if(t.SellerId==IdSeller && t.Status=="Reserved")
+                if(t.SellerId==IdSeller)
                 { 
                     ret2.Add(t);
                 }
@@ -106,7 +110,9 @@ namespace TicketReservation.Controllers
         }
 
         [HttpPost]
-        [Route("Delete")]
+		[AuthorizeJwt]
+
+		[Route("Delete")]
         public string Delete(Ticket delete)
         {
             string idTicket = delete.Id.ToString();

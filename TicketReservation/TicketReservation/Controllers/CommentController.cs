@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TicketReservation.AuthorizeHelper;
 using TicketReservation.Models;
 using TicketReservation.ModelsDB;
 
@@ -38,7 +39,7 @@ namespace TicketReservation.Controllers
             return ret;
         }
 
-
+		[AuthorizeJwt]
         [Route("RegisterComment")]
         public string RegisterComment(Comment com)
         {
