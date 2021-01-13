@@ -186,27 +186,16 @@ export class CommentsComponent implements OnInit {
   
     IsBuyer()
     {
-      if(localStorage.getItem('Role')=="Buyer")
-      {
-        return true;
-      }
-      return false;
+      return localStorage.getItem('Role')=="Buyer"?true:false;  
     }
 
     IsAdmin()
     {
-      if(localStorage.getItem('Role')=="Admin")
-      {
-          return true;
-      }
-      return false;
+      return localStorage.getItem('Role')=="Admin"?true:false;
+
     }
     IsSeller()
     {
-      if(localStorage.getItem('Role')=="Seller")
-      {
-        return true;
-      }
-      return false;
+      return localStorage.getItem('Role')=="Seller"?true:false;
     }
 }

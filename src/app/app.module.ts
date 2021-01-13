@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
@@ -9,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServerService } from './services/server.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AddsellerComponent } from './addseller/addseller.component';
 import { AllusersComponent } from './allusers/allusers.component';
@@ -38,6 +37,7 @@ import { TicketFilterPipe } from './alltickets/ticket-filter.pipe';
 import { UserSortPipe } from './allusers/user-sort.pipe';
 import { TicketSortPipe } from './alltickets/ticket-sort.pipe';
 import { EventSortPipe } from './allevents/event-sort.pipe';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 
 
@@ -109,7 +109,7 @@ const appRoutes:Routes=[
     MatCardModule,
 
   ],
-  providers: [ServerService],
+  providers: [ServerService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

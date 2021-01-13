@@ -197,7 +197,7 @@ export class AllusersComponent implements OnInit {
 
   isLogged()
   {
-    if(localStorage.getItem('Logged')=='Yes')
+    if(localStorage.jwt)
     {
         return true;
     }

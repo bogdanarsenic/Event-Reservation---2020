@@ -48,7 +48,6 @@ export class RegisterComponent implements OnInit {
     localStorage.clear();
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
-    localStorage.setItem('CurrentComponent','RegisterComponent');
   }
 
   onSubmit()
@@ -74,15 +73,7 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             res=>
             {
-            
-
-                localStorage.setItem('Logged', "Yes")
-                localStorage.setItem('Role', "Buyer")
-                localStorage.setItem('Username',this.korisnik.Username);
-                this.GetSession(this.korisnik.Username);
-                this.router.navigate(['']).then(()=>window.location.reload());
-                this.router.navigateByUrl("/home");
-                
+                this.GetSession(res.Username, res.Password);               
             }
           )
 
@@ -98,13 +89,35 @@ export class RegisterComponent implements OnInit {
     this.registerUserForm.reset();
     
   }
-  GetSession(username:string)
+  
+  
+  GetSession(username:string , password:string)
   {
-      this.registerService.GetSession(username).subscribe(
+      this.registerService.GetSession(username, password).subscribe(
         data=>
         {
-          
+            localStorage.setItem('Username',username);
+
+            let jwt=data;
+
+            let jwtData=jwt.split('.')[1]
+            let decodedJwtJsonData=window.atob(jwtData)
+            let decodedJwtData=JSON.parse(decodedJwtJsonData)
+  
+            localStorage.setItem('jwt',jwt);
+            
+            this.registerService.setToken();
+
+            localStorage.setItem('Role',decodedJwtData.role);
+
+            this.router.navigate(['']).then(()=>window.location.reload());
+
+            this.router.navigateByUrl("/home");
+        },
+        error=>{
+          alert("Something is wrong when getting session!");
         }
+      
       )
   }
 }

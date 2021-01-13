@@ -16,11 +16,8 @@ export class AddticketComponent implements OnInit {
 
   id:string
   userId:string
-
   ticketId:string
   sellerId:string
-
-
 
   reservationUserForm:FormGroup;
 

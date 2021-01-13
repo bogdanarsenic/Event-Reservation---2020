@@ -119,13 +119,10 @@ ngOnInit() {
 
   isPast(event:Event)
   {
-    let eventTime=new Date(this.event.EventTime);
+    let eventTime=new Date(event.EventTime);
     let todayTime=new Date(this.today);
-    if(eventTime<todayTime)
-    {
-      return true;
-    }
-    return false;
+    
+    return eventTime<todayTime?true:false;
   }
 
   hasReservation(event:Event)
@@ -137,35 +134,22 @@ ngOnInit() {
       }
     )
 
-    if(this.tickets.length==0)
-    {
-        return false;
-    }
-    return true;
+    return this.tickets.length==0?false:true;
   }
    
   isSeller()
   {
-    if(localStorage.getItem('Role')=="Seller")
-      return true;
-    else
-      return false;
+    return localStorage.getItem('Role')=="Seller"?true:false;
   }
 
   isAdmin()
   {
-    if(localStorage.getItem('Role')=="Admin")
-      return true;
-    else
-      return false;
+    return localStorage.getItem('Role')=="Admin"?true:false;
   }
 
   isBuyer()
   {
-    if(localStorage.getItem('Role')=="Buyer")
-      return true;
-    else
-      return false;
+    return localStorage.getItem('Role')=="Buyer"?true:false;
   }
 }
 

@@ -18,12 +18,15 @@ export class UploadImageComponent implements OnInit {
   temp:string
   local:string
   folder:string
+  imageShow : any;
+
 
 
   constructor(private router:Router, private service:ServerService) { }
 
   ngOnInit() 
   {
+    this.pictures3=[]
     this.isSeller();
     this.id=this.router.url.split('/')[1];
   }
@@ -32,6 +35,24 @@ export class UploadImageComponent implements OnInit {
   {
       this.selected=event.target.files[0];
       this.image=this.selected.name;
+
+      let typeOfFile=this.selected.type.split('/');
+
+    if (typeOfFile[0] == "image" && (typeOfFile[1] == "jpg" || typeOfFile[1] == "jpeg" || typeOfFile[1] == "png") && this.selected.size < 512000)
+        { 
+          this.image=this.selected.name;
+          var reader = new FileReader();
+          reader.readAsDataURL(event.target.files[0]);
+          reader.onload = (event) => {
+          this.imageShow = (<FileReader>event.target).result;
+        }
+      }
+      else
+      {
+        alert("Invalid! Valid formats - jpg,jpeg,png with size lower than 512kb");
+        return;
+      }
+
   }
 
   UploadFile()
@@ -57,22 +78,23 @@ export class UploadImageComponent implements OnInit {
 
   OnSubmit()
   {
-    this.pictures3=[]
-    this.local="http://localhost:52294/";
-    this.folder="Content/images/";
 
-    this.service.GetEvent(this.id).subscribe(
-      data=>{
-        data.Pictures=data.Pictures.replace(/\\/g,"/");
-        this.pictures1=data.Pictures.split(';');
-        this.pictures1.forEach(element=>
-          {
-            this.pictures2=element.split('/');
-            this.temp=this.local+this.folder+this.pictures2[this.pictures2.length-1];
-            this.pictures3.push(this.temp);
-          });
-      }
-    )
+    this.pictures3.push(this.imageShow);
+    // this.local="http://localhost:52294/";
+    // this.folder="Content/images/";
+
+    // this.service.GetEvent(this.id).subscribe(
+    //   data=>{
+    //     data.Pictures=data.Pictures.replace(/\\/g,"/");
+    //     this.pictures1=data.Pictures.split(';');
+    //     this.pictures1.forEach(element=>
+    //       {
+    //         this.pictures2=element.split('/');
+    //         this.temp=this.local+this.folder+this.pictures2[this.pictures2.length-1];
+    //         this.pictures3.push(this.temp);
+    //       });
+    //   }
+    // )
     
   }
 

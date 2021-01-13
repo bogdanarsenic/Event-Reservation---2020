@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
     this.login=new Login("","");
     this.selectedUser=new User("","","","","","","",0);
-    localStorage.setItem('CurrentComponent','LoginComponent');
 
   }
 
@@ -62,22 +61,13 @@ export class LoginComponent implements OnInit {
 
                 if(data.IsActive!=false)
                 {
-                  localStorage.setItem('Username',data.Username);
-                  localStorage.setItem('Role',data.Role);
-                  localStorage.setItem('Logged','Yes');
           
-                  this.GetSession(data.Username);
-
-
-                  this.router.navigate(['']).then(()=>window.location.reload());
-
-                  this.router.navigateByUrl("/home");
+                  this.GetSession(data.Username, data.Password);
+                
                 }
                 else
                 {
-
-                    alert("Invalid Username or Password!");
-                                  
+                    alert("Invalid Username or Password!");                               
                 }
                 
              }
@@ -98,16 +88,34 @@ export class LoginComponent implements OnInit {
 
     }
     
- GetSession(username:string)
+ GetSession(username:string , password:string)
   {
-      this.loginService.GetSession(username).subscribe(
+      this.loginService.GetSession(username, password).subscribe(
         data=>
         {
-          let jwt=data;
-          console.log("Nesto da vidimo");
+            localStorage.setItem('Username',username);
+
+            let jwt=data;
+
+            let jwtData=jwt.split('.')[1]
+            let decodedJwtJsonData=window.atob(jwtData)
+            let decodedJwtData=JSON.parse(decodedJwtJsonData)
+  
+            localStorage.setItem('jwt',jwt);
+
+            this.loginService.setToken();
+
+            localStorage.setItem('Role',decodedJwtData.role);
+
+            this.router.navigate(['']).then(()=>window.location.reload());
+
+            this.router.navigateByUrl("/home");
         },
+        error=>{
+          alert("Something is wrong when getting session!");
+        }
       
       )
   }
    
-  }
+}

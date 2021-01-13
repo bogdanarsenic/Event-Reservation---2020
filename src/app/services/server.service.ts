@@ -7,6 +7,7 @@ import { Location } from '../classes/Location';
 import { Event } from '../classes/Event';
 import { Ticket } from '../classes/Ticket';
 import { Comment } from '../classes/Comment';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,12 +15,10 @@ import { Comment } from '../classes/Comment';
 })
 export class ServerService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
-  ngOnInit()
-  {
+  private tokenExpirationTimer:any;
 
-  }
 
   RegistrationBuyer(buyer:User):Observable<any>
   {
@@ -62,16 +61,33 @@ export class ServerService {
       return this.http.get<User>(`http://localhost:52294/api/User/GetCurrent`,{params:{Username,Password}});
   }
 
-  GetSession(username:string):Observable<any>
+  GetSession(username:string, password:string):Observable<any>
   {
+    let headers=new HttpHeaders();
+    headers=headers.append('Content-type','application/x-www-form-urlencoded');
 
-    return this.http.get<User>(`http://localhost:52294/api/User/GetSession`,{params:{username}});
+    return this.http.get(`http://localhost:52294/api/Token/GetSession`,{params:{username,password}});
   }
 
-  Logout():Observable<any>
+  Logout()
   {
-    
-    return this.http.get("http://localhost:52294/api/User/Logout");
+    localStorage.clear();
+    this.router.navigateByUrl('');
+  }
+
+  autoLogout(tokenExpiration:number):any{
+
+    this.tokenExpirationTimer=setTimeout(()=>{
+        alert("Your token expired!");
+        this.Logout();
+      },tokenExpiration);
+
+  }
+
+  setToken(){
+    var tokenExpires=new Date();
+    tokenExpires.setSeconds(tokenExpires.getSeconds() + 30*60);
+    localStorage.setItem('tokenExpiresOn',tokenExpires.toString());
   }
 
   GetAllComments():Observable<any>

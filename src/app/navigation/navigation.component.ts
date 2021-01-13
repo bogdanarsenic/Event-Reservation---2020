@@ -16,81 +16,54 @@ export class NavigationComponent implements OnInit {
   
 
   ngOnInit() {
-    this.username="";
-  }
 
-  BackToCheck()
-  {
-    localStorage.setItem('CurrentComponent','HomeComponent');
-      this.router.navigateByUrl('/home');
-  }
-
-  CurrentComponent()
-  {
-    return localStorage.getItem('CurrentComponent');
+    if(localStorage.jwt)
+    {
+      this.checkToken();
+    }
   }
 
   ShowLogin()
   {
-    if(localStorage.getItem('Logged')=="Yes")
-    {
-      return false;
-    }
-    else
-    {
-      return true;
-    }
+    return localStorage.jwt?false:true;
   }
 
-  ShowLogout()
+  checkToken()
   {
-    if(localStorage.getItem('Logged')=="Yes")
+    var expiredDate=new Date(localStorage.getItem('tokenExpiresOn'));
+    var now=new Date();
+
+    if(now>expiredDate)
     {
-      return true;
+      alert("Your token expired!");
+      this.CallLogout();
     }
     else
     {
-      return false;
+        var tokenExpiresOn=expiredDate.getTime()-now.getTime();
+        this.loginService.autoLogout(tokenExpiresOn);
     }
+    
   }
 
   CallLogout()
   {
-    this.username=localStorage.getItem('Username');
-
-    this.loginService.Logout().subscribe(
-      data=>
-      {
-        
-      }
-    )
-
-    localStorage.clear();
-    this.router.navigateByUrl('');
+    this.loginService.Logout();
   }
     
   IsAdmin()
   {
-    if(localStorage.getItem('Role')=="Admin")
-        return true;
-    else
-        return false;
-    
+    return localStorage.getItem('Role')=="Admin"?true:false;
   }
 
   IsBuyer()
   {
-    if(localStorage.getItem('Role')=="Buyer")
-      return true;
-    else
-      return false;
+    return localStorage.getItem('Role')=="Buyer"?true:false;
+
   }
   
   IsSeller()
   {
-    if(localStorage.getItem('Role')=="Seller")
-      return true;
-    else
-      return false;
+    return localStorage.getItem('Role')=="Seller"?true:false;
   }
 }

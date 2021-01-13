@@ -87,7 +87,6 @@ createForm()
     
     
     this.Clicked=false;
-    localStorage.setItem('CurrentComponent','AllEventsComponent');
 
     if(this.isAdmin())
     {
@@ -317,57 +316,27 @@ createForm()
 
   isAdmin()
   {
-    if(localStorage.getItem('Role')=='Admin')
-    {
-      return true;
-    }
-    else
-      return false;
+    return localStorage.getItem('Role')=='Admin'?true:false;
   }
 
   isSeller()
   {
-    if(localStorage.getItem('Role')=='Seller')
-    {
-      return true;
-    }
-    else
-      return false;
+    return localStorage.getItem('Role')=='Seller'?true:false;  
   }
 
   isBuyer()
   {
-    if(localStorage.getItem('Role')=='Buyer')
-    {
-      return true;
-    }
-    else
-      return false;
+    return localStorage.getItem('Role')=='Buyer'?true:false;
   }
-
 
   IsLogged()
   {
-    if(localStorage.getItem('Logged')=="Yes")
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return localStorage.jwt?true:false;
   }
 
   isActive()
   {
-    if(this.active=="Active")
-    {
-        return true;
-    }
-    else
-    {
-      return false;
-    }
+    return this.active=="Active"?true:false;
   }
 
 }

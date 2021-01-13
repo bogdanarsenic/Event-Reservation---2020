@@ -48,7 +48,6 @@ export class AddsellerComponent implements OnInit {
 
     this.isAdmin();
     localStorage.removeItem('EventId');
-    localStorage.setItem('CurrentComponent','AddSellerComponent');
     this.korisnik=new User("","","","","","","",0);
     this.currentUser=new Login("","");
   }

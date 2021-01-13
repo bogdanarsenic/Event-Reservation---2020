@@ -1,17 +1,10 @@
 import { Component, OnInit,NgZone } from '@angular/core';
 import { ServerService } from '../services/server.service';
 import { Router } from '@angular/router';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Location} from '../classes/Location';
 import {Event} from '../classes/Event';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldControl} from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-
 import * as moment from 'moment';
-
 
 
 declare let google: any;
@@ -238,11 +231,7 @@ export class AddeventComponent implements OnInit {
 
   isSeller()
   {
-    if(localStorage.getItem('Role')=='Seller')
-    {
-        return true;
-    }
-      return this.router.navigateByUrl("/home");
+    return localStorage.getItem('Role')=='Seller'?true:false;
   }
 } 
 
