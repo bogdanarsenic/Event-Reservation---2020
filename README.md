@@ -1,7 +1,8 @@
 <h3> Project description </h3>
 <hr>
-The project task was to make web application similar to websites where you can buy ticket for all kinds of festivals (for example <a href="http://gigstix.com"> gigstix </a>). There are several users (admin, host, buyer and unregisted user), and each of them has some permissions. Admin can control everything, approve events, see all users, all bought tickets, delete them etc. Host can add new events, edit them, see users that bought ticket for that events, see tickets for that events...Users can buy ticket for each event, edit their profiles, had some discounts if they had enough points (every bought ticket will add some points to the user depends on the cost of it). Unregisted user can only see those events and search, filter or sort them. 
-On the backend I will store those information in database. I am using web api with custom jwt for authorizing users.
+The project task was to make web application similar to websites where you can buy ticket for all kinds of festivals (for example <a href="http://gigstix.com"> gigstix </a>). There are several users (admin, host, buyer and unregistered user), and each of them has some permissions. Admin can control everything, approve events, see all users, all bought tickets, delete them etc. Host can add new events, edit them, see users that bought ticket for that events, see tickets for that events...Buyers are registered users who can buy ticket for each event, edit their profiles, had some discounts if they had enough points (every bought ticket will add some points to the user depends on the cost of it). Unregistered users can only see those approved events and search, filter or sort them. 
+
+On the backend I am storing those information in database. I am using web api with custom jwt for authorizing users.
 
 <a href="Projekat 2019_2020.pdf"> Original project text </a>
 
