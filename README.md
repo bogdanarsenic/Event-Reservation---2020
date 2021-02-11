@@ -1,3 +1,7 @@
+<h3> Project description </h3>
+
+<a href="Projekat 2019_2020.pdf"> Project text </a>
+
 <h2> How to start a project? </h2>
 
 First of all, you have two different branches. The first one is "master pw84-2014-web-projekat" and the second one is "Angular pw84-2014-web-projekat".
